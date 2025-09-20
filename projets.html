@@ -6,47 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SZ — Projets | Soufiane ZOUGAGH</title>
     <meta name="description"
-        content="Mes projets techniques réalisés durant le BTS SIO SISR : réseau, sécurité, virtualisation, sauvegardes, services et scripting." />
+        content="Projets techniques réalisés en BTS SIO SISR : réseaux, systèmes, virtualisation, sécurité et bases de données." />
 
     <style>
         :root {
-            /* Thème sombre néon */
-            --bg: #0b1220;
-            --panel: #0f172a;
-            --panel-2: #0b1220;
-            --text: #e5e7eb;
-            --muted: #9aa4b2;
-            --primary: #22c55e;
-            /* vert néon */
-            --primary-2: #16a34a;
-            --outline: #10b98155;
-            --border: #22c55e;
-            --card-border: #1f2937;
-            --accent: #14b8a6;
-            /* vert/teal léger */
-            --shadow: 0 12px 30px rgba(0, 0, 0, .35);
-            --radius: 14px;
+            --bg: #f6f7fb;
+            --panel: #ffffffcc;
+            --panel-2: #ffffff;
+
+            --text: #1f2937;
+            --muted: #6b7280;
+
+            --primary: #3b82f6;
+            --primary-600: #2563eb;
+            --accent: #93c5fd;
+            --accent-2: #a7f3d0;
+
+            --green: #16a34a;
+            --green-soft: #dcfce7;
+
+            --card-border: #e5e7eb;
+            --radius: 18px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .08);
+
             --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
             --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
-            --ring: 0 0 0 3px rgba(34, 197, 94, .25);
         }
 
         * {
             box-sizing: border-box
         }
 
-        html,
         body {
             margin: 0;
-            padding: 0
-        }
-
-        body {
-            font: 15.5px/1.65 var(--sans);
+            padding: 0;
+            font: 16px/1.65 var(--sans);
             color: var(--text);
             background:
-                radial-gradient(1200px 600px at 10% -10%, rgba(34, 197, 94, .08), transparent 60%),
-                radial-gradient(900px 500px at 110% 10%, rgba(20, 184, 166, .08), transparent 60%),
+                radial-gradient(1200px 600px at 10% -10%, rgba(147, 197, 253, .25), transparent 60%),
+                radial-gradient(1000px 500px at 110% 10%, rgba(167, 243, 208, .22), transparent 60%),
                 var(--bg);
         }
 
@@ -56,7 +54,7 @@
         }
 
         a:hover {
-            color: #86efac
+            color: var(--primary-600)
         }
 
         .container {
@@ -66,17 +64,17 @@
         }
 
         section {
-            padding: 64px 0
+            padding: 70px 0
         }
 
-        /* ===== Header / Nav (cohérent avec tes autres pages) ===== */
+        /* ===== Header ===== */
         header {
             position: sticky;
             top: 0;
             z-index: 50;
-            background: rgba(11, 18, 32, .75);
+            background: rgba(255, 255, 255, .7);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid #122031;
+            border-bottom: 1px solid var(--card-border);
         }
 
         .nav-wrap {
@@ -96,15 +94,15 @@
             width: 34px;
             height: 34px;
             border-radius: 10px;
-            background: radial-gradient(100% 100% at 30% 20%, #34d399, #22c55e);
-            box-shadow: 0 0 18px rgba(34, 197, 94, .45), inset 0 0 12px rgba(34, 197, 94, .35);
+            background: radial-gradient(100% 100% at 30% 20%, var(--accent), var(--accent-2));
+            box-shadow: var(--shadow)
         }
 
         .brand h1 {
             margin: 0;
             font-size: 18px;
             letter-spacing: .4px;
-            color: #d1fae5
+            color: #0f172a
         }
 
         nav {
@@ -115,11 +113,11 @@
 
         nav a {
             display: inline-block;
-            padding: 8px 12px;
+            padding: 9px 12px;
             border-radius: 999px;
-            border: 1px solid #1f2937;
-            background: #0f172a;
-            color: #e5e7eb;
+            border: 1px solid var(--card-border);
+            background: #fff;
+            color: #0f172a;
             font-weight: 600;
             font-size: 14px;
             transition: .12s
@@ -127,13 +125,13 @@
 
         nav a:hover {
             transform: translateY(-1px);
-            border-color: #334155;
+            border-color: var(--primary);
             box-shadow: var(--shadow);
-            background: #111c30
+            background: #f8fafc
         }
 
         nav a.active {
-            box-shadow: 0 0 0 2px rgba(34, 197, 94, .22) inset;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, .2) inset;
             border-color: var(--primary)
         }
 
@@ -142,8 +140,8 @@
             width: 40px;
             height: 40px;
             border-radius: 10px;
-            border: 1px solid #1f2937;
-            background: #0f172a
+            border: 1px solid var(--card-border);
+            background: #fff
         }
 
         .burger span {
@@ -154,7 +152,7 @@
             margin: 6px auto
         }
 
-        @media (max-width:940px) {
+        @media(max-width:940px) {
             nav {
                 display: none;
                 position: absolute;
@@ -174,31 +172,14 @@
             }
         }
 
-        /* ===== Titre page style néon ===== */
-        .page-head {
-            text-align: center;
-            margin-bottom: 18px
-        }
-
-        .page-head h2 {
-            margin: 0 0 4px 0;
-            font: 900 clamp(22px, 4vw, 34px)/1.15 var(--mono);
-            color: #86efac;
-            text-shadow: 0 0 0 #fff, 0 0 16px rgba(34, 197, 94, .45);
-        }
-
-        .page-head p {
-            margin: 0;
-            color: var(--muted)
-        }
-
-        /* ===== Fenêtres (bord vert néon) ===== */
+        /* ===== Fenêtres ===== */
         .window {
-            background: linear-gradient(180deg, #0f172a, #0b1220);
-            border: 1px solid rgba(34, 197, 94, .55);
+            background: var(--panel-2);
+            border: 1px solid #c7d2fe;
             border-radius: var(--radius);
-            box-shadow: 0 0 0 2px rgba(34, 197, 94, .15), var(--shadow);
+            box-shadow: 0 0 0 2px rgba(147, 197, 253, .2), var(--shadow);
             overflow: hidden;
+            margin-bottom: 18px
         }
 
         .window-bar {
@@ -207,12 +188,11 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 14px;
-            border-bottom: 1px solid #14302a;
-            background: linear-gradient(180deg, #0c1a17, #0b1613);
+            border-bottom: 1px solid #e5e7eb;
+            background: linear-gradient(180deg, #f8fbff, #eef2ff);
             font-family: var(--mono);
-            color: #86efac;
-            font-weight: 700;
-            letter-spacing: .2px;
+            color: #1e3a8a;
+            font-weight: 700
         }
 
         .dots {
@@ -242,117 +222,64 @@
             padding: 18px
         }
 
-        /* ===== Grille des projets ===== */
-        .grid {
-            display: grid;
-            gap: 16px;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+        .page-title {
+            text-align: center;
+            font: 900 28px/1.25 var(--mono);
+            color: var(--primary);
+            margin: 0 0 22px
         }
 
-        @media (max-width:900px) {
-            .grid {
-                grid-template-columns: 1fr
-            }
+        /* ===== Cartes projets ===== */
+        .grid {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))
         }
 
         .card {
-            border: 1px solid rgba(34, 197, 94, .5);
-            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
             padding: 16px;
-            background: linear-gradient(180deg, #0f1b19, #0c141f);
-            box-shadow: inset 0 0 0 1px rgba(16, 185, 129, .08);
+            background: linear-gradient(180deg, #ffffff, #f9fafb)
         }
 
-        .card h3 {
-            margin: 0 0 10px 0;
-            font: 800 16px/1.25 var(--sans);
-            color: #d1fae5;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card h3 .badge {
-            display: inline-grid;
-            place-items: center;
-            width: 22px;
-            height: 22px;
-            border-radius: 6px;
-            background: #052e22;
-            color: #34d399;
-            font-size: 14px;
-            border: 1px solid #0e6b4e66;
+        .card h4 {
+            margin: 0 0 8px;
+            font: 800 16px/1.2 var(--sans);
+            color: var(--primary-600)
         }
 
         .card p {
-            margin: 0 0 8px 0;
-            color: #a7f3d0
-        }
-
-        .list {
-            margin: 0;
-            padding-left: 18px;
-            color: #cbd5e1
-        }
-
-        .list li {
-            margin: 6px 0
+            margin: 0 0 8px;
+            font-size: 14px;
+            color: var(--muted)
         }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            display: inline-block;
             margin-top: 10px;
-            padding: 8px 12px;
+            padding: 7px 12px;
             border-radius: 10px;
-            font-weight: 800;
-            cursor: pointer;
-            border: 1px solid rgba(34, 197, 94, .7);
-            color: #052e1f;
-            background: #22c55e;
-            box-shadow: 0 0 0 3px rgba(34, 197, 94, .12), 0 8px 20px rgba(0, 0, 0, .35);
-            text-shadow: 0 1px 0 rgba(255, 255, 255, .35);
+            border: 1px solid var(--green);
+            background: var(--green-soft);
+            color: var(--green);
+            font-weight: 600;
+            font-size: 14px
         }
 
         .btn:hover {
-            filter: brightness(1.03);
-            transform: translateY(-1px)
+            background: #bbf7d0
         }
 
-        .btn .i {
-            width: 16px;
-            height: 16px;
-            display: inline-block
-        }
-
-        /* ===== Section compétences ===== */
-        .bullets {
-            margin: 0;
-            padding-left: 0;
-            list-style: none;
-            color: #cbd5e1
-        }
-
-        .bullets li {
-            margin: 8px 0
-        }
-
-        .rub {
-            margin-top: 14px;
-            font-weight: 800;
-            color: #a7f3d0
-        }
-
-        /* ===== Footer aligné aux autres pages (dark) ===== */
+        /* ===== Footer ===== */
         footer {
-            margin-top: 42px;
-            background: rgba(11, 18, 32, .75);
+            margin-top: 40px;
+            background: rgba(255, 255, 255, .7);
             backdrop-filter: blur(10px);
-            border-top: 1px solid #122031;
+            border-top: 1px solid var(--card-border);
             padding: 18px 0;
             font-size: 14px;
-            color: #9aa4b2;
+            color: var(--muted)
         }
 
         .footer-wrap {
@@ -373,29 +300,27 @@
         }
 
         .footer-social a:hover svg {
-            transform: scale(1.12);
+            transform: scale(1.15);
             opacity: .85
         }
     </style>
 </head>
 
 <body>
-    <!-- ===== Header / Nav ===== -->
-    <header aria-label="Barre de navigation principale">
+    <!-- Header -->
+    <header>
         <div class="container nav-wrap">
-            <div class="brand" aria-label="Identité du site">
-                <div class="brand-logo" aria-hidden="true"></div>
+            <div class="brand">
+                <div class="brand-logo"></div>
                 <h1>SZ</h1>
             </div>
-            <button class="burger" aria-label="Ouvrir le menu" aria-controls="nav" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-            <nav id="nav" aria-label="Navigation">
+            <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+            <nav id="nav">
                 <a href="./index.html">Accueil</a>
                 <a href="bts.html">BTS SIO</a>
                 <a href="entreprise.html">Entreprise</a>
                 <a href="epreuves.html">Épreuves</a>
-                <a href="projets.html">Projets</a>
+                <a href="projets.html" class="active">Projets</a>
                 <a href="veille.html">Veille</a>
                 <a href="competences.html">Compétences</a>
                 <a href="certifications.html">Certifications</a>
@@ -404,258 +329,94 @@
         </div>
     </header>
 
-    <!-- ===== Mes Projets ===== -->
-    <section id="projets" aria-label="Mes Projets">
+    <!-- Projets -->
+    <section id="projets">
         <div class="container">
-            <div class="page-head">
-                <h2>Mes Projets</h2>
-                <p>Réalisation techniques durant ma formation BTS SIO SISR</p>
-            </div>
+            <h2 class="page-title">Mes Projets</h2>
 
-            <!-- Intro window -->
-            <div class="window" style="margin-bottom:16px">
-                <div class="window-bar">
-                    <span>Projets.md</span>
-                    <div class="dots" aria-hidden="true">
+            <div class="window">
+                <div class="window-bar"><span>projets.md</span>
+                    <div class="dots">
                         <div class="dot red"></div>
                         <div class="dot yellow"></div>
                         <div class="dot green"></div>
                     </div>
                 </div>
                 <div class="content">
-                    <p style="margin:0;color:#cbd5e1">
-                        Durant mes deux années de formation en BTS SIO option SISR, j’ai réalisé plusieurs projets
-                        techniques qui m’ont
-                        permis de développer mes compétences en administration système et réseau. Voici un aperçu de mes
-                        principales réalisations.
-                    </p>
+                    <p>Durant ma formation en BTS SIO SISR, j’ai réalisé plusieurs <b>projets techniques</b> en
+                        administration système, réseaux et sécurité.</p>
                 </div>
             </div>
 
-            <!-- Grid of project cards -->
+            <!-- Grille des projets -->
             <div class="grid">
-                <!-- DHCP Server -->
                 <div class="card">
-                    <h3><span class="badge">⚙️</span>Configuration et administration d’un serveur DHCP</h3>
-                    <p>Mise en œuvre et configuration d’un serveur DHCP pour l’attribution automatique d’adresses IP
-                        dans un réseau local.</p>
-                    <ul class="list">
-                        <li>Installation et configuration du service</li>
-                        <li>Création des plages d’adresses et des baux</li>
-                        <li>Options DHCP (passerelle, DNS…)</li>
-                        <li>Réservations d’adresses</li>
-                        <li>Tests et validation</li>
-                    </ul>
-                    <a class="btn" href="docs/projets/dhcp.pdf" download>
-                        <svg class="i" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 16l4-5h-3V4h-2v7H8zM5 18h14v2H5z" />
-                        </svg>
-                        Voir la documentation
-                    </a>
+                    <h4>🖥️ Serveur DHCP</h4>
+                    <p>Installation, configuration et gestion d’un serveur DHCP pour distribuer automatiquement des
+                        adresses IP.</p>
+                    <a class="btn" href="#">Voir la documentation</a>
                 </div>
 
-                <!-- HTTPS Sites -->
                 <div class="card">
-                    <h3><span class="badge">🔐</span>Configuration HTTPS des sites web</h3>
-                    <p>Sécurisation de sites web en HTTPS avec certificats SSL/TLS.</p>
-                    <ul class="list">
-                        <li>Serveurs web (Nginx / Apache)</li>
-                        <li>Redirections HTTP → HTTPS</li>
-                        <li>En-têtes de sécurité</li>
-                        <li>Tests et vérification</li>
-                    </ul>
-                    <a class="btn" href="docs/projets/https.pdf" download>
-                        <svg class="i" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 16l4-5h-3V4h-2v7H8zM5 18h14v2H5z" />
-                        </svg>
-                        Voir la documentation
-                    </a>
+                    <h4>🔐 HTTPS sur sites web</h4>
+                    <p>Sécurisation de serveurs web avec certificats SSL/TLS et redirections HTTPS.</p>
+                    <a class="btn" href="#">Voir la documentation</a>
                 </div>
 
-                <!-- Containers / Virtualisation -->
                 <div class="card">
-                    <h3><span class="badge">🐳</span>Conteneurs et virtualisation</h3>
-                    <p>Mise en place d’environnements virtualisés et conteneurisés pour le déploiement d’applications.
-                    </p>
-                    <ul class="list">
-                        <li>Docker / Compose & gestion des volumes</li>
-                        <li>Réseaux Docker & orchestration simple</li>
-                        <li>Virtualisation VMware / VirtualBox</li>
-                        <li>Benchmarks de base & bonnes pratiques</li>
-                    </ul>
-                    <a class="btn" href="docs/projets/containers.pdf" download>
-                        <svg class="i" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 16l4-5h-3V4h-2v7H8zM5 18h14v2H5z" />
-                        </svg>
-                        Voir la documentation
-                    </a>
+                    <h4>📦 Virtualisation</h4>
+                    <p>Environnements virtualisés avec VMware, VirtualBox et Docker Compose.</p>
+                    <a class="btn" href="#">Voir la documentation</a>
                 </div>
 
-                <!-- Rsync + Cron -->
                 <div class="card">
-                    <h3><span class="badge">🗂️</span>Solution de sauvegarde avec Rsync et Cron</h3>
-                    <p>Sauvegardes incrémentales automatisées de données critiques.</p>
-                    <ul class="list">
-                        <li>Rsync local / distant (SSH)</li>
-                        <li>Automatisation via Cron & rotation</li>
-                        <li>Notifications & journaux</li>
-                        <li>Tests de restauration</li>
-                    </ul>
-                    <a class="btn" href="docs/projets/rsync-cron.pdf" download>
-                        <svg class="i" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 16l4-5h-3V4h-2v7H8zM5 18h14v2H5z" />
-                        </svg>
-                        Voir la documentation
-                    </a>
+                    <h4>💾 Sauvegardes Rsync & Cron</h4>
+                    <p>Automatisation des sauvegardes avec Rsync et planification via Cron.</p>
+                    <a class="btn" href="#">Voir la documentation</a>
                 </div>
 
-                <!-- OPNsense -->
                 <div class="card">
-                    <h3><span class="badge">🛡️</span>Installation et configuration d’OPNsense</h3>
-                    <p>Mise en place d’un pare-feu/routeur OPNsense pour sécuriser un réseau d’entreprise.</p>
-                    <ul class="list">
-                        <li>Interfaces & règles de pare-feu</li>
-                        <li>NAT, routage, VLAN</li>
-                        <li>Services réseau (DHCP, DNS, VPN)</li>
-                        <li>Durcissement et sauvegardes</li>
-                    </ul>
-                    <a class="btn" href="docs/projets/opnsense.pdf" download>
-                        <svg class="i" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 16l4-5h-3V4h-2v7H8zM5 18h14v2H5z" />
-                        </svg>
-                        Voir la documentation
-                    </a>
+                    <h4>🛡️ OPNsense</h4>
+                    <p>Déploiement et configuration d’un pare-feu OPNsense pour sécuriser un réseau.</p>
+                    <a class="btn" href="#">Voir la documentation</a>
                 </div>
 
-                <!-- FTP / Samba -->
                 <div class="card">
-                    <h3><span class="badge">📦</span>Mise en place de serveurs FTP et Samba</h3>
-                    <p>Partage de fichiers sécurisé pour un environnement professionnel.</p>
-                    <ul class="list">
-                        <li>Serveur FTP avec SSL/TLS</li>
-                        <li>Serveur Samba pour partage Windows</li>
-                        <li>Permissions & ACL</li>
-                        <li>Tests de performance</li>
-                    </ul>
-                    <a class="btn" href="docs/projets/ftp-samba.pdf" download>
-                        <svg class="i" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 16l4-5h-3V4h-2v7H8zM5 18h14v2H5z" />
-                        </svg>
-                        Voir la documentation
-                    </a>
+                    <h4>📂 FTP & Samba</h4>
+                    <p>Partage de fichiers via serveurs FTP et Samba sécurisés.</p>
+                    <a class="btn" href="#">Voir la documentation</a>
                 </div>
 
-                <!-- MariaDB -->
                 <div class="card">
-                    <h3><span class="badge">🗄️</span>Administration MariaDB</h3>
-                    <p>Installation, configuration et exploitation d’un serveur de bases de données.</p>
-                    <ul class="list">
-                        <li>Utilisateurs, rôles et sauvegardes</li>
-                        <li>Sécurisation & durcissement</li>
-                        <li>Optimisations de base</li>
-                    </ul>
-                    <a class="btn" href="docs/projets/mariadb.pdf" download>
-                        <svg class="i" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 16l4-5h-3V4h-2v7H8zM5 18h14v2H5z" />
-                        </svg>
-                        Voir la documentation
-                    </a>
+                    <h4>🗄️ MariaDB</h4>
+                    <p>Administration d’une base de données MariaDB (sécurité, sauvegardes, optimisation).</p>
+                    <a class="btn" href="#">Voir la documentation</a>
                 </div>
 
-                <!-- DHCP Failover -->
                 <div class="card">
-                    <h3><span class="badge">🔁</span>DHCP Failover</h3>
-                    <p>Haute disponibilité pour garantir la continuité de service DHCP.</p>
-                    <ul class="list">
-                        <li>Deux serveurs redondants</li>
-                        <li>Synchronisation des baux</li>
-                        <li>Tests de bascule & résilience</li>
-                        <li>Supervision & alertes</li>
-                    </ul>
-                    <a class="btn" href="docs/projets/dhcp-failover.pdf" download>
-                        <svg class="i" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 16l4-5h-3V4h-2v7H8zM5 18h14v2H5z" />
-                        </svg>
-                        Voir la documentation
-                    </a>
-                </div>
-            </div>
-
-            <!-- Compétences window -->
-            <div class="window" style="margin-top:20px">
-                <div class="window-bar">
-                    <span>Competences.sh</span>
-                    <div class="dots" aria-hidden="true">
-                        <div class="dot red"></div>
-                        <div class="dot yellow"></div>
-                        <div class="dot green"></div>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3 style="margin:0 0 8px 0; font:800 16px/1.2 var(--sans); color:#d1fae5">Compétences développées
-                    </h3>
-
-                    <div class="rub">🔧 Administration Réseau</div>
-                    <ul class="bullets">
-                        <li>Services réseau (DHCP, DNS), routage et VLAN</li>
-                        <li>Haute disponibilité & supervision de base</li>
-                    </ul>
-
-                    <div class="rub">🛡️ Sécurité</div>
-                    <ul class="bullets">
-                        <li>Certificats SSL/TLS, pare-feu, segmentation</li>
-                        <li>Durcissement systèmes & bonnes pratiques</li>
-                    </ul>
-
-                    <div class="rub">💻 Systèmes</div>
-                    <ul class="bullets">
-                        <li>Linux & Windows Server (services, scripts)</li>
-                        <li>Virtualisation & conteneurisation</li>
-                    </ul>
-
-                    <div class="rub">🧰 Méthodologie</div>
-                    <ul class="bullets">
-                        <li>Documentation technique & veille</li>
-                        <li>Automatisation (Bash/PowerShell) & sauvegardes</li>
-                    </ul>
+                    <h4>🌐 DHCP Failover</h4>
+                    <p>Mise en place d’une solution DHCP haute disponibilité (failover).</p>
+                    <a class="btn" href="#">Voir la documentation</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== Footer ===== -->
+    <!-- Footer -->
     <footer>
         <div class="container footer-wrap">
             <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
             <div class="footer-social">
-                <a href="https://www.linkedin.com/in/soufianezghpro/" target="_blank" aria-label="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#22c55e" viewBox="0 0 24 24">
-                        <path
-                            d="M19 0H5A5 5 0 0 0 0 5v14a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5Zm-9 19H7V9h3v10ZM8.5 7.7A1.8 1.8 0 1 1 8.5 4a1.8 1.8 0 0 1 0 3.7ZM20 19h-3v-5.6c0-3.37-4-3.11-4 0V19h-3V9h3v1.55C14.4 7.96 20 7.77 20 13.02V19Z" />
-                    </svg>
-                </a>
-                <a href="https://www.github.com/zsoufiane" target="_blank" aria-label="GitHub">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9aa4b2" viewBox="0 0 24 24">
-                        <path
-                            d="M12 .5A12 12 0 0 0 0 12.76c0 5.4 3.44 9.97 8.2 11.59.6.12.82-.26.82-.58 0-.28-.01-1.04-.02-2.04-3.34.72-4.04-1.62-4.04-1.62-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.3 3.5.99.11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.53-1.52.12-3.17 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4s2.04.13 3 .4c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.93.43.37.82 1.11.82 2.23 0 1.61-.02 2.9-.02 3.29 0 .32.22.69.83.58A12.02 12.02 0 0 0 24 12.76 12 12 0 0 0 12 .5Z" />
-                    </svg>
-                </a>
+                <a href="https://www.linkedin.com/in/soufianezghpro/" target="_blank">LinkedIn</a>
+                <a href="https://www.github.com/zsoufiane" target="_blank">GitHub</a>
             </div>
         </div>
     </footer>
 
-    <!-- ===== JS ===== -->
     <script>
-        // Burger menu
         const burger = document.querySelector('.burger');
         const nav = document.getElementById('nav');
-        if (burger && nav) {
-            burger.addEventListener('click', () => {
-                const open = nav.classList.toggle('open');
-                burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-            });
-            nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
-        }
+        if (burger && nav) { burger.addEventListener('click', () => { nav.classList.toggle('open') }) }
     </script>
 </body>
 

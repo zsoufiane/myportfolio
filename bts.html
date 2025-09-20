@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SZ — Portfolio | Soufiane ZOUGAGH</title>
+    <meta name="description"
+        content="Portfolio de Soufiane ZOUGAGH — BTS SIO SISR, passionné de cybersécurité, systèmes & réseaux, et cloud." />
+
+    <!-- ====== CSS (Clair + glassmorphism) ====== -->
+    <style>
+        :root {
+            /* Palette claire (on garde ton code couleur) */
+            --bg: #f6f7fb;
+            --panel: #ffffffcc;
+            --panel-2: #ffffff;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --primary: #3b82f6;
+            /* bleu */
+            --primary-600: #2563eb;
+            /* bleu plus soutenu */
+            --accent: #93c5fd;
+            /* bleu clair */
+            --accent-2: #a7f3d0;
+            /* vert menthe clair */
+            --card-border: #e5e7eb;
+            --radius: 18px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .08);
+            --shadow-strong: 0 20px 40px rgba(0, 0, 0, .12);
+            --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font: 16px/1.65 var(--sans);
+            color: var(--text);
+            background:
+                radial-gradient(1200px 600px at 10% -10%, rgba(147, 197, 253, .25), transparent 60%),
+                radial-gradient(1000px 500px at 110% 10%, rgba(167, 243, 208, .22), transparent 60%),
+                var(--bg);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none
+        }
+
+        a:hover {
+            color: var(--primary-600)
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 22px
+        }
+
+        section {
+            padding: 70px 0
+        }
+
+        /* ====== Header / Nav ====== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, .7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .nav-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .brand-logo {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: radial-gradient(100% 100% at 30% 20%, var(--accent), var(--accent-2));
+            box-shadow: var(--shadow);
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: .4px;
+            color: #0f172a
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 9px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--card-border);
+            background: #fff;
+            color: #0f172a;
+            font-weight: 600;
+            font-size: 14px;
+            transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+        }
+
+        nav a:hover {
+            transform: translateY(-1px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+            background: #f8fafc
+        }
+
+        nav a.active {
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, .2) inset;
+            border-color: var(--primary)
+        }
+
+        .burger {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            background: #fff
+        }
+
+        .burger span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: #94a3b8;
+            margin: 6px auto
+        }
+
+        @media (max-width:940px) {
+            nav {
+                display: none;
+                position: absolute;
+                left: 22px;
+                right: 22px;
+                top: 64px
+            }
+
+            nav.open {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px
+            }
+
+            .burger {
+                display: block
+            }
+        }
+
+        /* ====== Cartes / Hero ====== */
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, .6), rgba(255, 255, 255, .45)), var(--panel);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            padding: 26px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(8px);
+        }
+
+        #accueil .hero {
+            display: grid;
+            gap: 18px
+        }
+
+        #accueil h2 {
+            font-size: clamp(26px, 4vw, 36px);
+            margin: 0
+        }
+
+        .lead {
+            color: var(--muted)
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            background: linear-gradient(180deg, #dbeafe, #bfdbfe);
+            border: 1px solid #c7d2fe;
+            color: #0b1220;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, .35);
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            filter: brightness(1.03);
+            transform: translateY(-1px)
+        }
+
+        .btn.secondary {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            color: var(--text);
+            text-shadow: none
+        }
+
+        /* ====== Composants réutilisables ====== */
+        .grid-2 {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        @media (max-width:900px) {
+            .grid-2 {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .panel-title {
+            margin: 0 0 12px 0;
+            font-weight: 900;
+            letter-spacing: .3px;
+            color: #0f172a
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        /* Fenêtre style "terminal" clair (déjà proche de ta maquette) */
+        .window {
+            background: var(--panel-2);
+            border: 1px solid #c7d2fe;
+            border-radius: var(--radius);
+            box-shadow: 0 0 0 2px rgba(147, 197, 253, .2), var(--shadow);
+            overflow: hidden;
+        }
+
+        .window .window-bar {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            border-bottom: 1px solid #e5e7eb;
+            background: linear-gradient(180deg, #f8fbff, #eef2ff);
+            font-family: var(--mono);
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+
+        .window .dots {
+            display: flex;
+            gap: 8px
+        }
+
+        .window .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%
+        }
+
+        .window .dot.red {
+            background: #ef4444
+        }
+
+        .window .dot.yellow {
+            background: #f59e0b
+        }
+
+        .window .dot.green {
+            background: #22c55e
+        }
+
+        .window .content {
+            padding: 18px
+        }
+
+        .bento {
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 16px;
+            background: linear-gradient(180deg, #ffffff, #f8fbff);
+            box-shadow: var(--shadow);
+        }
+
+        .bento h3 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            color: #0f172a
+        }
+
+        .bento ul {
+            margin: 0;
+            padding-left: 18px;
+            color: #475569
+        }
+
+        .list {
+            margin: 0;
+            padding-left: 18px;
+            color: #475569
+        }
+
+        .list li {
+            margin: 6px 0
+        }
+
+        .chip {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 999px;
+            border: 1px solid #c7d2fe;
+            background: #eef2ff;
+            font: 600 12px var(--sans);
+            color: #1e3a8a
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ====== Header / Nav ====== -->
+    <header aria-label="Barre de navigation principale">
+        <div class="container nav-wrap">
+            <div class="brand" aria-label="Identité du site">
+                <div class="brand-logo" aria-hidden="true"></div>
+                <h1>SZ</h1>
+            </div>
+
+            <button class="burger" aria-label="Ouvrir le menu" aria-controls="nav" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav id="nav" aria-label="Navigation">
+                <a href="./index.html">Accueil</a>
+                <a href="bts.html">BTS SIO</a>
+                <a href="entreprise.html">Entreprise</a>
+                <a href="epreuves.html">Épreuves</a>
+                <a href="projets.html">Projets</a>
+                <a href="veille.html">Veille</a>
+                <a href="competences.html">Compétences</a>
+                <a href="certifications.html">Certifications</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ====== BTS SIO (reproduction de la maquette en gardant la palette) ====== -->
+    <section id="bts" aria-label="BTS SIO">
+        <div class="container">
+            <h2 class="panel-title">BTS SIO</h2>
+            <p class="muted">Services Informatiques aux Organisations</p>
+
+            <div class="window" style="margin-top:12px">
+                <div class="window-bar">
+                    <span>about_bts_sio.md</span>
+                    <div class="dots" aria-hidden="true">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3 style="margin:0 0 10px 0; font-size:20px; font-weight:800">Qu’est-ce que le BTS SIO ?</h3>
+                    <p class="muted" style="margin:0 0 16px 0">Le Brevet de Technicien Supérieur Services Informatiques
+                        aux Organisations est un diplôme Bac+2 préparant aux métiers de l’informatique. La formation
+                        dure deux ans et propose deux options.</p>
+
+                    <div class="grid-2" style="margin: 0 0 16px 0">
+                        <div class="bento">
+                            <h3>SISR — Solutions d’Infrastructure, Systèmes et Réseaux</h3>
+                            <ul class="list">
+                                <li>Administration des systèmes et des réseaux</li>
+                                <li>Cybersécurité et protection des données</li>
+                                <li>Maintenance des infrastructures</li>
+                                <li>Virtualisation et cloud</li>
+                                <li>Support et assistance aux utilisateurs</li>
+                            </ul>
+                            <p style="margin-top:10px"><span class="chip">Débouchés</span> Administrateur systèmes &
+                                réseaux, Technicien support, Expert en cybersécurité</p>
+                        </div>
+                        <div class="bento">
+                            <h3>SLAM — Solutions Logicielles et Applications Métiers</h3>
+                            <ul class="list">
+                                <li>Développement d’applications web et mobiles</li>
+                                <li>Programmation et bases de données</li>
+                                <li>Conception de solutions applicatives</li>
+                                <li>Gestion de projets informatiques</li>
+                                <li>Maintenance des applications</li>
+                            </ul>
+                            <p style="margin-top:10px"><span class="chip">Débouchés</span> Développeur web/mobile,
+                                Analyste programmeur, Chef de projet</p>
+                        </div>
+                    </div>
+
+                    <h4 style="margin: 18px 0 8px 0">Programme commun</h4>
+                    <ul class="list">
+                        <li>Culture générale et expression</li>
+                        <li>Expression et communication en langue anglaise</li>
+                        <li>Mathématiques pour l’informatique</li>
+                        <li>Culture économique, juridique et managériale</li>
+                        <li>Analyse des services informatiques</li>
+                    </ul>
+
+                    <h4 id="stage" style="margin: 18px 0 8px 0">Stages en entreprise</h4>
+                    <p class="muted" style="margin:0 0 8px 0">La formation comprend 12 semaines de stage réparties sur
+                        deux années :</p>
+                    <ul class="list">
+                        <li>Stage de première année : 5–6 semaines</li>
+                        <li>Stage de deuxième année : 7 semaines</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== Projets (maquette reproduite) ====== -->
+    <section id="projets" aria-label="Projets réalisés en BTS SIO SISR">
+        <div class="container">
+            <div class="window">
+                <div class="window-bar">
+                    <span>projets.md</span>
+                    <div class="dots" aria-hidden="true">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3 style="margin:0 0 14px 0; font-size:20px; font-weight:800">Projets réalisés en BTS SIO SISR</h3>
+                    <div class="grid-2">
+                        <div class="bento">
+                            <h3>🧩 Infrastructure réseau</h3>
+                            <p class="muted" style="margin:0 0 8px 0">Configuration & maintenance d’une infrastructure
+                                complète :</p>
+                            <ul class="list">
+                                <li>Installation et configuration de serveurs</li>
+                                <li>Mise en place de solutions de virtualisation</li>
+                                <li>Services réseau (DNS, DHCP)</li>
+                                <li>Configuration du sécurité réseau</li>
+                            </ul>
+                        </div>
+                        <div class="bento">
+                            <h3>🛡️ Sécurité informatique</h3>
+                            <p class="muted" style="margin:0 0 8px 0">Déploiement de solutions de sécurité :</p>
+                            <ul class="list">
+                                <li>Configuration de pare-feu</li>
+                                <li>Mise en place de VPN</li>
+                                <li>Gestion des droits d’accès</li>
+                                <li>Surveillance et analyse des logs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SZ — Veille Informatique | Soufiane ZOUGAGH</title>
+    <meta name="description"
+        content="Veille informatique autour du Cloud Computing : définition, actualités et tendances." />
+
+    <style>
+        :root {
+            --bg: #f6f7fb;
+            --panel: #ffffffcc;
+            --panel-2: #ffffff;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --primary: #3b82f6;
+            --primary-600: #2563eb;
+            --accent: #93c5fd;
+            --accent-2: #a7f3d0;
+            --green: #16a34a;
+            --green-soft: #dcfce7;
+            --card-border: #e5e7eb;
+            --radius: 18px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .08);
+            --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font: 16px/1.65 var(--sans);
+            color: var(--text);
+            background:
+                radial-gradient(1200px 600px at 10% -10%, rgba(147, 197, 253, .25), transparent 60%),
+                radial-gradient(1000px 500px at 110% 10%, rgba(167, 243, 208, .22), transparent 60%),
+                var(--bg);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none
+        }
+
+        a:hover {
+            color: var(--primary-600)
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 22px
+        }
+
+        section {
+            padding: 70px 0
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, .7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .nav-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .brand-logo {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: radial-gradient(100% 100% at 30% 20%, var(--accent), var(--accent-2));
+            box-shadow: var(--shadow)
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: .4px;
+            color: #0f172a
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 9px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--card-border);
+            background: #fff;
+            color: #0f172a;
+            font-weight: 600;
+            font-size: 14px;
+            transition: .12s;
+        }
+
+        nav a:hover {
+            transform: translateY(-1px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+            background: #f8fafc
+        }
+
+        nav a.active {
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, .2) inset;
+            border-color: var(--primary)
+        }
+
+        .burger {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            background: #fff
+        }
+
+        .burger span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: #94a3b8;
+            margin: 6px auto
+        }
+
+        @media (max-width:940px) {
+            nav {
+                display: none;
+                position: absolute;
+                left: 22px;
+                right: 22px;
+                top: 64px
+            }
+
+            nav.open {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px
+            }
+
+            .burger {
+                display: block
+            }
+        }
+
+        /* Fenêtres */
+        .window {
+            background: var(--panel-2);
+            border: 1px solid #c7d2fe;
+            border-radius: var(--radius);
+            box-shadow: 0 0 0 2px rgba(147, 197, 253, .2), var(--shadow);
+            overflow: hidden;
+            margin-bottom: 18px;
+        }
+
+        .window-bar {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            border-bottom: 1px solid #e5e7eb;
+            background: linear-gradient(180deg, #f8fbff, #eef2ff);
+            font-family: var(--mono);
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+
+        .dots {
+            display: flex;
+            gap: 8px
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%
+        }
+
+        .dot.red {
+            background: #ef4444
+        }
+
+        .dot.yellow {
+            background: #f59e0b
+        }
+
+        .dot.green {
+            background: #22c55e
+        }
+
+        .content {
+            padding: 18px
+        }
+
+        .page-title {
+            margin: 0 0 22px;
+            text-align: center;
+            font: 900 28px/1.25 var(--mono);
+            color: var(--green)
+        }
+
+        .list {
+            margin: 0;
+            padding-left: 18px;
+            color: #374151
+        }
+
+        .list li {
+            margin: 6px 0
+        }
+
+        .card {
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 16px;
+            background: linear-gradient(180deg, #ffffff, #f8fbff)
+        }
+
+        .card h4 {
+            margin: 0 0 8px;
+            font: 800 16px/1.2 var(--sans);
+            color: #0f172a
+        }
+
+        /* Accordion */
+        .accordion-item {
+            border-bottom: 1px solid var(--card-border)
+        }
+
+        .accordion-header {
+            cursor: pointer;
+            padding: 12px;
+            font-weight: 600;
+            color: var(--primary-600);
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .accordion-header:hover {
+            background: #f1f5f9
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 0 12px 12px;
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block
+        }
+
+        /* Footer (sans liens de navigation) */
+        footer {
+            margin-top: 40px;
+            background: rgba(255, 255, 255, .7);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--card-border);
+            padding: 18px 0;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .footer-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px
+        }
+
+        .footer-social a svg {
+            transition: transform .2s, opacity .2s
+        }
+
+        .footer-social a:hover svg {
+            transform: scale(1.15);
+            opacity: .85
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrap">
+            <div class="brand">
+                <div class="brand-logo"></div>
+                <h1>SZ</h1>
+            </div>
+            <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+            <nav id="nav" aria-label="Navigation">
+                <a href="./index.html">Accueil</a>
+                <a href="bts.html">BTS SIO</a>
+                <a href="entreprise.html">Entreprise</a>
+                <a href="epreuves.html">Épreuves</a>
+                <a href="projets.html">Projets</a>
+                <a href="veille.html">Veille</a>
+                <a href="competences.html">Compétences</a>
+                <a href="certifications.html">Certifications</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Veille -->
+    <section id="veille">
+        <div class="container">
+            <h2 class="page-title">Veille Informatique — Cloud Computing</h2>
+
+            <!-- Définition -->
+            <div class="window">
+                <div class="window-bar">
+                    <span>definition.md</span>
+                    <div class="dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                </div>
+                <div class="content">
+                    <p class="muted">
+                        La <b>veille informatique</b> consiste à surveiller en continu les évolutions technologiques,
+                        les innovations et les bonnes pratiques dans un domaine donné.
+                        Ici, ma veille est centrée sur le <b>Cloud Computing</b>, un modèle d’informatique à la demande
+                        qui permet d’accéder via Internet à des ressources (serveurs, stockage, applications) de manière
+                        flexible, scalable et sécurisée.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Intro Cloud -->
+            <div class="window">
+                <div class="window-bar">
+                    <span>cloud_intro.md</span>
+                    <div class="dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="card">
+                        <h4>Qu’est-ce que le Cloud Computing ?</h4>
+                        <p>Le Cloud Computing repose sur trois grands modèles de services :</p>
+                        <ul class="list">
+                            <li><b>IaaS</b> — serveurs, stockage et réseaux à la demande.</li>
+                            <li><b>PaaS</b> — environnements prêts à l’emploi pour développer et déployer des
+                                applications.</li>
+                            <li><b>SaaS</b> — logiciels accessibles en ligne sans installation locale.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Articles -->
+            <div class="window">
+                <div class="window-bar">
+                    <span>articles.md</span>
+                    <div class="dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="card">
+                        <h4>Articles récents</h4>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <a href="https://www.lemondeinformatique.fr/actualites/lire-le-serverless-cartonne-sur-aws-azure-et-gcp-83117.html"
+                                        target="_blank" rel="noopener">Le serverless cartonne sur AWS, Azure et
+                                        GCP</a><span>+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    Adoption massive du <b>serverless</b> (AWS Lambda, Azure Functions, GCP Functions),
+                                    tirée par la réduction des coûts et la simplicité des workloads événementiels.
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <a href="https://www.lemondeinformatique.fr/actualites/lire-sap-renonce-a-sa-preference-s4-hana-sur-azure-83129.html"
+                                        target="_blank" rel="noopener">SAP renonce à sa préférence S/4HANA sur
+                                        Azure</a><span>+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    SAP met fin à sa préférence pour Azure, ouvrant davantage la voie aux scénarios
+                                    <b>multi-cloud</b> selon les besoins clients.
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <a href="https://www.lemondeinformatique.fr/actualites/lire-aws-rend-redshift-ml-disponible-pour-tous-83097.html"
+                                        target="_blank" rel="noopener">AWS rend Redshift ML disponible pour
+                                        tous</a><span>+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <b>Redshift ML</b> en disponibilité générale : entraîner et déployer des modèles ML
+                                    directement depuis SQL avec SageMaker.
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <a href="https://www.lemondeinformatique.fr/actualites/lire-avec-oncloud-bouygues-telecom-entreprises-tente-en-solo-l-aventure-du-cloud-de-confiance-83116.html"
+                                        target="_blank" rel="noopener">Bouygues Telecom Entreprises lance
+                                        OnCloud</a><span>+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <b>OnCloud</b> vise les PME/ETI avec un cloud aligné <b>cloud de confiance</b>
+                                    (sécurité, conformité, souveraineté).
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <a href="https://www.lemondeinformatique.fr/actualites/lire-databricks-renforce-sa-gouvernance-de-donnees-et-sa-gestion-des-modeles-ml-83093.html"
+                                        target="_blank" rel="noopener">Databricks renforce gouvernance &
+                                        ML</a><span>+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    Nouvelles fonctions de <b>gouvernance</b> et de gestion du cycle de vie des modèles
+                                    ML.
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <a href="https://www.itforbusiness.fr/capgemini-et-orange-sassocient-pour-creer-un-cloud-de-confiance-a-la-sauce-microsoft-43433"
+                                        target="_blank" rel="noopener">Capgemini & Orange : cloud Bleu</a><span>+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <b>Bleu</b>, projet de <b>cloud de confiance</b> basé sur Azure/M365 pour données
+                                    sensibles publiques & OIV.
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <a href="https://www.itforbusiness.fr/un-etat-des-lieux-de-lopen-source-en-france-43661"
+                                        target="_blank" rel="noopener">Un état des lieux de l’open source en
+                                        France</a><span>+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    Panorama de l’<b>open source</b> en France : souveraineté, communautés et impact sur
+                                    le <b>cloud-native</b>.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tendances -->
+            <div class="window">
+                <div class="window-bar">
+                    <span>tendances.md</span>
+                    <div class="dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="card">
+                        <h4>Tendances & Perspectives</h4>
+                        <ul class="list">
+                            <li>Montée en puissance du <b>cloud hybride</b> et du <b>multi-cloud</b>.</li>
+                            <li>Adoption massive du <b>serverless</b> et des <b>containers (Kubernetes)</b>.</li>
+                            <li>Renforcement de la <b>sécurité cloud</b> (Cloud Security, DevSecOps).</li>
+                            <li>Développement du <b>cloud souverain</b> en Europe.</li>
+                            <li>Utilisation accrue de l’IA et du <b>cloud computing vert</b>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer (sans liens de nav) -->
+    <footer>
+        <div class="container footer-wrap">
+            <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/soufianezghpro/" target="_blank" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#2563eb" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 
+            2.761 2.239 5 5 5h14c2.762 0 5-2.239 
+            5-5v-14c0-2.761-2.238-5-5-5zm-11 
+            19h-3v-10h3v10zm-1.5-11.268c-.966 
+            0-1.75-.79-1.75-1.764s.784-1.764 
+            1.75-1.764c.967 0 1.75.79 
+            1.75 1.764s-.783 1.764-1.75 
+            1.764zm13.5 11.268h-3v-5.604c0-3.368-4-3.113-4 
+            0v5.604h-3v-10h3v1.545c1.396-2.586 
+            7-2.777 7 2.476v5.979z" />
+                    </svg>
+                </a>
+                <a href="https://www.github.com/zsoufiane" target="_blank" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#1f2937" viewBox="0 0 24 24">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 
+            12 0 5.303 3.438 9.8 8.205 
+            11.385.6.113.82-.258.82-.577 
+            0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.084-.729.084-.729 
+            1.205.084 1.84 1.236 1.84 1.236 
+            1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.334-5.466-5.931 
+            0-1.311.469-2.381 1.236-3.221-.123-.303-.535-1.523.117-3.176 
+            0 0 1.008-.322 3.301 1.23a11.48 
+            11.48 0 013.003-.404c1.018.005 
+            2.042.138 3.003.404 2.291-1.552 
+            3.297-1.23 3.297-1.23.653 1.653.242 
+            2.873.119 3.176.77.84 1.235 
+            1.91 1.235 3.221 0 4.609-2.803 
+            5.628-5.475 5.921.43.371.823 
+            1.102.823 2.222 0 1.606-.015 
+            2.898-.015 3.293 0 .322.216.694.825.576 
+            4.765-1.587 8.2-6.083 
+            8.2-11.385 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS (menu mobile + accordion) -->
+    <script>
+        // Burger
+        const burger = document.querySelector('.burger');
+        const nav = document.getElementById('nav');
+        if (burger && nav) {
+            burger.addEventListener('click', () => {
+                const open = nav.classList.toggle('open');
+                burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+        }
+
+        // Accordéon
+        document.querySelectorAll('.accordion-item').forEach(it => {
+            const header = it.querySelector('.accordion-header');
+            header.addEventListener('click', () => {
+                it.classList.toggle('active');
+                const sym = header.querySelector('span');
+                if (sym) sym.textContent = it.classList.contains('active') ? '-' : '+';
+            });
+        });
+    </script>
+</body>
+
+</html>

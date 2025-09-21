@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projet Virtualisation — Documentation | Soufiane ZOUGAGH</title>
+    <meta name="description"
+        content="Documentation détaillée du projet Virtualisation : VMware, VirtualBox, Docker, configuration et bonnes pratiques." />
+    <style>
+        :root {
+            --bg: #f6f7fb;
+            --panel: #fff;
+            --text: #0f172a;
+            --muted: #6b7280;
+            --primary: #3b82f6;
+            --primary-600: #2563eb;
+            --border: #e5e7eb;
+            --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
+            --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+            --radius: 18px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .08)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font: 16px/1.65 var(--sans);
+            color: var(--text);
+            background: var(--bg)
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none
+        }
+
+        a:hover {
+            color: var(--primary-600)
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 28px 20px
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, .75);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .brand {
+            display: flex;
+            gap: 10px;
+            align-items: center
+        }
+
+        .logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: radial-gradient(100% 100% at 30% 20%, #93c5fd, #a7f3d0);
+            box-shadow: var(--shadow)
+        }
+
+        h2 {
+            margin: 28px 0 10px
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px;
+            margin: 16px 0
+        }
+
+        pre {
+            background: #0b1220;
+            color: #e5e7eb;
+            border-radius: 12px;
+            padding: 14px;
+            overflow: auto
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 13px
+        }
+
+        footer {
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            background: rgba(255, 255, 255, .7)
+        }
+
+        .small {
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid #16a34a;
+            background: #dcfce7;
+            color: #166534;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container brand">
+            <div class="logo"></div>
+            <h1>SZ</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>📦 Virtualisation — Documentation</h2>
+        <p><b>But :</b> déployer et administrer des environnements virtualisés à l’aide de <b>VMware</b>,
+            <b>VirtualBox</b> et <b>Docker</b>.</p>
+
+        <div class="panel">
+            <h3>1️⃣ VMware / VirtualBox</h3>
+            <ul>
+                <li>Création de VM Linux (Debian/Ubuntu, CentOS) et Windows Server.</li>
+                <li>Configuration réseau (NAT, Bridge, Host-Only).</li>
+                <li>Snapshots pour sauvegarder l’état d’une VM.</li>
+            </ul>
+        </div>
+
+        <div class="panel">
+            <h3>2️⃣ Docker</h3>
+            <pre><code># Exemple : lancer un conteneur Nginx
+docker run -d -p 8080:80 nginx
+
+# Docker Compose : stack multi-services
+version: "3.9"
+services:
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+</code></pre>
+        </div>
+
+        <div class="panel">
+            <h3>3️⃣ Tests et validation</h3>
+            <ul>
+                <li>Accès à une VM via SSH (<code>ssh user@192.168.x.x</code>).</li>
+                <li>Test des services Docker via navigateur (<code>http://localhost:8080</code>).</li>
+                <li>Gestion des ressources (CPU, RAM) allouées aux VM/containers.</li>
+            </ul>
+        </div>
+
+        <div class="panel">
+            <h3>✅ Résultats</h3>
+            <ul>
+                <li>VM fonctionnelles pour tester différents OS et services.</li>
+                <li>Conteneurs Docker déployés pour services rapides et isolés.</li>
+                <li>Automatisation grâce à Docker Compose.</li>
+            </ul>
+        </div>
+
+        <div class="panel">
+            <h3>🚀 Améliorations</h3>
+            <ul>
+                <li>Mettre en place Kubernetes pour l’orchestration.</li>
+                <li>Créer des templates de VM préconfigurées.</li>
+                <li>Supervision via Portainer, vSphere ou Proxmox.</li>
+            </ul>
+        </div>
+
+        <a class="btn" href="projets.html">← Retour aux projets</a>
+    </main>
+
+    <footer>
+        <div class="container small">
+            © 2025 — <b>Soufiane ZOUGAGH</b>. Documentation Virtualisation.
+        </div>
+    </footer>
+</body>
+
+</html>

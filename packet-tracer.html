@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projet Packet Tracer — Documentation | Soufiane ZOUGAGH</title>
+    <meta name="description"
+        content="Documentation détaillée du projet Packet Tracer : conception réseau, VLANs, routage inter-VLAN, DHCP, tests et améliorations." />
+    <style>
+        :root {
+            --bg: #f6f7fb;
+            --panel: #fff;
+            --text: #0f172a;
+            --muted: #6b7280;
+            --primary: #3b82f6;
+            --primary-600: #2563eb;
+            --accent: #a7f3d0;
+            --border: #e5e7eb;
+            --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
+            --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+            --radius: 18px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .08)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font: 16px/1.65 var(--sans);
+            color: var(--text);
+            background:
+                radial-gradient(1100px 500px at 10% -10%, rgba(147, 197, 253, .25), transparent 60%),
+                radial-gradient(1000px 500px at 110% 10%, rgba(167, 243, 208, .22), transparent 60%),
+                var(--bg);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none
+        }
+
+        a:hover {
+            color: var(--primary-600)
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 28px 20px
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(255, 255, 255, .75);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .nav {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px
+        }
+
+        .brand {
+            display: flex;
+            gap: 10px;
+            align-items: center
+        }
+
+        .logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: radial-gradient(100% 100% at 30% 20%, #93c5fd, #a7f3d0);
+            box-shadow: var(--shadow)
+        }
+
+        .brand h1 {
+            font-size: 18px;
+            margin: 0
+        }
+
+        .badge {
+            display: inline-block;
+            font: 700 12px/1 var(--sans);
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: #fff;
+            color: #0f172a
+        }
+
+        h2 {
+            margin: 28px 0 10px
+        }
+
+        .lead {
+            font-size: 18px;
+            color: #111827
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px;
+            margin: 16px 0
+        }
+
+        pre {
+            background: #0b1220;
+            color: #e5e7eb;
+            border-radius: 12px;
+            padding: 14px;
+            overflow: auto
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 13px
+        }
+
+        .grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #fff
+        }
+
+        th,
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px
+        }
+
+        th {
+            background: #f8fafc;
+            text-align: left
+        }
+
+        tr:last-child td {
+            border-bottom: none
+        }
+
+        .toc {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid #16a34a;
+            background: #dcfce7;
+            color: #166534;
+            font-weight: 700
+        }
+
+        footer {
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            background: rgba(255, 255, 255, .7)
+        }
+
+        .small {
+            color: var(--muted);
+            font-size: 14px
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="nav">
+            <div class="brand">
+                <div class="logo"></div>
+                <h1>SZ</h1>
+            </div>
+            <div class="toc">
+                <a class="badge" href="#objectif">Objectif</a>
+                <a class="badge" href="#outils">Outils</a>
+                <a class="badge" href="#plan">Plan d’adressage</a>
+                <a class="badge" href="#etapes">Étapes</a>
+                <a class="badge" href="#tests">Tests</a>
+                <a class="badge" href="#resultats">Résultats</a>
+                <a class="badge" href="#améliorations">Améliorations</a>
+                <a class="badge" href="#annexes">Annexes</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 id="objectif">Projet Packet Tracer — Documentation</h2>
+        <p class="lead">
+            Conception et simulation d’un réseau d’entreprise sous <b>Cisco Packet Tracer</b> :
+            segmentation en VLANs, <b>routage inter-VLAN</b>, <b>DHCP</b>, tests de connectivité et bonnes pratiques.
+        </p>
+
+        <div class="panel" id="outils">
+            <h3>🛠️ Outils & topologie</h3>
+            <ul>
+                <li><b>Cisco Packet Tracer</b> (version 8.x)</li>
+                <li>1 routeur, 2 switches L2 (ou 1 switch L3), 1 serveur (DHCP/DNS/HTTP), 6 postes clients</li>
+                <li>Trunk 802.1Q entre switch & routeur (routage inter-VLAN via sous-interfaces)</li>
+            </ul>
+        </div>
+
+        <div class="panel" id="plan">
+            <h3>🗺️ Plan d’adressage</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>VLAN</th>
+                        <th>Nom</th>
+                        <th>Plage</th>
+                        <th>Gateway</th>
+                        <th>Usage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10</td>
+                        <td>ADMIN</td>
+                        <td>192.168.10.0/24</td>
+                        <td>192.168.10.1</td>
+                        <td>Équipe IT / serveurs</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>USERS</td>
+                        <td>192.168.20.0/24</td>
+                        <td>192.168.20.1</td>
+                        <td>Utilisateurs</td>
+                    </tr>
+                    <tr>
+                        <td>99</td>
+                        <td>MGMT</td>
+                        <td>192.168.99.0/24</td>
+                        <td>192.168.99.1</td>
+                        <td>Management des switches (optionnel)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="small">DNS de test : 8.8.8.8 (ou serveur DNS interne si configuré).</p>
+        </div>
+
+        <div class="panel" id="etapes">
+            <h3>🔧 Étapes de configuration</h3>
+
+            <h4>1) Création des VLANs (switch)</h4>
+            <pre><code>enable
+configure terminal
+vlan 10
+ name ADMIN
+vlan 20
+ name USERS
+vlan 99
+ name MGMT
+interface range fa0/1-12
+ switchport mode access
+ switchport access vlan 20
+interface range fa0/13-16
+ switchport mode access
+ switchport access vlan 10
+interface g0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+</code></pre>
+
+            <h4>2) Routage inter-VLAN sur le routeur (sous-interfaces)</h4>
+            <pre><code>enable
+configure terminal
+interface g0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+interface g0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+ no shutdown
+interface g0/0.99
+ encapsulation dot1Q 99
+ ip address 192.168.99.1 255.255.255.0
+ no shutdown
+</code></pre>
+
+            <h4>3) DHCP sur le routeur (2 pools)</h4>
+            <pre><code>ip dhcp excluded-address 192.168.10.1 192.168.10.20
+ip dhcp excluded-address 192.168.20.1 192.168.20.20
+
+ip dhcp pool VLAN10
+ network 192.168.10.0 255.255.255.0
+ default-router 192.168.10.1
+ dns-server 8.8.8.8
+ lease 7
+
+ip dhcp pool VLAN20
+ network 192.168.20.0 255.255.255.0
+ default-router 192.168.20.1
+ dns-server 8.8.8.8
+ lease 7
+</code></pre>
+
+            <h4>4) Adresse de management du switch (optionnel)</h4>
+            <pre><code>interface vlan 99
+ ip address 192.168.99.10 255.255.255.0
+ no shutdown
+ip default-gateway 192.168.99.1
+</code></pre>
+
+            <h4>5) Tests rapides (mode user)</h4>
+            <pre><code># Sur un PC en VLAN 20
+ipconfig /all
+ping 192.168.20.1   # passerelle
+ping 192.168.10.10  # hôte VLAN 10
+ping 8.8.8.8        # internet simulé
+</code></pre>
+        </div>
+
+        <div class="panel" id="tests">
+            <h3>🧪 Procédure de validation</h3>
+            <div class="grid">
+                <div class="panel">
+                    <b>Adressage DHCP</b>
+                    <ul>
+                        <li>Chaque PC reçoit une IP dans son VLAN, gateway et DNS corrects.</li>
+                    </ul>
+                </div>
+                <div class="panel">
+                    <b>Inter-VLAN</b>
+                    <ul>
+                        <li>Ping entre un poste VLAN 10 et VLAN 20 OK.</li>
+                        <li>Traceroute montre le routeur comme saut intermédiaire.</li>
+                    </ul>
+                </div>
+                <div class="panel">
+                    <b>Services</b>
+                    <ul>
+                        <li>Accès au serveur HTTP interne via navigateur Packet Tracer.</li>
+                        <li>Résolution DNS si serveur DNS interne configuré.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel" id="resultats">
+            <h3>✅ Résultats</h3>
+            <ul>
+                <li>Segmentation réseau efficace via VLANs.</li>
+                <li>Routage inter-VLAN opérationnel.</li>
+                <li>Attribution IP automatique (DHCP) stable.</li>
+                <li>Architecture prête pour la sécurité (ACL), la QoS et la haute dispo.</li>
+            </ul>
+        </div>
+
+        <div class="panel" id="améliorations">
+            <h3>🚀 Améliorations possibles</h3>
+            <ul>
+                <li><b>ACL</b> pour filtrer inter-VLAN (ex. interdire USERS → ADMIN sauf ports précis).</li>
+                <li><b>Switch L3</b> et SVI pour le routage au niveau du cœur.</li>
+                <li><b>HSRP/VRRP</b> pour passerelles redondantes.</li>
+                <li><b>Syslog/NTP</b> pour observabilité et horodatage cohérent.</li>
+            </ul>
+            <details>
+                <summary>Exemple d’ACL (USERS limité vers ADMIN)</summary>
+                <pre><code>ip access-list extended USERS_TO_ADMIN
+ deny ip 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255
+ permit ip 192.168.20.0 0.0.0.255 any
+interface g0/0.20
+ ip access-group USERS_TO_ADMIN out
+</code></pre>
+            </details>
+        </div>
+
+        <div class="panel" id="annexes">
+            <h3>📎 Annexes</h3>
+            <ul>
+                <li>Fichier de projet : <i>PacketTracer_Entreprise.pkt</i> (à déposer dans ton repo / site).</li>
+                <li>Version de Packet Tracer utilisée : 8.x</li>
+            </ul>
+            <a class="btn" href="projets.html">← Retour aux projets</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container small">
+            © 2025 — <b>Soufiane ZOUGAGH</b>. Documentation Packet Tracer.
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projet Serveur DHCP — Documentation | Soufiane ZOUGAGH</title>
+    <meta name="description"
+        content="Documentation détaillée du projet Serveur DHCP : installation, configuration, tests et bonnes pratiques." />
+    <style>
+        :root {
+            --bg: #f6f7fb;
+            --panel: #fff;
+            --text: #0f172a;
+            --muted: #6b7280;
+            --primary: #3b82f6;
+            --primary-600: #2563eb;
+            --border: #e5e7eb;
+            --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
+            --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+            --radius: 18px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .08)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font: 16px/1.65 var(--sans);
+            color: var(--text);
+            background: var(--bg)
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none
+        }
+
+        a:hover {
+            color: var(--primary-600)
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 28px 20px
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, .75);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .brand {
+            display: flex;
+            gap: 10px;
+            align-items: center
+        }
+
+        .logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: radial-gradient(100% 100% at 30% 20%, #93c5fd, #a7f3d0);
+            box-shadow: var(--shadow)
+        }
+
+        h2 {
+            margin: 28px 0 10px
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px;
+            margin: 16px 0
+        }
+
+        pre {
+            background: #0b1220;
+            color: #e5e7eb;
+            border-radius: 12px;
+            padding: 14px;
+            overflow: auto
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 13px
+        }
+
+        footer {
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            background: rgba(255, 255, 255, .7)
+        }
+
+        .small {
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid #16a34a;
+            background: #dcfce7;
+            color: #166534;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container brand">
+            <div class="logo"></div>
+            <h1>SZ</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>🖥️ Serveur DHCP — Documentation</h2>
+        <p><b>But :</b> installer, configurer et administrer un serveur DHCP pour distribuer automatiquement les
+            adresses IP aux postes clients.</p>
+
+        <div class="panel">
+            <h3>1️⃣ Installation</h3>
+            <ul>
+                <li>Sous Linux : <code>sudo apt install isc-dhcp-server</code></li>
+                <li>Sous Windows Server : ajout du rôle DHCP via le gestionnaire de serveur.</li>
+            </ul>
+        </div>
+
+        <div class="panel">
+            <h3>2️⃣ Configuration de base (Linux)</h3>
+            <pre><code># Fichier /etc/dhcp/dhcpd.conf
+default-lease-time 600;
+max-lease-time 7200;
+
+subnet 192.168.10.0 netmask 255.255.255.0 {
+  range 192.168.10.100 192.168.10.200;
+  option routers 192.168.10.1;
+  option domain-name-servers 8.8.8.8, 1.1.1.1;
+}
+</code></pre>
+            <p>Relancer le service : <code>sudo systemctl restart isc-dhcp-server</code></p>
+        </div>
+
+        <div class="panel">
+            <h3>3️⃣ Vérification</h3>
+            <ul>
+                <li>Configurer un poste client en DHCP → il doit recevoir une IP du bon pool.</li>
+                <li>Commande : <code>ipconfig /renew</code> (Windows) ou <code>dhclient</code> (Linux).</li>
+                <li>Logs : <code>/var/log/syslog</code> pour vérifier l’attribution.</li>
+            </ul>
+        </div>
+
+        <div class="panel">
+            <h3>✅ Résultats</h3>
+            <ul>
+                <li>Distribution IP automatique fonctionnelle.</li>
+                <li>Possibilité de réserver des IP fixes par adresse MAC.</li>
+                <li>Réseau simplifié, pas besoin de configuration manuelle.</li>
+            </ul>
+        </div>
+
+        <div class="panel">
+            <h3>🚀 Améliorations</h3>
+            <ul>
+                <li>Configurer <b>DHCP Failover</b> pour la haute disponibilité.</li>
+                <li>Ajouter un <b>DNS interne</b> lié au DHCP.</li>
+                <li>Mettre en place une surveillance via logs et monitoring.</li>
+            </ul>
+        </div>
+
+        <a class="btn" href="projets.html">← Retour aux projets</a>
+    </main>
+
+    <footer>
+        <div class="container small">
+            © 2025 — <b>Soufiane ZOUGAGH</b>. Documentation Serveur DHCP.
+        </div>
+    </footer>
+</body>
+
+</html>

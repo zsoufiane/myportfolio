@@ -33,8 +33,39 @@
             --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
         }
 
+        /* Schéma de couleur natif */
+        :root {
+            color-scheme: light;
+        }
+
+        html[data-theme="dark"] {
+            color-scheme: dark;
+        }
+
+        /* Thème sombre */
+        html[data-theme="dark"] {
+            --bg: #0b1220;
+            --panel: #0f172acc;
+            --panel-2: #111827;
+
+            --text: #e5e7eb;
+            --muted: #9ca3af;
+
+            --primary: #60a5fa;
+            --primary-600: #3b82f6;
+            --accent: #2563eb;
+            --accent-2: #22c55e;
+
+            --green: #22c55e;
+            --green-soft: #052e16;
+
+            --card-border: #1f2937;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .4);
+        }
+
         * {
-            box-sizing: border-box
+            box-sizing: border-box;
+            transition: background-color .2s ease, color .2s ease, border-color .2s ease
         }
 
         body {
@@ -45,6 +76,13 @@
             background:
                 radial-gradient(1200px 600px at 10% -10%, rgba(147, 197, 253, .25), transparent 60%),
                 radial-gradient(1000px 500px at 110% 10%, rgba(167, 243, 208, .22), transparent 60%),
+                var(--bg);
+        }
+
+        html[data-theme="dark"] body {
+            background:
+                radial-gradient(1200px 600px at 10% -10%, rgba(96, 165, 250, .12), transparent 60%),
+                radial-gradient(1000px 500px at 110% 10%, rgba(34, 197, 94, .10), transparent 60%),
                 var(--bg);
         }
 
@@ -77,6 +115,10 @@
             border-bottom: 1px solid var(--card-border);
         }
 
+        html[data-theme="dark"] header {
+            background: rgba(17, 24, 39, .6);
+        }
+
         .nav-wrap {
             display: flex;
             align-items: center;
@@ -103,6 +145,10 @@
             font-size: 18px;
             letter-spacing: .4px;
             color: #0f172a
+        }
+
+        html[data-theme="dark"] .brand h1 {
+            color: var(--text);
         }
 
         nav {
@@ -135,6 +181,12 @@
             border-color: var(--primary)
         }
 
+        html[data-theme="dark"] nav a {
+            background: #111827;
+            color: var(--text);
+            border-color: var(--card-border);
+        }
+
         .burger {
             display: none;
             width: 40px;
@@ -150,6 +202,43 @@
             height: 2px;
             background: #94a3b8;
             margin: 6px auto
+        }
+
+        html[data-theme="dark"] .burger {
+            background: #111827;
+            border-color: var(--card-border);
+        }
+
+        /* Toggle thème */
+        .theme-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: 1px solid var(--card-border);
+            background: #fff;
+            color: #0f172a;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: .12s transform, .12s filter, .12s background;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.03);
+        }
+
+        .theme-toggle .icon-sun,
+        .theme-toggle .icon-moon {
+            pointer-events: none
+        }
+
+        html[data-theme="dark"] .theme-toggle {
+            background: #111827;
+            color: var(--text);
+            border-color: var(--card-border);
         }
 
         @media(max-width:940px) {
@@ -222,11 +311,26 @@
             padding: 18px
         }
 
+        html[data-theme="dark"] .window {
+            border-color: #1f2937;
+            box-shadow: 0 0 0 2px rgba(96, 165, 250, .12), var(--shadow);
+        }
+
+        html[data-theme="dark"] .window-bar {
+            background: linear-gradient(180deg, #0f172a, #0b1220);
+            border-bottom: 1px solid #1f2937;
+            color: #93c5fd;
+        }
+
         .page-title {
             text-align: center;
             font: 900 28px/1.25 var(--mono);
             color: var(--primary);
             margin: 0 0 22px
+        }
+
+        html[data-theme="dark"] .page-title {
+            color: #93c5fd
         }
 
         /* ===== Cartes projets ===== */
@@ -255,6 +359,19 @@
             color: var(--muted)
         }
 
+        html[data-theme="dark"] .card {
+            background: linear-gradient(180deg, #0b1220, #0f172a);
+            border-color: var(--card-border);
+        }
+
+        html[data-theme="dark"] .card h4 {
+            color: #93c5fd
+        }
+
+        html[data-theme="dark"] .card p {
+            color: var(--muted)
+        }
+
         .btn {
             display: inline-block;
             margin-top: 10px;
@@ -264,11 +381,22 @@
             background: var(--green-soft);
             color: var(--green);
             font-weight: 600;
-            font-size: 14px
+            font-size: 14px;
+            transition: .12s
         }
 
         .btn:hover {
             background: #bbf7d0
+        }
+
+        html[data-theme="dark"] .btn {
+            border-color: #14532d;
+            background: #0f172a;
+            color: #86efac
+        }
+
+        html[data-theme="dark"] .btn:hover {
+            filter: brightness(1.08)
         }
 
         /* ===== Footer ===== */
@@ -280,6 +408,11 @@
             padding: 18px 0;
             font-size: 14px;
             color: var(--muted)
+        }
+
+        html[data-theme="dark"] footer {
+            background: rgba(17, 24, 39, .6);
+            border-color: var(--card-border);
         }
 
         .footer-wrap {
@@ -296,12 +429,33 @@
         }
 
         .footer-social a svg {
-            transition: transform .2s, opacity .2s
+            transition: transform .2s, opacity .2s, fill .2s
         }
 
         .footer-social a:hover svg {
             transform: scale(1.15);
             opacity: .85
+        }
+
+        /* Icônes réseaux : GitHub éclairci en mode nuit */
+        .footer-social a[aria-label="GitHub"] svg {
+            fill: #1f2937;
+        }
+
+        html[data-theme="dark"] .footer-social a[aria-label="GitHub"] svg {
+            fill: #cbd5e1;
+        }
+
+        html[data-theme="dark"] .footer-social a[aria-label="GitHub"]:hover svg {
+            fill: #e5e7eb;
+        }
+
+        html[data-theme="dark"] .footer-social a[aria-label="LinkedIn"] svg {
+            fill: #60a5fa;
+        }
+
+        html[data-theme="dark"] .footer-social a[aria-label="LinkedIn"]:hover svg {
+            fill: #93c5fd;
         }
     </style>
 </head>
@@ -311,11 +465,31 @@
     <header>
         <div class="container nav-wrap">
             <div class="brand">
-                <div class="brand-logo"></div>
+                <div class="brand-logo" aria-hidden="true"></div>
                 <h1>SZ</h1>
             </div>
-            <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
-            <nav id="nav">
+
+            <div style="display:flex; gap:10px; align-items:center">
+                <button class="burger" aria-label="Menu" aria-controls="nav" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+
+                <!-- Bouton mode nuit -->
+                <button id="theme-toggle" class="theme-toggle" aria-label="Activer le mode nuit" aria-pressed="false">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <path fill="currentColor"
+                            d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.48 0l1.79-1.8 1.41 1.41-1.8 1.79-1.4-1.4zM12 4V1h-0v3h0zm0 19v-3h0v3h0zM4 12H1v0h3v0zm19 0h-3v0h3v0zM6.76 19.16l-1.42 1.42-1.79-1.8 1.41-1.41 1.8 1.79zm10.48 0l1.4 1.4 1.8-1.79-1.41-1.41-1.79 1.8zM12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                        aria-hidden="true" style="display:none">
+                        <path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                    </svg>
+                    <span class="toggle-label" style="position:absolute;left:-9999px">Thème</span>
+                </button>
+            </div>
+
+            <nav id="nav" aria-label="Navigation">
                 <a href="./index.html">Accueil</a>
                 <a href="bts.html">BTS SIO</a>
                 <a href="entreprise.html">Entreprise</a>
@@ -335,8 +509,9 @@
             <h2 class="page-title">Mes Projets</h2>
 
             <div class="window">
-                <div class="window-bar"><span>projets.md</span>
-                    <div class="dots">
+                <div class="window-bar">
+                    <span>projets.md</span>
+                    <div class="dots" aria-hidden="true">
                         <div class="dot red"></div>
                         <div class="dot yellow"></div>
                         <div class="dot green"></div>
@@ -357,7 +532,6 @@
                     <a class="btn" href="serveur-dhcp.html">Voir la documentation</a>
                 </div>
 
-                <!-- Packet Tracer prend la place de HTTPS -->
                 <div class="card">
                     <h4>📡 Packet Tracer</h4>
                     <p>Conception et simulation de réseaux Cisco : routage, VLANs, DHCP, et configuration de la sécurité
@@ -401,7 +575,6 @@
                     <a class="btn" href="#">Voir la documentation</a>
                 </div>
 
-                <!-- HTTPS passe en dernier -->
                 <div class="card">
                     <h4>🔐 HTTPS sur sites web</h4>
                     <p>Sécurisation de serveurs web avec certificats SSL/TLS et redirections HTTPS.</p>
@@ -416,16 +589,107 @@
         <div class="container footer-wrap">
             <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
             <div class="footer-social">
-                <a href="https://www.linkedin.com/in/soufianezghpro/" target="_blank">LinkedIn</a>
-                <a href="https://www.github.com/zsoufiane" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/soufianezghpro/" target="_blank" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#2563eb" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 
+            2.761 2.239 5 5 5h14c2.762 0 5-2.239 
+            5-5v-14c0-2.761-2.238-5-5-5zm-11 
+            19h-3v-10h3v10zm-1.5-11.268c-.966 
+            0-1.75-.79-1.75-1.764s.784-1.764 
+            1.75-1.764c.967 0 1.75.79 
+            1.75 1.764s-.783 1.764-1.75 
+            1.764zm13.5 11.268h-3v-5.604c0-3.368-4-3.113-4 
+            0v5.604h-3v-10h3v1.545c1.396-2.586 
+            7-2.777 7 2.476v5.979z" />
+                    </svg>
+                </a>
+                <a href="https://www.github.com/zsoufiane" target="_blank" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 
+            12 0 5.303 3.438 9.8 8.205 
+            11.385.6.113.82-.258.82-.577 
+            0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.084-.729.084-.729 
+            1.205.084 1.84 1.236 1.84 1.236 
+            1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.334-5.466-5.931 
+            0-1.311.469-2.381 1.236-3.221-.123-.303-.535-1.523.117-3.176 
+            0 0 1.008-.322 3.301 1.23a11.48 
+            11.48 0 013.003-.404c1.018.005 
+            2.042.138 3.003.404 2.291-1.552 
+            3.297-1.23 3.297-1.23.653 1.653.242 
+            2.873.119 3.176.77.84 1.235 
+            1.91 1.235 3.221 0 4.609-2.803 
+            5.628-5.475 5.921.43.371.823 
+            1.102.823 2.222 0 1.606-.015 
+            2.898-.015 3.293 0 .322.216.694.825.576 
+            4.765-1.587 8.2-6.083 
+            8.2-11.385 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                </a>
             </div>
         </div>
     </footer>
 
     <script>
+        // Thème (clair/sombre) + persistance + suivi du système
+        (function themeInit() {
+            const root = document.documentElement;
+            const btn = document.getElementById('theme-toggle');
+            const mql = window.matchMedia('(prefers-color-scheme: dark)');
+            const saved = localStorage.getItem('theme');
+            const system = mql.matches ? 'dark' : 'light';
+            let current = saved || system;
+
+            function apply(theme) {
+                current = theme;
+                root.setAttribute('data-theme', theme);
+                if (btn) {
+                    const isDark = theme === 'dark';
+                    btn.setAttribute('aria-pressed', String(isDark));
+                    btn.setAttribute('aria-label', isDark ? 'Activer le mode clair' : 'Activer le mode nuit');
+                    const sun = btn.querySelector('.icon-sun');
+                    const moon = btn.querySelector('.icon-moon');
+                    if (sun && moon) {
+                        sun.style.display = isDark ? 'none' : 'inline';
+                        moon.style.display = isDark ? 'inline' : 'none';
+                    }
+                }
+            }
+            apply(current);
+
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    const next = current === 'dark' ? 'light' : 'dark';
+                    apply(next);
+                    localStorage.setItem('theme', next);
+                });
+            }
+
+            // suivre automatiquement le système si pas de choix manuel
+            if (mql.addEventListener) {
+                mql.addEventListener('change', (e) => {
+                    const hasManual = !!localStorage.getItem('theme');
+                    if (!hasManual) apply(e.matches ? 'dark' : 'light');
+                });
+            } else if (mql.addListener) { // Safari ancien
+                mql.addListener((e) => {
+                    const hasManual = !!localStorage.getItem('theme');
+                    if (!hasManual) apply(e.matches ? 'dark' : 'light');
+                });
+            }
+        })();
+
+        // Burger
         const burger = document.querySelector('.burger');
         const nav = document.getElementById('nav');
-        if (burger && nav) { burger.addEventListener('click', () => { nav.classList.toggle('open') }) }
+        if (burger && nav) {
+            burger.addEventListener('click', () => {
+                const open = nav.classList.toggle('open');
+                burger.setAttribute('aria-expanded', String(open));
+            });
+            nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+        }
     </script>
 </body>
 

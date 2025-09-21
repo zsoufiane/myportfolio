@@ -429,7 +429,7 @@
             color: var(--muted);
         }
 
-        /* ====== Timeline style "fenêtre" (clair) ====== */
+        /* ====== Timeline ====== */
         .terminal {
             background: var(--panel-2);
             border: 1px solid #c7d2fe;
@@ -513,7 +513,6 @@
             color: #475569
         }
 
-        /* Sombre pour la timeline */
         html[data-theme="dark"] .terminal {
             background: var(--panel-2);
             border: 1px solid #1f2937;
@@ -609,12 +608,25 @@
         }
 
         .footer-social a svg {
-            transition: transform .2s, opacity .2s
+            transition: transform .2s, opacity .2s, fill .2s;
         }
 
         .footer-social a:hover svg {
             transform: scale(1.15);
             opacity: .85
+        }
+
+        /* --- Correction GitHub sombre --- */
+        .footer-social a[aria-label="GitHub"] svg {
+            fill: #1f2937;
+        }
+
+        html[data-theme="dark"] .footer-social a[aria-label="GitHub"] svg {
+            fill: #cbd5e1;
+        }
+
+        html[data-theme="dark"] .footer-social a[aria-label="GitHub"]:hover svg {
+            fill: #e5e7eb;
         }
     </style>
 </head>
@@ -693,7 +705,7 @@ networking.sys
 security.sys
 linux.sys
 windows.sys
-                        </pre>
+</pre>
                 </div>
             </div>
         </section>
@@ -703,7 +715,6 @@ windows.sys
     <section id="apropos">
         <div class="container">
             <div class="grid">
-                <!-- Colonne gauche : texte + cartes -->
                 <div>
                     <h2 class="neon-title">À propos de moi</h2>
                     <p class="about-text">
@@ -712,7 +723,6 @@ windows.sys
                         Passionné par l'informatique, je souhaite poursuivre mes études avec un Bachelor et Master en
                         Réseaux Systèmes et Cloud à ESGI.
                     </p>
-
                     <div class="info-grid">
                         <div class="info-card">
                             <div class="icon">🎓</div>
@@ -721,7 +731,6 @@ windows.sys
                                 <p>Bac ES → BTS SIO SISR → Bachelor → Master (Réseaux Systèmes & Cloud)</p>
                             </div>
                         </div>
-
                         <div class="info-card">
                             <div class="icon">🛡️</div>
                             <div>
@@ -729,7 +738,6 @@ windows.sys
                                 <p>Administration Système & Réseaux, Cloud, Cybersécurité</p>
                             </div>
                         </div>
-
                         <div class="info-card">
                             <div class="icon">🗂️</div>
                             <div>
@@ -737,7 +745,6 @@ windows.sys
                                 <p>Infrastructure réseau, Sécurisation, Monitoring</p>
                             </div>
                         </div>
-
                         <div class="info-card">
                             <div class="icon">✅</div>
                             <div>
@@ -747,8 +754,6 @@ windows.sys
                         </div>
                     </div>
                 </div>
-
-                <!-- Colonne droite : timeline en "fenêtre" -->
                 <aside class="terminal" aria-label="Parcours.exe" id="timeline">
                     <div class="titlebar">
                         <span>Parcours.exe</span>
@@ -758,7 +763,6 @@ windows.sys
                             <div class="dot green"></div>
                         </div>
                     </div>
-
                     <div class="timeline">
                         <div class="item">
                             <h4>Bac ES</h4>
@@ -804,7 +808,7 @@ windows.sys
                     </svg>
                 </a>
                 <a href="https://www.github.com/zsoufiane" target="_blank" aria-label="GitHub">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#1f2937" viewBox="0 0 24 24">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                         <path d="M12 .297c-6.63 0-12 5.373-12 
             12 0 5.303 3.438 9.8 8.205 
             11.385.6.113.82-.258.82-.577 
@@ -829,15 +833,13 @@ windows.sys
         </div>
     </footer>
 
-    <!-- ====== JS (thème + menu mobile + surbrillance nav + effet terminal) ====== -->
+    <!-- ====== JS ====== -->
     <script>
-        // --- Thème (clair/sombre) ---
         (function themeInit() {
             const root = document.documentElement;
             const btn = document.getElementById('theme-toggle');
             const mql = window.matchMedia('(prefers-color-scheme: dark)');
-
-            const saved = localStorage.getItem('theme'); // 'light' | 'dark' | null
+            const saved = localStorage.getItem('theme');
             const system = mql.matches ? 'dark' : 'light';
             let current = saved || system;
 
@@ -856,9 +858,7 @@ windows.sys
                     }
                 }
             }
-
             apply(current);
-
             if (btn) {
                 btn.addEventListener('click', () => {
                     const next = current === 'dark' ? 'light' : 'dark';
@@ -866,15 +866,12 @@ windows.sys
                     localStorage.setItem('theme', next);
                 });
             }
-
-            // Si l’utilisateur change le thème du système et qu’aucun choix manuel n’a été fait
             if (mql.addEventListener) {
                 mql.addEventListener('change', (e) => {
                     const hasManual = !!localStorage.getItem('theme');
                     if (!hasManual) apply(e.matches ? 'dark' : 'light');
                 });
             } else if (mql.addListener) {
-                // Safari ancien
                 mql.addListener((e) => {
                     const hasManual = !!localStorage.getItem('theme');
                     if (!hasManual) apply(e.matches ? 'dark' : 'light');
@@ -882,7 +879,6 @@ windows.sys
             }
         })();
 
-        // --- Burger menu ---
         const burger = document.querySelector('.burger');
         const nav = document.getElementById('nav');
         if (burger && nav) {
@@ -893,7 +889,6 @@ windows.sys
             nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
         }
 
-        // --- Surbrillance section active ---
         const links = Array.from(document.querySelectorAll('nav a'));
         const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
         const observer = new IntersectionObserver((entries) => {
@@ -906,7 +901,6 @@ windows.sys
         }, { rootMargin: '-40% 0px -55% 0px', threshold: 0.01 });
         sections.forEach(sec => observer.observe(sec));
 
-        // --- Effet "terminal" (typage progressif) ---
         (function typeTerminal() {
             const el = document.getElementById('terminal');
             if (!el) return;

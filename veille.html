@@ -410,53 +410,6 @@
             font-weight: 600
         }
 
-        .small {
-            font-size: 13px
-        }
-
-        /* Timeline */
-        .timeline {
-            position: relative;
-            margin: 6px 0 0 0;
-            padding-left: 24px
-        }
-
-        .timeline::before {
-            content: "";
-            position: absolute;
-            left: 10px;
-            top: 4px;
-            bottom: 4px;
-            width: 2px;
-            background: #c7d2fe
-        }
-
-        .t-item {
-            position: relative;
-            margin: 16px 0 0 0;
-            padding-left: 12px
-        }
-
-        .t-item::before {
-            content: "";
-            position: absolute;
-            left: -16px;
-            top: 6px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #60a5fa;
-            box-shadow: 0 0 0 3px rgba(96, 165, 250, .2)
-        }
-
-        .t-title {
-            font-weight: 800
-        }
-
-        .t-link {
-            margin-left: 10px
-        }
-
         footer {
             margin-top: 40px;
             background: rgba(255, 255, 255, .7);
@@ -575,7 +528,7 @@
                                 <li>Rester à jour sur <b>DevOps/CI-CD</b> (GitHub Actions, Argo CD) et
                                     <b>SRE/Observabilité</b> (Prometheus, Grafana).</li>
                                 <li>Monter en expertise <b>CloudSec/DevSecOps</b> : IAM, durcissement,
-                                    <b>OPA/Gatekeeper</b>, <b>Kyverno</b>, scans SCA/IAST.</li>
+                                    <b>OPA/Gatekeeper</b>, <b>OPA Rego</b>, <b>Kyverno</b>, scanners SCA/IAST.</li>
                             </ul>
                             <div style="margin-top:8px">
                                 <span class="tag">AWS</span><span class="tag">Azure</span><span
@@ -609,7 +562,6 @@
                         <div class="card" style="margin-top:12px">
                             <h4>Outils</h4>
                             <div class="tag">Feedly</div>
-                            <div class="tag">Google Alertes</div>
                             <div class="tag">Github Stars</div>
                             <div class="tag">Readwise</div>
                             <div class="tag">Obsidian</div>
@@ -619,7 +571,7 @@
                 </aside>
             </div>
 
-            <!-- Faits marquants -->
+            <!-- Faits marquants (dernière MAJ) -->
             <div class="window" style="margin-top:18px">
                 <div class="window-bar">
                     <span>faits_marquants_2025-09.md</span>
@@ -633,30 +585,39 @@
                     <div class="grid-3">
                         <div class="card">
                             <h4>🔐 Sécurité Kubernetes</h4>
-                            <p class="muted">Durcissement admission avec <b>OPA/Gatekeeper</b> (images signées,
-                                runAsNonRoot, limites CPU/RAM).</p>
-                            <a class="badge" href="#" aria-label="Lire l'analyse sécurité Kubernetes">Lire</a>
+                            <p class="muted">Durcissement admission avec <b>OPA/Gatekeeper</b> (politiques images
+                                signées, runAsNonRoot, ressources bornées).</p>
+                            <ul class="list">
+                                <li>Templates prêtes à l’emploi (ConstraintTemplates).</li>
+                                <li>Bench <b>Kyverno</b> vs Gatekeeper (latence admission).</li>
+                            </ul>
                         </div>
                         <div class="card">
                             <h4>☁️ Coûts & FinOps</h4>
-                            <p class="muted">Autoscaling EKS (Karpenter) + Spot + budgets pour réduire les coûts
-                                non-prod.</p>
-                            <a class="badge" href="#" aria-label="Lire l'analyse FinOps">Lire</a>
+                            <p class="muted">Expérimentations <b>Karpenter</b> & autoscaling sur EKS pour réduire les
+                                coûts non-prod.</p>
+                            <ul class="list">
+                                <li>Spot + disruption budgets.</li>
+                                <li>Right-sizing via <b>Goldilocks</b>.</li>
+                            </ul>
                         </div>
                         <div class="card">
                             <h4>🧱 IaC Sécurisée</h4>
-                            <p class="muted">CI Terraform avec <b>tfsec</b>/<b>Checkov</b> + policy-as-code <b>OPA</b>.
-                            </p>
-                            <a class="badge" href="#" aria-label="Lire l'analyse IaC">Lire</a>
+                            <p class="muted">Pipeline <b>Terraform</b> avec scans <b>tfsec</b>/<b>Checkov</b> et
+                                policy-as-code <b>OPA</b>.</p>
+                            <ul class="list">
+                                <li>Blocage PR sur règles critiques (secrets, S3 public).</li>
+                                <li>Drift detection planifié.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ======= Bloc ajouté : Contenu fourni (Matthias Bossard) ======= -->
+            <!-- Sources principales -->
             <div class="window" style="margin-top:18px">
                 <div class="window-bar">
-                    <span>Matthias_Bossard/veille.md</span>
+                    <span>sources.rss</span>
                     <div class="dots" aria-hidden="true">
                         <div class="dot red"></div>
                         <div class="dot yellow"></div>
@@ -664,95 +625,95 @@
                     </div>
                 </div>
                 <div class="content">
-                    <div class="card">
-                        <h4>Matthias Bossard — Veille technologique</h4>
-                        <div class="small muted" style="margin:6px 0 12px 0;">
-                            Menu (fourni) : Accueil • Profil • Formations • MISSIONS • Veille technologique • me
-                            contacter
-                        </div>
-                    </div>
-
-                    <div class="grid-2">
+                    <div class="grid-3">
                         <div class="card">
-                            <h4>Qu'est-ce que la veille technologique ?</h4>
-                            <p class="muted">
-                                La veille technologique, élément de la veille stratégique, consiste à surveiller les
-                                évolutions techniques et les innovations d’un secteur. Elle inclut la surveillance, la
-                                collecte, le partage et la diffusion d’informations pour anticiper des changements
-                                (R&amp;D, brevets, nouveaux produits, matériaux, processus, concepts, fabrication, etc.)
-                                afin d’en évaluer l’impact sur l’environnement et l’organisation.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <h4>Mon sujet de veille</h4>
-                            <p class="muted">
-                                <b>L’IA dans la cybersécurité</b> — un sujet au cœur des problématiques de demain, à
-                                l’intersection des nouvelles technologies et de la protection des données. Il ouvre des
-                                perspectives sur les défis et opportunités de notre ère numérique.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="grid-2" style="margin-top:12px">
-                        <div class="card">
-                            <h4>Comment j’ai procédé ?</h4>
+                            <h4>Cloud & Plateformes</h4>
                             <ul class="list">
-                                <li><b>Feedly :</b> création de flux autour de mots-clés ; suivi des sources
-                                    pertinentes.</li>
-                                <li><b>Google Alertes :</b> 1 email/jour sur le thème « IA et cybersécurité » (sélection
-                                    automatique du contenu pertinent).</li>
+                                <li>AWS What’s New, Architecture Blog</li>
+                                <li>Azure Updates, Microsoft DevBlogs</li>
+                                <li>Google Cloud Blog (sécurité)</li>
                             </ul>
                         </div>
                         <div class="card">
-                            <h4>À quoi ça ressemble ?</h4>
+                            <h4>DevOps / SRE</h4>
                             <ul class="list">
-                                <li>Dans <b>Feedly</b>, tous les articles du jour sont listés, avec aperçu et bouton «
-                                    visit website ».</li>
-                                <li>Dans <b>Google Alertes</b>, aperçu des articles intéressants pour lecture complète
-                                    ou survol rapide.</li>
+                                <li>Kubernetes Blog, Kustomize, Helm</li>
+                                <li>Argo Project (CD, Rollouts)</li>
+                                <li>HashiCorp (Terraform)</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Security</h4>
+                            <ul class="list">
+                                <li>OWASP Blog / Top 10</li>
+                                <li>Sigstore / Cosign</li>
+                                <li>MITRE ATT&CK Updates</li>
                             </ul>
                         </div>
                     </div>
+                    <p class="muted" style="margin-top:8px">Astuce : classe les flux par tags (cloud, k8s, sec, finops)
+                        et lis par “sessions focus”.</p>
+                </div>
+            </div>
 
-                    <div class="card" style="margin-top:12px">
-                        <h4>Timeline — À retenir</h4>
-                        <div class="timeline">
-                            <div class="t-item">
-                                <div class="t-title">Février 2023 — <span class="muted">Fraude vocale IA</span></div>
-                                <p class="muted">Un utilisateur berne la sécurité de sa banque via une IA vocale
-                                    gratuite.</p>
-                                <a class="t-link badge" href="#" aria-label="Lire février 2023">Lire</a>
-                            </div>
-                            <div class="t-item">
-                                <div class="t-title">Juillet 2023 — <span class="muted">WormGPT</span></div>
-                                <p class="muted">Clone non-officiel de ChatGPT utilisé pour générer malwares et
-                                    campagnes de phishing.</p>
-                                <a class="t-link badge" href="#" aria-label="Lire juillet 2023">Lire</a>
-                            </div>
-                            <div class="t-item">
-                                <div class="t-title">Septembre 2023 — <span class="muted">Darktrace Cyber AI
-                                        Analyst</span></div>
-                                <p class="muted">Automatisation d’enquêtes sur menaces à grande échelle après 3 ans de
-                                    R&amp;D.</p>
-                                <a class="t-link badge" href="#" aria-label="Lire septembre 2023">Lire</a>
-                            </div>
-                            <div class="t-item">
-                                <div class="t-title">Mai 2024 — <span class="muted">Defendis</span></div>
-                                <p class="muted">IA au service de la cybersécurité (détection et réponse assistées).</p>
-                                <a class="t-link badge" href="#" aria-label="Lire mai 2024">Lire</a>
-                            </div>
+            <!-- Notes & synthèses -->
+            <div class="grid-2" style="margin-top:18px">
+                <div class="window">
+                    <div class="window-bar">
+                        <span>notes_de_lecture.md</span>
+                        <div class="dots" aria-hidden="true">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
                         </div>
                     </div>
+                    <div class="content">
+                        <div class="card">
+                            <h4>Notes rapides (extraits)</h4>
+                            <ul class="list">
+                                <li><b>Image signing:</b> généraliser <code>cosign verify</code> en pré-déploiement.
+                                </li>
+                                <li><b>RBAC minimal:</b> rôles par workload, rotation des SA tokens.</li>
+                                <li><b>Observabilité:</b> exporter tracing vers <b>Tempo</b> / <b>OpenTelemetry</b>.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card" style="margin-top:12px">
+                            <h4>Backlog d’expérimentations</h4>
+                            <ul class="list">
+                                <li>Chaîne supply chain: SLSA + SBOM (Syft/Grype).</li>
+                                <li>EKS blue/green avec Argo Rollouts + HPA.</li>
+                                <li>OPA Rego policies pour Terraform (OPA eval dans CI).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="card" style="margin-top:12px">
-                        <h4>Mentions & crédits</h4>
-                        <p class="muted">Mentions légales • Accueil</p>
-                        <p class="muted">© 2025 Matthias Bossard. Tous droits réservés — <span class="small">Made in
-                                Webflow</span></p>
+                <div class="window">
+                    <div class="window-bar">
+                        <span>synthese_mensuelle_2025-09.md</span>
+                        <div class="dots" aria-hidden="true">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="card">
+                            <h4>Synthèse (septembre 2025)</h4>
+                            <p class="muted" style="margin:0 0 10px 0">Trois idées actionnables pour mon contexte
+                                alternance / projets perso :</p>
+                            <ul class="list">
+                                <li><b>Pipeline sécurisé de bout en bout</b> : signatures d’images + attestation
+                                    provenance.</li>
+                                <li><b>Politique d’admission</b> : imposer limites CPU/RAM et non-root par défaut.</li>
+                                <li><b>FinOps</b> : autoscaling contrôlé + budgets + alertes <i>anomaly detection</i>.
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- ======= Fin bloc ajouté ======= -->
 
             <!-- Liens & documents -->
             <div class="window" style="margin-top:18px">

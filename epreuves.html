@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SZ — Épreuves E4 | Soufiane ZOUGAGH</title>
-    <meta name="description"
-        content="Épreuves E4 du BTS SIO : deux situations d’évaluation et documentation téléchargeable." />
+    <title>SZ — Épreuves du BTS SIO | Soufiane ZOUGAGH</title>
+    <meta name="description" content="Présentation des épreuves informatiques du BTS SIO : E4, E5 et E6 (Cybersécurité)." />
 
     <style>
-        /* ====== Palette claire (identique aux autres pages) ====== */
+        /* Palette claire */
         :root {
             --bg: #f6f7fb;
             --panel: #ffffffcc;
@@ -26,21 +25,10 @@
             --card-border: #e5e7eb;
             --radius: 18px;
             --shadow: 0 10px 30px rgba(0, 0, 0, .08);
-            --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
-            --ring: 0 0 0 4px rgba(59, 130, 246, .18);
+            --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+            --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
         }
 
-        /* Schéma de couleur natif */
-        :root {
-            color-scheme: light;
-        }
-
-        html[data-theme="dark"] {
-            color-scheme: dark;
-        }
-
-        /* Variables pour le thème sombre */
         html[data-theme="dark"] {
             --bg: #0b1220;
             --panel: #0f172acc;
@@ -49,69 +37,50 @@
             --muted: #9ca3af;
             --primary: #60a5fa;
             --primary-600: #3b82f6;
-            --accent: #2563eb;
-            --accent-2: #22c55e;
             --green: #22c55e;
-            --green-2: #4ade80;
+            --green-2: #86efac;
             --green-soft: #052e16;
             --card-border: #1f2937;
             --shadow: 0 10px 30px rgba(0, 0, 0, .4);
         }
 
-        * {
-            box-sizing: border-box;
-            transition: background-color .2s ease, color .2s ease, border-color .2s ease
-        }
-
-        html,
         body {
             margin: 0;
-            padding: 0
-        }
-
-        body {
             font: 16px/1.65 var(--sans);
             color: var(--text);
-            background:
-                radial-gradient(1200px 600px at 10% -10%, rgba(147, 197, 253, .25), transparent 60%),
+            background: radial-gradient(1200px 600px at 10% -10%, rgba(147, 197, 253, .25), transparent 60%),
                 radial-gradient(1000px 500px at 110% 10%, rgba(167, 243, 208, .22), transparent 60%),
                 var(--bg);
         }
 
         html[data-theme="dark"] body {
-            background:
-                radial-gradient(1200px 600px at 10% -10%, rgba(96, 165, 250, .12), transparent 60%),
+            background: radial-gradient(1200px 600px at 10% -10%, rgba(96, 165, 250, .12), transparent 60%),
                 radial-gradient(1000px 500px at 110% 10%, rgba(34, 197, 94, .10), transparent 60%),
                 var(--bg);
         }
 
         a {
             color: var(--primary);
-            text-decoration: none
+            text-decoration: none;
         }
 
         a:hover {
-            color: var(--primary-600)
+            color: var(--primary-600);
         }
 
         .container {
-            max-width: 1150px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 22px
+            padding: 0 20px;
         }
 
-        section {
-            padding: 70px 0
-        }
-
-        /* ====== Header / Nav ====== */
         header {
             position: sticky;
             top: 0;
-            z-index: 50;
+            z-index: 10;
             background: rgba(255, 255, 255, .7);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--card-border)
+            border-bottom: 1px solid var(--card-border);
         }
 
         html[data-theme="dark"] header {
@@ -122,442 +91,111 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 0
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px
-        }
-
-        .brand-logo {
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
-            background: radial-gradient(100% 100% at 30% 20%, var(--accent), var(--accent-2));
-            box-shadow: var(--shadow)
-        }
-
-        .brand h1 {
-            margin: 0;
-            font-size: 18px;
-            letter-spacing: .4px;
-            color: #0f172a
-        }
-
-        html[data-theme="dark"] .brand h1 {
-            color: var(--text);
+            padding: 14px 0;
         }
 
         nav {
             display: flex;
             gap: 10px;
-            flex-wrap: wrap
+            flex-wrap: wrap;
         }
 
         nav a {
-            display: inline-block;
-            padding: 9px 12px;
+            padding: 8px 12px;
             border-radius: 999px;
             border: 1px solid var(--card-border);
             background: #fff;
             color: #0f172a;
             font-weight: 600;
             font-size: 14px;
-            transition: .12s
         }
 
         nav a:hover {
-            transform: translateY(-1px);
             border-color: var(--primary);
-            box-shadow: var(--shadow);
-            background: #f8fafc
+            background: #f8fafc;
         }
 
         nav a.active {
+            border-color: var(--primary);
             box-shadow: 0 0 0 2px rgba(59, 130, 246, .2) inset;
-            border-color: var(--primary)
         }
 
         html[data-theme="dark"] nav a {
             background: #111827;
             color: var(--text);
-            border-color: var(--card-border);
         }
 
-        .burger {
-            display: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            border: 1px solid var(--card-border);
-            background: #fff
+        h1,
+        h2,
+        h3 {
+            font-weight: 800;
+            color: var(--green);
         }
 
-        .burger span {
-            display: block;
-            width: 20px;
-            height: 2px;
-            background: #94a3b8;
-            margin: 6px auto
+        html[data-theme="dark"] h1,
+        html[data-theme="dark"] h2,
+        html[data-theme="dark"] h3 {
+            color: var(--green-2);
         }
 
-        html[data-theme="dark"] .burger {
-            background: #111827;
-            border-color: var(--card-border);
+        section {
+            padding: 60px 0;
         }
 
-        /* ---- Bouton toggle thème ---- */
-        .theme-toggle {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 999px;
-            border: 1px solid var(--card-border);
-            background: #fff;
-            color: #0f172a;
-            box-shadow: var(--shadow);
-            cursor: pointer;
-            transition: .12s transform, .12s filter, .12s background;
-        }
-
-        .theme-toggle:hover {
-            transform: translateY(-1px);
-            filter: brightness(1.03);
-        }
-
-        .theme-toggle .icon-sun,
-        .theme-toggle .icon-moon {
-            pointer-events: none
-        }
-
-        html[data-theme="dark"] .theme-toggle {
-            background: #111827;
-            color: var(--text);
-            border-color: var(--card-border);
-        }
-
-        @media (max-width:940px) {
-            nav {
-                display: none;
-                position: absolute;
-                left: 22px;
-                right: 22px;
-                top: 64px
-            }
-
-            nav.open {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 10px
-            }
-
-            .burger {
-                display: block
-            }
-        }
-
-        /* ====== Fenêtre type terminal ====== */
         .window {
             background: var(--panel-2);
             border: 1px solid #c7d2fe;
             border-radius: var(--radius);
             box-shadow: 0 0 0 2px rgba(147, 197, 253, .2), var(--shadow);
-            overflow: hidden
-        }
-
-        .window-bar {
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 14px;
-            border-bottom: 1px solid #e5e7eb;
-            background: linear-gradient(180deg, #f8fbff, #eef2ff);
-            font-family: var(--mono);
-            color: #1e3a8a;
-            font-weight: 700
+            padding: 24px;
         }
 
         html[data-theme="dark"] .window {
             border-color: #1f2937;
-            box-shadow: 0 0 0 2px rgba(96, 165, 250, .12), var(--shadow);
         }
 
-        html[data-theme="dark"] .window-bar {
-            background: linear-gradient(180deg, #0f172a, #0b1220);
-            border-bottom: 1px solid #1f2937;
-            color: #93c5fd;
+        p {
+            margin: 10px 0;
+            color: var(--text);
         }
 
-        .dots {
-            display: flex;
-            gap: 8px
+        ul {
+            padding-left: 20px;
         }
 
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%
+        li {
+            margin: 6px 0;
         }
 
-        .dot.red {
-            background: #ef4444
+        .sub-title {
+            font: 700 18px var(--sans);
+            margin-top: 20px;
+            color: var(--primary);
         }
 
-        .dot.yellow {
-            background: #f59e0b
-        }
-
-        .dot.green {
-            background: #22c55e
-        }
-
-        .content {
-            padding: 18px
-        }
-
-        /* ====== Titre page ====== */
-        .page-title {
-            margin: 0 0 22px 0;
-            text-align: center;
-            font: 900 28px/1.25 var(--mono);
-            color: var(--green)
-        }
-
-        html[data-theme="dark"] .page-title {
-            color: var(--green-2);
-        }
-
-        /* Grilles */
-        .grid-2 {
-            display: grid;
-            gap: 18px;
-            grid-template-columns: repeat(2, minmax(0, 1fr))
-        }
-
-        @media (max-width:900px) {
-            .grid-2 {
-                grid-template-columns: 1fr
-            }
-        }
-
-        .list {
-            margin: 0;
-            padding-left: 18px;
-            color: #374151
-        }
-
-        .list li {
-            margin: 6px 0
-        }
-
-        html[data-theme="dark"] .list {
-            color: var(--muted);
-        }
-
-        /* Chips / tags */
-        .chips {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 10px
-        }
-
-        .chip {
-            display: inline-block;
-            padding: 6px 10px;
-            border-radius: 999px;
-            border: 1px solid #86efac;
-            background: var(--green-soft);
-            color: #065f46;
-            font: 700 12px var(--sans);
-        }
-
-        html[data-theme="dark"] .chip {
-            border-color: #14532d;
-            color: #86efac
-        }
-
-        /* Boutons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 9px 12px;
-            border-radius: 10px;
-            border: 1px solid #86efac;
-            background: var(--green-soft);
-            color: #065f46;
-            font-weight: 800;
-            box-shadow: var(--shadow);
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            filter: brightness(1.03);
-            transform: translateY(-1px)
-        }
-
-        .btn .i {
-            width: 16px;
-            height: 16px;
-            display: inline-block
-        }
-
-        html[data-theme="dark"] .btn {
-            border-color: #14532d;
-            background: #0f172a;
-            color: #86efac
-        }
-
-        /* Cartes situations pro */
-        .situation {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 12px;
-            padding: 12px;
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            background: linear-gradient(180deg, #ffffff, #f8fbff)
-        }
-
-        .situation .bullet {
-            font-size: 22px;
-            line-height: 1
-        }
-
-        .s-title {
-            margin: 0;
-            font: 800 16px/1.2 var(--sans);
-            color: #0f172a
-        }
-
-        .s-date {
-            margin: 2px 0 0 0;
-            font: 700 13px/1 var(--mono);
-            color: #16a34a
-        }
-
-        .s-desc {
-            margin: 6px 0 10px 0;
-            color: #374151;
-            font-size: 14px
-        }
-
-        html[data-theme="dark"] .situation {
-            background: linear-gradient(180deg, #0b1220, #0f172a);
-            border-color: var(--card-border);
-        }
-
-        html[data-theme="dark"] .s-title {
-            color: var(--text)
-        }
-
-        html[data-theme="dark"] .s-desc {
-            color: var(--muted)
-        }
-
-        html[data-theme="dark"] .s-date {
-            color: var(--green-2)
-        }
-
-        /* ====== Footer ====== */
         footer {
             margin-top: 40px;
             background: rgba(255, 255, 255, .7);
             backdrop-filter: blur(10px);
             border-top: 1px solid var(--card-border);
             padding: 18px 0;
+            text-align: center;
             font-size: 14px;
             color: var(--muted);
-        }
-
-        html[data-theme="dark"] footer {
-            background: rgba(17, 24, 39, .6);
-            border-color: var(--card-border);
-        }
-
-        .footer-wrap {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 12px
-        }
-
-        .footer-social a svg {
-            transition: transform .2s, opacity .2s, fill .2s
-        }
-
-        .footer-social a:hover svg {
-            transform: scale(1.15);
-            opacity: .85
-        }
-
-        /* Icônes réseaux : GitHub éclairci en mode nuit, LinkedIn un peu plus lumineux */
-        .footer-social a[aria-label="GitHub"] svg {
-            fill: #1f2937;
-        }
-
-        html[data-theme="dark"] .footer-social a[aria-label="GitHub"] svg {
-            fill: #cbd5e1;
-        }
-
-        html[data-theme="dark"] .footer-social a[aria-label="GitHub"]:hover svg {
-            fill: #e5e7eb;
-        }
-
-        html[data-theme="dark"] .footer-social a[aria-label="LinkedIn"] svg {
-            fill: #60a5fa;
-        }
-
-        html[data-theme="dark"] .footer-social a[aria-label="LinkedIn"]:hover svg {
-            fill: #93c5fd;
         }
     </style>
 </head>
 
 <body>
-    <!-- ====== Header ====== -->
-    <header aria-label="Barre de navigation principale">
+    <!-- HEADER -->
+    <header>
         <div class="container nav-wrap">
-            <div class="brand" aria-label="Identité du site">
-                <div class="brand-logo" aria-hidden="true"></div>
+            <div class="brand">
                 <h1>SZ</h1>
             </div>
-
-            <div style="display:flex; gap:10px; align-items:center">
-                <button class="burger" aria-label="Ouvrir le menu" aria-controls="nav" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </button>
-
-                <!-- Bouton mode nuit -->
-                <button id="theme-toggle" class="theme-toggle" aria-label="Activer le mode nuit" aria-pressed="false">
-                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                        aria-hidden="true">
-                        <path fill="currentColor"
-                            d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.48 0l1.79-1.8 1.41 1.41-1.8 1.79-1.4-1.4zM12 4V1h-0v3h0zm0 19v-3h0v3h0zM4 12H1v0h3v0zm19 0h-3v0h3v0zM6.76 19.16l-1.42 1.42-1.79-1.8 1.41-1.41 1.8 1.79zm10.48 0l1.4 1.4 1.8-1.79-1.41-1.41-1.79 1.8zM12 8a4 4 0 100 8 4 4 0 000-8z" />
-                    </svg>
-                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                        aria-hidden="true" style="display:none">
-                        <path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-                    </svg>
-                    <span class="toggle-label" style="position:absolute;left:-9999px">Thème</span>
-                </button>
-            </div>
-
-            <nav id="nav" aria-label="Navigation">
+            <nav>
                 <a href="./index.html">Accueil</a>
-                <a href="bts.html">BTS SIO</a>
+                <a href="bts.html" class="active">BTS SIO</a>
                 <a href="entreprise.html">Entreprise</a>
                 <a href="epreuves.html">Épreuves</a>
                 <a href="projets.html">Projets</a>
@@ -569,236 +207,83 @@
         </div>
     </header>
 
-    <!-- ====== E4 ====== -->
-    <section id="e4" aria-label="Épreuves E4 - BTS SIO">
+    <!-- SECTION ÉPREUVES -->
+    <section id="epreuves">
         <div class="container">
-            <h2 class="page-title">Épreuves E4 - BTS SIO</h2>
+            <h2>FAQ — Quelles sont les épreuves informatiques du BTS SIO ?</h2>
 
-            <!-- Intro -->
-            <div class="window" style="margin-bottom:18px">
-                <div class="window-bar">
-                    <span>Situation.exe</span>
-                    <div class="dots" aria-hidden="true">
-                        <div class="dot red"></div>
-                        <div class="dot yellow"></div>
-                        <div class="dot green"></div>
-                    </div>
-                </div>
-                <div class="content">
-                    <p class="muted" style="margin:0">
-                        L’épreuve E4 évalue les compétences du domaine professionnel acquises en cours de formation.
-                        Elle se compose de deux situations d’évaluation :
-                    </p>
-                </div>
-            </div>
-
-            <!-- Deux colonnes : Situation 1 / 2 -->
-            <div class="grid-2" style="margin-bottom:22px">
-                <div class="window">
-                    <div class="window-bar">
-                        <span>Situation_1.md</span>
-                        <div class="dots" aria-hidden="true">
-                            <div class="dot red"></div>
-                            <div class="dot yellow"></div>
-                            <div class="dot green"></div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <h3 class="s-title">Situation 1</h3>
-                        <ul class="list">
-                            <li>Mise en place d’une infrastructure réseau sécurisée pour une PME</li>
-                            <li>Système de sécurité réseau avec Fail2ban et PortSentry</li>
-                            <li>Durée : 40 minutes</li>
-                            <li>Coefficient : 4</li>
-                        </ul>
-                        <div class="chips">
-                            <span class="chip">Administration système</span>
-                            <span class="chip">Sécurité réseau</span>
-                            <span class="chip">Infrastructure</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="window">
-                    <div class="window-bar">
-                        <span>Situation_2.md</span>
-                        <div class="dots" aria-hidden="true">
-                            <div class="dot red"></div>
-                            <div class="dot yellow"></div>
-                            <div class="dot green"></div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <h3 class="s-title">Situation 2</h3>
-                        <ul class="list">
-                            <li>Déploiement d’un serveur Nginx avec deux sites WordPress</li>
-                            <li>Configuration d’un serveur web sécurisé</li>
-                            <li>Durée : 40 minutes</li>
-                            <li>Coefficient : 4</li>
-                        </ul>
-                        <div class="chips">
-                            <span class="chip">Déploiement web</span>
-                            <span class="chip">Sécurité</span>
-                            <span class="chip">Administration serveur</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Documentation / situations professionnelles -->
             <div class="window">
-                <div class="window-bar">
-                    <span>Documentation.md</span>
-                    <div class="dots" aria-hidden="true">
-                        <div class="dot red"></div>
-                        <div class="dot yellow"></div>
-                        <div class="dot green"></div>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3 class="s-title" style="margin-bottom:6px">Mes situations professionnelles</h3>
+                <p>Le <b>BTS Services Informatiques aux Organisations (SIO)</b> est une formation complète qui prépare les étudiants à devenir des professionnels de l'informatique. Voici un aperçu des principales <b>épreuves informatiques</b> du BTS SIO :</p>
 
-                    <!-- SP1 -->
-                    <div class="situation" style="margin-top:12px">
-                        <div class="bullet">•</div>
-                        <div>
-                            <div class="s-title">Situation 1 — Infrastructure réseau</div>
-                            <div class="s-date">Mars 2024</div>
-                            <p class="s-desc">Mise en place d’une infrastructure réseau sécurisée pour une PME.</p>
-                            <div class="actions">
-                                <a class="btn" href="docs/SP1.pdf" download>
-                                    <svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                        <path d="M12 16l4-5h-3V4h-2v7H8zM5 18h14v2H5z" />
-                                    </svg>
-                                    Télécharger le document SP1
-                                </a>
-                                <a class="btn" href="docs/SP1_tech.pdf" download>
-                                    <svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                        <path d="M3 4h18v2H3zm0 7h18v2H3zm0 7h18v2H3z" />
-                                    </svg>
-                                    Documentation technique
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <ul>
+                    <li><b>E4 :</b> Conception et maintenance de solutions informatiques</li>
+                    <li><b>E5 :</b> Pratique professionnelle</li>
+                    <li><b>E6 :</b> Cybersécurité des services informatiques</li>
+                </ul>
 
-                    <!-- SP2 -->
-                    <div class="situation" style="margin-top:12px">
-                        <div class="bullet">•</div>
-                        <div>
-                            <div class="s-title">Situation 2 — Déploiement serveur web</div>
-                            <div class="s-date">Avril 2024</div>
-                            <p class="s-desc">Déploiement d’un serveur Nginx avec deux sites WordPress.</p>
-                            <div class="actions">
-                                <a class="btn" href="docs/SP2.pdf" download>
-                                    <svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                        <path d="M12 16l4-5h-3V4h-2v7H8zM5 18h14v2H5z" />
-                                    </svg>
-                                    Télécharger le document SP2
-                                </a>
-                                <a class="btn" href="docs/SP2_tech.pdf" download>
-                                    <svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                        <path d="M3 4h18v2H3zm0 7h18v2H3zm0 7h18v2H3z" />
-                                    </svg>
-                                    Documentation technique
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <p>Chaque épreuve a ses propres objectifs, formats et compétences évaluées. Découvre les détails ci-dessous 👇</p>
 
-                </div>
+                <h3>E4 — Conception et maintenance de solutions informatiques</h3>
+                <p>L'épreuve <b>E4</b> dure 40 minutes et se divise en deux parties principales :</p>
+
+                <h4 class="sub-title">1️⃣ Présentation des compétences du BTS (10 min)</h4>
+                <p>Tu seras jugé sur ta capacité à réagir rapidement à un problème, à identifier les causes et les solutions possibles, et à implémenter la solution de manière structurée.</p>
+
+                <ul>
+                    <li><b>Objectif :</b> Évaluer ta capacité à appliquer les compétences techniques dans un contexte concret.</li>
+                    <li><b>Format :</b> Contexte professionnel simulé où tu dois résoudre un problème technique.</li>
+                    <li><b>Compétences évaluées :</b> Diagnostic, mise en œuvre, gestion de projet, communication.</li>
+                </ul>
+
+                <h4 class="sub-title">2️⃣ Questions / Réponses (30 min)</h4>
+                <p>Cette partie permet de vérifier ta maîtrise des bases théoriques nécessaires pour exercer ton futur métier.</p>
+
+                <ul>
+                    <li><b>Objectif :</b> Vérifier ta maîtrise des connaissances théoriques.</li>
+                    <li><b>Format :</b> Série de questions sur les systèmes, réseaux, bases de données et langages.</li>
+                    <li><b>Compétences évaluées :</b> Connaissances techniques et justification des choix.</li>
+                </ul>
+
+                <hr />
+
+                <h3>E5 — Pratique professionnelle</h3>
+                <p>L’épreuve <b>E5</b> dure 2h10 et repose sur des <b>situations professionnelles vécues</b> pendant ta formation.</p>
+
+                <ul>
+                    <li><b>Objectif :</b> Mettre en pratique les compétences acquises en milieu professionnel.</li>
+                    <li><b>Format :</b> Présentation de cas réels rencontrés en stage ou atelier.</li>
+                    <li><b>Compétences évaluées :</b> Analyse de besoin, mise en œuvre technique, communication.</li>
+                </ul>
+
+                <p><b>Déroulement de l’épreuve :</b></p>
+                <ol>
+                    <li>30 min de recherche sur une demande d’évolution reçue.</li>
+                    <li>20 min de présentation de la solution.</li>
+                    <li>1h de mise en œuvre pratique de la solution.</li>
+                    <li>20 min de recette et validation par le jury.</li>
+                </ol>
+
+                <hr />
+
+                <h3>E6 — Cybersécurité des services informatiques</h3>
+                <p>L’épreuve <b>E6</b> dure 4 heures et se concentre sur la <b>sécurité informatique</b>, un domaine essentiel du BTS SIO.</p>
+
+                <ul>
+                    <li><b>Objectif :</b> Évaluer tes compétences en matière de cybersécurité.</li>
+                    <li><b>Format :</b> Étude de cas sur table avec documentation.</li>
+                    <li><b>Exemples de sujets :</b> Analyse de vulnérabilités, mise en place de mesures de sécurité.</li>
+                    <li><b>Compétences évaluées :</b> Analyse des menaces, conception de solutions sécurisées, mise à jour des systèmes.</li>
+                </ul>
+
+                <p><b>Exemple :</b> Identifier les failles d’un réseau d’entreprise et proposer un plan de protection contre les cyberattaques.</p>
             </div>
-
         </div>
     </section>
 
-    <!-- ====== JS ====== -->
-    <script>
-        // Thème (clair/sombre) + persistance + respect du thème système
-        (function themeInit() {
-            const root = document.documentElement;
-            const btn = document.getElementById('theme-toggle');
-            const mql = window.matchMedia('(prefers-color-scheme: dark)');
-            const saved = localStorage.getItem('theme');  // 'light' | 'dark' | null
-            const system = mql.matches ? 'dark' : 'light';
-            let current = saved || system;
-
-            function apply(theme) {
-                current = theme;
-                root.setAttribute('data-theme', theme);
-                if (btn) {
-                    const isDark = theme === 'dark';
-                    btn.setAttribute('aria-pressed', String(isDark));
-                    btn.setAttribute('aria-label', isDark ? 'Activer le mode clair' : 'Activer le mode nuit');
-                    const sun = btn.querySelector('.icon-sun');
-                    const moon = btn.querySelector('.icon-moon');
-                    if (sun && moon) {
-                        sun.style.display = isDark ? 'none' : 'inline';
-                        moon.style.display = isDark ? 'inline' : 'none';
-                    }
-                }
-            }
-            apply(current);
-
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    const next = current === 'dark' ? 'light' : 'dark';
-                    apply(next);
-                    localStorage.setItem('theme', next);
-                });
-            }
-
-            // suivre le système si pas de choix manuel
-            if (mql.addEventListener) {
-                mql.addEventListener('change', (e) => {
-                    const hasManual = !!localStorage.getItem('theme');
-                    if (!hasManual) apply(e.matches ? 'dark' : 'light');
-                });
-            } else if (mql.addListener) { // Safari ancien
-                mql.addListener((e) => {
-                    const hasManual = !!localStorage.getItem('theme');
-                    if (!hasManual) apply(e.matches ? 'dark' : 'light');
-                });
-            }
-        })();
-
-        // Burger menu
-        const burger = document.querySelector('.burger');
-        const nav = document.getElementById('nav');
-        if (burger && nav) {
-            burger.addEventListener('click', () => {
-                const open = nav.classList.toggle('open');
-                burger.setAttribute('aria-expanded', String(open));
-            });
-            nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
-        }
-    </script>
-
-    <!-- ====== Footer ====== -->
+    <!-- FOOTER -->
     <footer>
-        <div class="container footer-wrap">
-            <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
-            <div class="footer-social">
-                <a href="https://www.linkedin.com/in/soufianezghpro/" target="_blank" aria-label="LinkedIn">
-                    <!-- Icône LinkedIn -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#2563eb" viewBox="0 0 24 24"
-                        aria-hidden="true">
-                        <path
-                            d="M19 0H5A5 5 0 0 0 0 5v14a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5Zm-9 19H7V9h3v10ZM8.5 7.7A1.8 1.8 0 1 1 8.5 4a1.8 1.8 0 0 1 0 3.7ZM20 19h-3v-5.6c0-3.37-4-3.11-4 0V19h-3V9h3v1.55C14.4 7.96 20 7.77 20 13.02V19Z" />
-                    </svg>
-                </a>
-                <a href="https://www.github.com/zsoufiane" target="_blank" aria-label="GitHub">
-                    <!-- Icône GitHub -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        aria-hidden="true">
-                        <path
-                            d="M12 .5A12 12 0 0 0 0 12.76c0 5.4 3.44 9.97 8.2 11.59.6.12.82-.26.82-.58 0-.28-.01-1.04-.02-2.04-3.34.72-4.04-1.62-4.04-1.62-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.3 3.5.99.11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.53-1.52.12-3.17 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4s2.04.13 3 .4c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.93.43.37.82 1.11.82 2.23 0 1.61-.02 2.9-.02 3.29 0 .32.22.69.83.58A12.02 12.02 0 0 0 24 12.76 12 12 0 0 0 12 .5Z" />
-                    </svg>
-                </a>
-            </div>
-        </div>
+        <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
     </footer>
-
 </body>
 
 </html>

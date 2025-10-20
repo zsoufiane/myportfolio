@@ -8,7 +8,6 @@
     <meta name="description" content="Certifications en cybersécurité, cloud et numérique." />
 
     <style>
-        /* ===== Thème clair (base) ===== */
         :root {
             --bg: #f6f7fb;
             --panel: #ffffffcc;
@@ -27,10 +26,6 @@
             --green: #16a34a;
             --green-2: #22c55e;
             --green-soft: #dcfce7;
-        }
-
-        html[data-theme="dark"] {
-            color-scheme: dark;
         }
 
         html[data-theme="dark"] {
@@ -57,7 +52,6 @@
 
         body {
             margin: 0;
-            padding: 0;
             font: 16px/1.65 var(--sans);
             color: var(--text);
             background:
@@ -173,6 +167,17 @@
             border-color: var(--card-border);
         }
 
+        .section-title {
+            text-align: center;
+            margin: 0 0 24px 0;
+            font: 800 26px/1.3 var(--sans);
+            color: var(--green);
+        }
+
+        html[data-theme="dark"] .section-title {
+            color: var(--green-2);
+        }
+
         .window {
             background: var(--panel-2);
             border: 1px solid #c7d2fe;
@@ -192,17 +197,6 @@
             font-family: var(--mono);
             color: #1e3a8a;
             font-weight: 700;
-        }
-
-        .section-title {
-            text-align: center;
-            margin: 0 0 24px 0;
-            font: 800 26px/1.3 var(--sans);
-            color: var(--green);
-        }
-
-        html[data-theme="dark"] .section-title {
-            color: var(--green-2);
         }
 
         .cert-grid {
@@ -289,7 +283,6 @@
             color: var(--muted);
         }
 
-        /* ===== Modal (agrandissement badge) ===== */
         .modal {
             display: none;
             position: fixed;
@@ -312,7 +305,6 @@
 </head>
 
 <body>
-    <!-- Header -->
     <header>
         <div class="container nav-wrap">
             <div class="brand">
@@ -333,7 +325,6 @@
         </div>
     </header>
 
-    <!-- Section Certifications -->
     <section id="certifs">
         <div class="container">
             <h2 class="section-title">Mes Certifications</h2>
@@ -374,18 +365,31 @@
                                 <li>Introduction à la défense numérique</li>
                             </ul>
                         </div>
+
+                        <!-- ✅ Nouveau badge MEC ajouté -->
+                        <div class="cert">
+                            <h4>🏆 Microsoft MEC — Modern Educator Community
+                                <img src="./documents/mec_logo.png" alt="Badge Microsoft MEC" title="Microsoft Educator Community" onclick="openModal(this)">
+                            </h4>
+                            <hr>
+                            <p><b>Status :</b> Obtenue</p>
+                            <p><b>Date :</b> Avril 2025</p>
+                            <ul>
+                                <li>Utilisation avancée des outils Microsoft</li>
+                                <li>Transformation numérique éducative</li>
+                                <li>Collaboration Cloud et pédagogie numérique</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modal pour agrandissement -->
     <div id="badgeModal" class="modal" onclick="closeModal()">
         <img id="badgeModalImg" src="" alt="Badge agrandi" />
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="container footer-wrap">
             <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
@@ -393,15 +397,12 @@
     </footer>
 
     <script>
-        // Fonction pour ouvrir le badge en grand
         function openModal(img) {
             const modal = document.getElementById("badgeModal");
             const modalImg = document.getElementById("badgeModalImg");
             modalImg.src = img.src;
             modal.style.display = "flex";
         }
-
-        // Fonction pour fermer le badge
         function closeModal() {
             document.getElementById("badgeModal").style.display = "none";
         }

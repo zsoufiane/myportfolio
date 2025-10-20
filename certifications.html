@@ -92,7 +92,6 @@
             padding: 70px 0;
         }
 
-        /* ===== Header ===== */
         header {
             position: sticky;
             top: 0;
@@ -245,6 +244,12 @@
             margin-left: 10px;
             object-fit: cover;
             box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform .2s ease;
+        }
+
+        .cert h4 img:hover {
+            transform: scale(1.08);
         }
 
         .cert hr {
@@ -284,6 +289,26 @@
             font-size: 14px;
             color: var(--muted);
         }
+
+        /* ===== Modal (agrandissement badge) ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, .6);
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -322,7 +347,7 @@
                     <div class="cert-grid">
                         <div class="cert">
                             <h4>🛡️ SecNum Académie
-                                <img src="./documents/secnum.png" alt="Badge SecNum Académie" title="ANSSI - SecNum Académie">
+                                <img src="./documents/secnum.png" alt="Badge SecNum Académie" title="ANSSI - SecNum Académie" onclick="openModal(this)">
                             </h4>
                             <hr>
                             <p><b>Status :</b> Obtenue</p>
@@ -347,7 +372,7 @@
 
                         <div class="cert">
                             <h4>🧠 Introduction to Cybersecurity — Cisco
-                                <img src="./documents/cisco_cyber.jpg" alt="Badge Cisco" title="Cisco Introduction to Cybersecurity">
+                                <img src="./documents/cisco_cyber.jpg" alt="Badge Cisco" title="Cisco Introduction to Cybersecurity" onclick="openModal(this)">
                             </h4>
                             <hr>
                             <p><b>Status :</b> Obtenue</p>
@@ -392,12 +417,32 @@
         </div>
     </section>
 
+    <!-- Modal pour agrandissement -->
+    <div id="badgeModal" class="modal" onclick="closeModal()">
+        <img id="badgeModalImg" src="" alt="Badge agrandi" />
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="container footer-wrap">
             <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
         </div>
     </footer>
+
+    <script>
+        // Fonction pour ouvrir le badge en grand
+        function openModal(img) {
+            const modal = document.getElementById("badgeModal");
+            const modalImg = document.getElementById("badgeModalImg");
+            modalImg.src = img.src;
+            modal.style.display = "flex";
+        }
+
+        // Fonction pour fermer le badge
+        function closeModal() {
+            document.getElementById("badgeModal").style.display = "none";
+        }
+    </script>
 </body>
 
 </html>

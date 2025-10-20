@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SZ — Épreuves du BTS SIO | Soufiane ZOUGAGH</title>
-    <meta name="description" content="Présentation des épreuves informatiques du BTS SIO : E4, E5 et E6 (Cybersécurité)." />
+    <meta name="description" content="Épreuves informatiques du BTS SIO : E4, E5, E6 Cybersécurité." />
 
     <style>
-        /* Palette claire */
+        /* ====== Palette claire (identique aux autres pages) ====== */
         :root {
             --bg: #f6f7fb;
             --panel: #ffffffcc;
@@ -26,7 +26,11 @@
             --radius: 18px;
             --shadow: 0 10px 30px rgba(0, 0, 0, .08);
             --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
-            --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+            --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+        }
+
+        html[data-theme="dark"] {
+            color-scheme: dark;
         }
 
         html[data-theme="dark"] {
@@ -37,24 +41,33 @@
             --muted: #9ca3af;
             --primary: #60a5fa;
             --primary-600: #3b82f6;
+            --accent: #2563eb;
+            --accent-2: #22c55e;
             --green: #22c55e;
-            --green-2: #86efac;
+            --green-2: #4ade80;
             --green-soft: #052e16;
             --card-border: #1f2937;
             --shadow: 0 10px 30px rgba(0, 0, 0, .4);
         }
 
+        * {
+            box-sizing: border-box;
+            transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+        }
+
         body {
-            margin: 0;
             font: 16px/1.65 var(--sans);
             color: var(--text);
-            background: radial-gradient(1200px 600px at 10% -10%, rgba(147, 197, 253, .25), transparent 60%),
+            margin: 0;
+            background:
+                radial-gradient(1200px 600px at 10% -10%, rgba(147, 197, 253, .25), transparent 60%),
                 radial-gradient(1000px 500px at 110% 10%, rgba(167, 243, 208, .22), transparent 60%),
                 var(--bg);
         }
 
         html[data-theme="dark"] body {
-            background: radial-gradient(1200px 600px at 10% -10%, rgba(96, 165, 250, .12), transparent 60%),
+            background:
+                radial-gradient(1200px 600px at 10% -10%, rgba(96, 165, 250, .12), transparent 60%),
                 radial-gradient(1000px 500px at 110% 10%, rgba(34, 197, 94, .10), transparent 60%),
                 var(--bg);
         }
@@ -69,15 +82,19 @@
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1150px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 22px;
+        }
+
+        section {
+            padding: 70px 0;
         }
 
         header {
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 50;
             background: rgba(255, 255, 255, .7);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--card-border);
@@ -94,6 +111,31 @@
             padding: 14px 0;
         }
 
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: radial-gradient(100% 100% at 30% 20%, var(--accent), var(--accent-2));
+            box-shadow: var(--shadow);
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: .4px;
+            color: #0f172a;
+        }
+
+        html[data-theme="dark"] .brand h1 {
+            color: var(--text);
+        }
+
         nav {
             display: flex;
             gap: 10px;
@@ -101,7 +143,7 @@
         }
 
         nav a {
-            padding: 8px 12px;
+            padding: 9px 12px;
             border-radius: 999px;
             border: 1px solid var(--card-border);
             background: #fff;
@@ -110,36 +152,21 @@
             font-size: 14px;
         }
 
+        nav a.active {
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, .2) inset;
+            border-color: var(--primary);
+        }
+
         nav a:hover {
             border-color: var(--primary);
             background: #f8fafc;
-        }
-
-        nav a.active {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, .2) inset;
+            transform: translateY(-1px);
         }
 
         html[data-theme="dark"] nav a {
             background: #111827;
             color: var(--text);
-        }
-
-        h1,
-        h2,
-        h3 {
-            font-weight: 800;
-            color: var(--green);
-        }
-
-        html[data-theme="dark"] h1,
-        html[data-theme="dark"] h2,
-        html[data-theme="dark"] h3 {
-            color: var(--green-2);
-        }
-
-        section {
-            padding: 60px 0;
+            border-color: var(--card-border);
         }
 
         .window {
@@ -147,30 +174,42 @@
             border: 1px solid #c7d2fe;
             border-radius: var(--radius);
             box-shadow: 0 0 0 2px rgba(147, 197, 253, .2), var(--shadow);
-            padding: 24px;
+            overflow: hidden;
         }
 
-        html[data-theme="dark"] .window {
-            border-color: #1f2937;
+        .window-bar {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            border-bottom: 1px solid #e5e7eb;
+            background: linear-gradient(180deg, #f8fbff, #eef2ff);
+            font-family: var(--mono);
+            color: #1e3a8a;
+            font-weight: 700;
         }
 
-        p {
-            margin: 10px 0;
+        .content {
+            padding: 18px;
+        }
+
+        h2.page-title {
+            text-align: center;
+            font: 900 28px/1.25 var(--mono);
+            color: var(--green);
+        }
+
+        html[data-theme="dark"] h2.page-title {
+            color: var(--green-2);
+        }
+
+        p, li {
             color: var(--text);
         }
 
-        ul {
-            padding-left: 20px;
-        }
-
-        li {
-            margin: 6px 0;
-        }
-
-        .sub-title {
-            font: 700 18px var(--sans);
-            margin-top: 20px;
-            color: var(--primary);
+        html[data-theme="dark"] p, html[data-theme="dark"] li {
+            color: var(--muted);
         }
 
         footer {
@@ -179,18 +218,22 @@
             backdrop-filter: blur(10px);
             border-top: 1px solid var(--card-border);
             padding: 18px 0;
-            text-align: center;
             font-size: 14px;
             color: var(--muted);
+        }
+
+        html[data-theme="dark"] footer {
+            background: rgba(17, 24, 39, .6);
         }
     </style>
 </head>
 
 <body>
-    <!-- HEADER -->
+    <!-- Header -->
     <header>
         <div class="container nav-wrap">
             <div class="brand">
+                <div class="brand-logo"></div>
                 <h1>SZ</h1>
             </div>
             <nav>
@@ -207,82 +250,85 @@
         </div>
     </header>
 
-    <!-- SECTION ÉPREUVES -->
-    <section id="epreuves">
+    <!-- Section Épreuves -->
+    <section id="e4" aria-label="Épreuves BTS SIO">
         <div class="container">
-            <h2>FAQ — Quelles sont les épreuves informatiques du BTS SIO ?</h2>
+            <h2 class="page-title">Épreuves informatiques du BTS SIO</h2>
 
             <div class="window">
-                <p>Le <b>BTS Services Informatiques aux Organisations (SIO)</b> est une formation complète qui prépare les étudiants à devenir des professionnels de l'informatique. Voici un aperçu des principales <b>épreuves informatiques</b> du BTS SIO :</p>
+                <div class="window-bar">
+                    <span>Epreuves_BTS_SIO.md</span>
+                    <div class="dots" aria-hidden="true">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>Le <b>BTS Services Informatiques aux Organisations (SIO)</b> forme des techniciens supérieurs capables de concevoir, déployer et sécuriser des solutions informatiques. Les épreuves informatiques principales sont :</p>
+                    <ul>
+                        <li><b>E4 :</b> Conception et maintenance de solutions informatiques</li>
+                        <li><b>E5 :</b> Pratique professionnelle</li>
+                        <li><b>E6 :</b> Cybersécurité des services informatiques</li>
+                    </ul>
 
-                <ul>
-                    <li><b>E4 :</b> Conception et maintenance de solutions informatiques</li>
-                    <li><b>E5 :</b> Pratique professionnelle</li>
-                    <li><b>E6 :</b> Cybersécurité des services informatiques</li>
-                </ul>
+                    <hr>
 
-                <p>Chaque épreuve a ses propres objectifs, formats et compétences évaluées. Découvre les détails ci-dessous 👇</p>
+                    <h3>🧩 E4 — Conception et maintenance de solutions informatiques</h3>
+                    <p>L’épreuve E4 dure environ <b>40 minutes</b> et évalue ta capacité à appliquer les compétences techniques acquises pendant ta formation.</p>
+                    <h4>Partie 1 — Présentation des compétences du BTS</h4>
+                    <p>Durée : <b>10 minutes</b></p>
+                    <ul>
+                        <li>Capacité à analyser un problème et identifier des solutions adaptées.</li>
+                        <li>Organisation, rigueur et communication technique.</li>
+                        <li>Application des connaissances dans un contexte professionnel.</li>
+                    </ul>
 
-                <h3>E4 — Conception et maintenance de solutions informatiques</h3>
-                <p>L'épreuve <b>E4</b> dure 40 minutes et se divise en deux parties principales :</p>
+                    <h4>Partie 2 — Questions / Réponses</h4>
+                    <p>Durée : <b>30 minutes</b></p>
+                    <ul>
+                        <li>Évaluation des connaissances théoriques.</li>
+                        <li>Capacité à justifier ses choix techniques.</li>
+                        <li>Maîtrise des fondamentaux : systèmes, réseaux, bases de données, développement.</li>
+                    </ul>
 
-                <h4 class="sub-title">1️⃣ Présentation des compétences du BTS (10 min)</h4>
-                <p>Tu seras jugé sur ta capacité à réagir rapidement à un problème, à identifier les causes et les solutions possibles, et à implémenter la solution de manière structurée.</p>
+                    <hr>
 
-                <ul>
-                    <li><b>Objectif :</b> Évaluer ta capacité à appliquer les compétences techniques dans un contexte concret.</li>
-                    <li><b>Format :</b> Contexte professionnel simulé où tu dois résoudre un problème technique.</li>
-                    <li><b>Compétences évaluées :</b> Diagnostic, mise en œuvre, gestion de projet, communication.</li>
-                </ul>
+                    <h3>⚙️ E5 — Pratique professionnelle</h3>
+                    <p>L’épreuve E5 dure <b>2h10</b> et repose sur des situations professionnelles vécues durant la formation.</p>
+                    <ul>
+                        <li><b>Objectif :</b> Vérifier la capacité à appliquer ses compétences en situation réelle.</li>
+                        <li><b>Format :</b> Étude de cas inspirée des expériences de stage ou d’alternance.</li>
+                        <li><b>Compétences évaluées :</b> Analyse de besoins, proposition de solution, mise en œuvre, communication.</li>
+                    </ul>
+                    <p><b>Déroulement de l’épreuve :</b></p>
+                    <ol>
+                        <li>30 min de préparation sur une demande d’évolution.</li>
+                        <li>20 min de présentation orale de la solution proposée.</li>
+                        <li>1h de mise en œuvre technique.</li>
+                        <li>20 min de validation et recette avec le jury.</li>
+                    </ol>
 
-                <h4 class="sub-title">2️⃣ Questions / Réponses (30 min)</h4>
-                <p>Cette partie permet de vérifier ta maîtrise des bases théoriques nécessaires pour exercer ton futur métier.</p>
+                    <hr>
 
-                <ul>
-                    <li><b>Objectif :</b> Vérifier ta maîtrise des connaissances théoriques.</li>
-                    <li><b>Format :</b> Série de questions sur les systèmes, réseaux, bases de données et langages.</li>
-                    <li><b>Compétences évaluées :</b> Connaissances techniques et justification des choix.</li>
-                </ul>
-
-                <hr />
-
-                <h3>E5 — Pratique professionnelle</h3>
-                <p>L’épreuve <b>E5</b> dure 2h10 et repose sur des <b>situations professionnelles vécues</b> pendant ta formation.</p>
-
-                <ul>
-                    <li><b>Objectif :</b> Mettre en pratique les compétences acquises en milieu professionnel.</li>
-                    <li><b>Format :</b> Présentation de cas réels rencontrés en stage ou atelier.</li>
-                    <li><b>Compétences évaluées :</b> Analyse de besoin, mise en œuvre technique, communication.</li>
-                </ul>
-
-                <p><b>Déroulement de l’épreuve :</b></p>
-                <ol>
-                    <li>30 min de recherche sur une demande d’évolution reçue.</li>
-                    <li>20 min de présentation de la solution.</li>
-                    <li>1h de mise en œuvre pratique de la solution.</li>
-                    <li>20 min de recette et validation par le jury.</li>
-                </ol>
-
-                <hr />
-
-                <h3>E6 — Cybersécurité des services informatiques</h3>
-                <p>L’épreuve <b>E6</b> dure 4 heures et se concentre sur la <b>sécurité informatique</b>, un domaine essentiel du BTS SIO.</p>
-
-                <ul>
-                    <li><b>Objectif :</b> Évaluer tes compétences en matière de cybersécurité.</li>
-                    <li><b>Format :</b> Étude de cas sur table avec documentation.</li>
-                    <li><b>Exemples de sujets :</b> Analyse de vulnérabilités, mise en place de mesures de sécurité.</li>
-                    <li><b>Compétences évaluées :</b> Analyse des menaces, conception de solutions sécurisées, mise à jour des systèmes.</li>
-                </ul>
-
-                <p><b>Exemple :</b> Identifier les failles d’un réseau d’entreprise et proposer un plan de protection contre les cyberattaques.</p>
+                    <h3>🔒 E6 — Cybersécurité des services informatiques</h3>
+                    <p>L’épreuve E6, d’une durée de <b>4 heures</b>, est axée sur la cybersécurité des systèmes et des réseaux informatiques.</p>
+                    <ul>
+                        <li><b>Objectif :</b> Évaluer la capacité à sécuriser les services informatiques.</li>
+                        <li><b>Format :</b> Étude de cas écrite, sur table, avec documentation fournie.</li>
+                        <li><b>Compétences évaluées :</b> Détection de failles, sécurisation des réseaux, mise en œuvre de contre-mesures.</li>
+                    </ul>
+                    <p><b>Exemple de sujet :</b> analyser les vulnérabilités d’un réseau d’entreprise, proposer un plan d’action et décrire les solutions de sécurité à appliquer.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer>
-        <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
+        <div class="container footer-wrap">
+            <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
+        </div>
     </footer>
 </body>
 

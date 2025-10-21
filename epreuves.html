@@ -150,11 +150,24 @@
             color: var(--primary);
             background: linear-gradient(180deg, #f8fbff, #eef2ff);
             border-bottom: 1px solid var(--card-border);
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         html[data-theme="dark"] .accordion-header {
             background: linear-gradient(180deg, #0f172a, #0b1220);
             color: var(--green-2);
+        }
+
+        .accordion-header:hover {
+            filter: brightness(1.05);
+        }
+
+        .accordion-header svg {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion.open .accordion-header svg {
+            transform: rotate(90deg);
         }
 
         .accordion-content {
@@ -255,12 +268,24 @@
 </head>
 
 <body>
+    <!-- ===== Header ===== -->
     <header>
         <div class="container nav-wrap">
             <div class="brand">
                 <div class="brand-logo" style="width:34px;height:34px;border-radius:10px;background:radial-gradient(100% 100% at 30% 20%,var(--accent),var(--accent-2));"></div>
                 <h1>SZ</h1>
             </div>
+            <nav>
+                <a href="./index.html">Accueil</a>
+                <a href="bts.html">BTS SIO</a>
+                <a href="entreprise.html">Entreprise</a>
+                <a href="epreuves.html" class="active">Épreuves</a>
+                <a href="projets.html">Projets</a>
+                <a href="veille.html">Veille</a>
+                <a href="competences.html">Compétences</a>
+                <a href="certifications.html">Certifications</a>
+                <a href="contact.html">Contact</a>
+            </nav>
             <button id="theme-toggle" class="theme-toggle" aria-label="Basculer le thème">
                 <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                     <path fill="currentColor"
@@ -274,13 +299,21 @@
         </div>
     </header>
 
+    <!-- ===== Section principale ===== -->
     <section>
         <div class="container">
             <h2 class="page-title">Épreuves BTS SIO</h2>
 
             <!-- Accordéon E4 -->
             <div class="accordion">
-                <div class="accordion-header">Épreuve E4 — Solutions d’infrastructure</div>
+                <div class="accordion-header">
+                    Épreuve E4 — Solutions d’infrastructure
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M8.12 4.71a1 1 0 0 1 1.41 0l6.36 6.36a1 1 0 0 1 0 1.41l-6.36 6.36a1 1 0 1 1-1.41-1.41L13.36 12 8.12 6.12a1 1 0 0 1 0-1.41z" />
+                    </svg>
+                </div>
                 <div class="accordion-content">
                     <div class="window">
                         <div class="window-bar">Situation_1.md</div>
@@ -319,7 +352,14 @@
 
             <!-- Accordéon E5 -->
             <div class="accordion">
-                <div class="accordion-header">Épreuve E5 — Analyse économique et juridique</div>
+                <div class="accordion-header">
+                    Épreuve E5 — Analyse économique et juridique
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M8.12 4.71a1 1 0 0 1 1.41 0l6.36 6.36a1 1 0 0 1 0 1.41l-6.36 6.36a1 1 0 1 1-1.41-1.41L13.36 12 8.12 6.12a1 1 0 0 1 0-1.41z" />
+                    </svg>
+                </div>
                 <div class="accordion-content">
                     <p class="muted">📘 Contenu à venir : dossiers économiques et juridiques du BTS SIO.</p>
                 </div>
@@ -327,15 +367,22 @@
 
             <!-- Accordéon E6 -->
             <div class="accordion">
-                <div class="accordion-header">Épreuve E6 — Projet professionnel</div>
+                <div class="accordion-header">
+                    Épreuve E6 — Projet professionnel
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M8.12 4.71a1 1 0 0 1 1.41 0l6.36 6.36a1 1 0 0 1 0 1.41l-6.36 6.36a1 1 0 1 1-1.41-1.41L13.36 12 8.12 6.12a1 1 0 0 1 0-1.41z" />
+                    </svg>
+                </div>
                 <div class="accordion-content">
                     <p class="muted">🧩 Contenu à venir : projet final et dossier professionnel.</p>
                 </div>
             </div>
-
         </div>
     </section>
 
+    <!-- ===== Footer ===== -->
     <footer>
         <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;">
             <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
@@ -357,7 +404,7 @@
     </footer>
 
     <script>
-        // Thème clair/sombre
+        // Gestion du thème clair/sombre
         const root = document.documentElement;
         const btn = document.getElementById('theme-toggle');
         const saved = localStorage.getItem('theme');
@@ -381,7 +428,7 @@
             apply(current);
         });
 
-        // Accordéons
+        // Accordéons avec flèche animée
         document.querySelectorAll('.accordion-header').forEach(header => {
             header.addEventListener('click', () => {
                 const accordion = header.parentElement;

@@ -8,7 +8,7 @@
   <meta name="description" content="Certifications en cybersécurité, cloud et numérique." />
 
   <style>
-    /* ====== Palette claire ====== */
+    /* ===== Thème clair ===== */
     :root {
       --bg: #f6f7fb;
       --panel: #ffffffcc;
@@ -21,11 +21,9 @@
       --accent-2: #a7f3d0;
       --green: #16a34a;
       --green-2: #22c55e;
-      --green-soft: #dcfce7;
       --card-border: #e5e7eb;
       --radius: 18px;
       --shadow: 0 10px 30px rgba(0, 0, 0, .08);
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
       --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
     }
 
@@ -41,8 +39,7 @@
       --accent: #2563eb;
       --accent-2: #22c55e;
       --green: #22c55e;
-      --green-2: #4ade80;
-      --green-soft: #052e16;
+      --green-2: #86efac;
       --card-border: #1f2937;
       --shadow: 0 10px 30px rgba(0, 0, 0, .4);
     }
@@ -54,8 +51,9 @@
 
     html,
     body {
-      height: 100%;
       margin: 0;
+      padding: 0;
+      height: 100%;
       display: flex;
       flex-direction: column;
     }
@@ -93,10 +91,6 @@
       max-width: 1150px;
       margin: 0 auto;
       padding: 0 22px;
-    }
-
-    section {
-      padding: 70px 0;
     }
 
     /* ===== HEADER ===== */
@@ -142,6 +136,7 @@
 
     nav {
       display: flex;
+      align-items: center;
       gap: 10px;
       flex-wrap: wrap;
     }
@@ -169,124 +164,33 @@
       border-color: var(--card-border);
     }
 
-    /* ===== SECTION ===== */
-    .section-title {
-      text-align: center;
-      margin-bottom: 24px;
-      font: 800 26px/1.3 var(--sans);
-      color: var(--green);
-    }
-
-    html[data-theme="dark"] .section-title {
-      color: var(--green-2);
-    }
-
-    .window {
-      background: var(--panel-2);
-      border: 1px solid #c7d2fe;
-      border-radius: var(--radius);
-      box-shadow: 0 0 0 2px rgba(147, 197, 253, .2), var(--shadow);
-      overflow: hidden;
-    }
-
-    html[data-theme="dark"] .window {
-      border-color: #1f2937;
-      box-shadow: 0 0 0 2px rgba(96, 165, 250, .12), var(--shadow);
-    }
-
-    .window-bar {
+    /* ===== BOUTON THÈME ===== */
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
       height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 14px;
-      border-bottom: 1px solid #e5e7eb;
-      background: linear-gradient(180deg, #f8fbff, #eef2ff);
-      font-family: var(--mono);
-      color: #1e3a8a;
-      font-weight: 700;
-    }
-
-    html[data-theme="dark"] .window-bar {
-      background: linear-gradient(180deg, #0f172a, #0b1220);
-      border-bottom: 1px solid #1f2937;
-      color: #93c5fd;
-    }
-
-    .cert-grid {
-      display: grid;
-      gap: 18px;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-
-    .cert {
-      border: 1px solid var(--green);
-      border-radius: 12px;
-      padding: 16px;
-      background: linear-gradient(180deg, #ffffff, #f9fafb);
-    }
-
-    html[data-theme="dark"] .cert {
-      background: linear-gradient(180deg, #0b1220, #0f172a);
-      border-color: #14532d;
-    }
-
-    .cert h4 {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 0;
-      font: 800 16px/1.3 var(--sans);
-      color: var(--green);
-    }
-
-    html[data-theme="dark"] .cert h4 {
-      color: var(--green-2);
-    }
-
-    .cert h4 img {
-      width: 42px;
-      height: 42px;
-      border-radius: 6px;
-      margin-left: 10px;
-      object-fit: cover;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: #fff;
+      color: #0f172a;
       box-shadow: var(--shadow);
       cursor: pointer;
-      transition: transform .2s ease;
+      transition: .12s transform, .12s filter, .12s background;
     }
 
-    .cert h4 img:hover {
-      transform: scale(1.08);
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
     }
 
-    .cert hr {
-      border: none;
-      border-top: 2px solid var(--green);
-      margin: 8px 0 12px 0;
-      width: 100px;
+    html[data-theme="dark"] .theme-toggle {
+      background: #111827;
+      color: var(--text);
     }
 
-    /* ===== MODAL ===== */
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(5px);
-      justify-content: center;
-      align-items: center;
-      z-index: 200;
-    }
-
-    .modal img {
-      max-width: 90%;
-      max-height: 85vh;
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, .6);
-      cursor: pointer;
-    }
-
-    /* ===== FOOTER fixé en bas ===== */
+    /* ===== FOOTER ===== */
     footer {
       background: rgba(255, 255, 255, .7);
       backdrop-filter: blur(10px);
@@ -300,6 +204,40 @@
     html[data-theme="dark"] footer {
       background: rgba(17, 24, 39, .6);
     }
+
+    .footer-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer-social a svg {
+      transition: transform .2s, opacity .2s;
+    }
+
+    .footer-social a:hover svg {
+      transform: scale(1.15);
+      opacity: .85;
+    }
+
+    .footer-social a[aria-label="GitHub"] svg {
+      fill: #1f2937;
+    }
+
+    html[data-theme="dark"] .footer-social a[aria-label="GitHub"] svg {
+      fill: #cbd5e1;
+    }
+
+    html[data-theme="dark"] .footer-social a[aria-label="LinkedIn"] svg {
+      fill: #60a5fa;
+    }
   </style>
 </head>
 
@@ -310,17 +248,38 @@
         <div class="brand-logo"></div>
         <h1>SZ</h1>
       </div>
-      <nav>
-        <a href="./index.html">Accueil</a>
-        <a href="bts.html">BTS SIO</a>
-        <a href="entreprise.html">Entreprise</a>
-        <a href="epreuves.html">Épreuves</a>
-        <a href="projets.html">Projets</a>
-        <a href="veille.html">Veille</a>
-        <a href="competences.html">Compétences</a>
-        <a href="certifications.html" class="active">Certifications</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+
+      <div style="display:flex;gap:10px;align-items:center;">
+        <!-- Bouton Thème -->
+        <button id="theme-toggle" class="theme-toggle" aria-label="Activer le mode nuit" aria-pressed="false"
+          title="Basculer clair/sombre">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor"
+              d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.48 0l1.79-1.8 
+              1.41 1.41-1.8 1.79-1.4-1.4zM12 4V1h0v3h0zm0 19v-3h0v3h0zM4 12H1v0h3v0zm19 
+              0h-3v0h3v0zM6.76 19.16l-1.42 1.42-1.79-1.8 1.41-1.41 
+              1.8 1.79zm10.48 0l1.4 1.4 1.8-1.79-1.41-1.41-1.79 
+              1.8zM12 8a4 4 0 100 8 4 4 0 000-8z" />
+          </svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            viewBox="0 0 24 24" aria-hidden="true" style="display:none">
+            <path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+          </svg>
+        </button>
+
+        <nav>
+          <a href="./index.html">Accueil</a>
+          <a href="bts.html">BTS SIO</a>
+          <a href="entreprise.html">Entreprise</a>
+          <a href="epreuves.html">Épreuves</a>
+          <a href="projets.html">Projets</a>
+          <a href="veille.html">Veille</a>
+          <a href="competences.html">Compétences</a>
+          <a href="certifications.html" class="active">Certifications</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -328,97 +287,45 @@
     <section id="certifs">
       <div class="container">
         <h2 class="section-title">Mes Certifications</h2>
-
-        <div class="window">
-          <div class="window-bar">
-            <span>certifications.json</span>
-          </div>
-          <div class="content">
-            <div class="cert-grid">
-              <div class="cert">
-                <h4>🛡️ SecNum Académie
-                  <img src="./documents/secnum.png" alt="Badge SecNum Académie" title="ANSSI - SecNum Académie"
-                    onclick="openModal(this)">
-                </h4>
-                <hr>
-                <p><b>Status :</b> Obtenue</p>
-                <p><b>Date :</b> Mars 2025</p>
-                <ul>
-                  <li>Sécurisation des SI</li>
-                  <li>Protection des données sensibles</li>
-                  <li>Bonnes pratiques de sécurité</li>
-                </ul>
-              </div>
-
-              <div class="cert">
-                <h4>🧠 Introduction to Cybersecurity — Cisco
-                  <img src="./documents/cisco_cyber.jpg" alt="Badge Cisco" title="Cisco Introduction to Cybersecurity"
-                    onclick="openModal(this)">
-                </h4>
-                <hr>
-                <p><b>Status :</b> Obtenue</p>
-                <p><b>Date :</b> Octobre 2025</p>
-                <p><b>Identifiant :</b> 6cb582ff-df23-4344-b546-37c47992c3e6</p>
-                <ul>
-                  <li>Cyber Best Practices</li>
-                  <li>Concepts fondamentaux de la cybersécurité</li>
-                  <li>Réseaux et sécurité des systèmes</li>
-                  <li>Protection des données</li>
-                  <li>Introduction à la défense numérique</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- Ton contenu certifications ici -->
       </div>
     </section>
   </main>
 
-  <div id="badgeModal" class="modal" onclick="closeModal()">
-    <img id="badgeModalImg" src="" alt="Badge agrandi" />
-  </div>
-
-  <!-- FOOTER identique à Épreuves et fixé en bas -->
   <footer>
-    <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+    <div class="container footer-wrap">
       <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
-      <div style="display:flex;gap:12px;align-items:center;">
+      <div class="footer-social">
         <a href="https://www.linkedin.com/in/soufianezghpro/" target="_blank" aria-label="LinkedIn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#2563eb" viewBox="0 0 24 24">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#2563eb" viewBox="0 0 24 24">
             <path
-              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 
-              2.761 2.239 5 5 5h14c2.762 0 5-2.239 
-              5-5v-14c0-2.761-2.238-5-5-5zm-11 
-              19h-3v-10h3v10zm-1.5-11.268c-.966 
-              0-1.75-.79-1.75-1.764s.784-1.764 
-              1.75-1.764c.967 0 1.75.79 
-              1.75 1.764s-.783 1.764-1.75 
-              1.764zm13.5 11.268h-3v-5.604c0-3.368-4-3.113-4 
-              0v5.604h-3v-10h3v1.545c1.396-2.586 
-              7-2.777 7 2.476v5.979z" />
+              d="M19 0H5A5 5 0 0 0 0 5v14a5 5 0 0 0 
+              5 5h14a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5Zm-9 
+              19H7V9h3v10ZM8.5 7.7A1.8 1.8 0 1 1 8.5 4a1.8 
+              1.8 0 0 1 0 3.7ZM20 19h-3v-5.6c0-3.37-4-3.11-4 
+              0V19h-3V9h3v1.55C14.4 7.96 20 7.77 20 
+              13.02V19Z" />
           </svg>
         </a>
         <a href="https://www.github.com/zsoufiane" target="_blank" aria-label="GitHub">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
             <path
-              d="M12 .297c-6.63 0-12 5.373-12 
-              12 0 5.303 3.438 9.8 8.205 
-              11.385.6.113.82-.258.82-.577 
-              0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.084-.729.084-.729 
-              1.205.084 1.84 1.236 1.84 1.236 
-              1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.334-5.466-5.931 
-              0-1.311.469-2.381 1.236-3.221-.123-.303-.535-1.523.117-3.176 
-              0 0 1.008-.322 3.301 1.23a11.48 
-              11.48 0 013.003-.404c1.018.005 
-              2.042.138 3.003.404 2.291-1.552 
-              3.297-1.23 3.297-1.23.653 1.653.242 
-              2.873.119 3.176.77.84 1.235 
-              1.91 1.235 3.221 0 4.609-2.803 
-              5.628-5.475 5.921.43.371.823 
-              1.102.823 2.222 0 1.606-.015 
-              2.898-.015 3.293 0 .322.216.694.825.576 
-              4.765-1.587 8.2-6.083 
-              8.2-11.385 0-6.627-5.373-12-12-12z" />
+              d="M12 .5A12 12 0 0 0 0 12.76c0 5.4 3.44 
+              9.97 8.2 11.59.6.12.82-.26.82-.58 
+              0-.28-.01-1.04-.02-2.04-3.34.72-4.04-1.62-4.04-1.62-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 
+              1.2.09 1.84 1.24 1.84 1.24 
+              1.07 1.84 2.81 1.3 3.5.99.11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 
+              0-1.31.47-2.38 1.24-3.22-.12-.3-.53-1.52.12-3.17 
+              0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 
+              3-.4s2.04.13 3 .4c2.29-1.55 3.3-1.23 
+              3.3-1.23.66 1.65.24 2.87.12 
+              3.17.77.84 1.24 1.91 1.24 
+              3.22 0 4.61-2.8 5.63-5.48 
+              5.93.43.37.82 1.11.82 
+              2.23 0 1.61-.02 2.9-.02 
+              3.29 0 .32.22.69.83.58A12.02 
+              12.02 0 0 0 24 12.76 12 
+              12 0 0 0 12 .5Z" />
           </svg>
         </a>
       </div>
@@ -426,15 +333,38 @@
   </footer>
 
   <script>
-    function openModal(img) {
-      const modal = document.getElementById("badgeModal");
-      const modalImg = document.getElementById("badgeModalImg");
-      modalImg.src = img.src;
-      modal.style.display = "flex";
-    }
-    function closeModal() {
-      document.getElementById("badgeModal").style.display = "none";
-    }
+    // ===== Thème clair/sombre + sauvegarde =====
+    (function themeInit() {
+      const root = document.documentElement;
+      const btn = document.getElementById('theme-toggle');
+      const mql = window.matchMedia('(prefers-color-scheme: dark)');
+      const saved = localStorage.getItem('theme');
+      const system = mql.matches ? 'dark' : 'light';
+      let current = saved || system;
+
+      function apply(theme) {
+        current = theme;
+        root.setAttribute('data-theme', theme);
+        const sun = btn.querySelector('.icon-sun');
+        const moon = btn.querySelector('.icon-moon');
+        if (sun && moon) {
+          sun.style.display = theme === 'dark' ? 'none' : 'inline';
+          moon.style.display = theme === 'dark' ? 'inline' : 'none';
+        }
+        btn.setAttribute('aria-pressed', theme === 'dark');
+      }
+      apply(current);
+
+      btn.addEventListener('click', () => {
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        apply(next);
+      });
+
+      mql.addEventListener('change', e => {
+        if (!localStorage.getItem('theme')) apply(e.matches ? 'dark' : 'light');
+      });
+    })();
   </script>
 </body>
 

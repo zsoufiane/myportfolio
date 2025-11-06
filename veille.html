@@ -39,7 +39,7 @@
             --shadow-strong: 0 20px 40px rgba(0,0,0,.55);
         }
         *{box-sizing:border-box;transition:background-color .2s,color .2s,border-color .2s}
-        html,body{margin:0;padding:0}
+        html,body{margin:0;padding:0} body{padding-bottom:90px;}
         body{
             font:16px/1.65 var(--sans);color:var(--text);
             background:
@@ -88,7 +88,7 @@
         .rss-meta{font:600 12px var(--mono);color:#64748b}
         html[data-theme="dark"] .rss-meta{color:var(--muted)}
         /* Footer */
-        footer{margin-top:40px;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border-top:1px solid var(--card-border);padding:18px 0;font-size:14px;color:var(--muted)}
+        footer{position:fixed;bottom:0;left:0;width:100%;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border-top:1px solid var(--card-border);padding:18px 0;font-size:14px;color:var(--muted)}
         html[data-theme="dark"] footer{background:rgba(17,24,39,.6);border-color:var(--card-border)}
         .footer-wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
         .footer-social{display:flex;gap:12px}
@@ -171,11 +171,46 @@
             nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
         }
 
-        // RSS Google Alerts -> via rss2json (contourne CORS)
-        const RSS_URL=encodeURIComponent('https://www.google.com/alerts/feeds/12345678901234567890/virtualisation'); // <-- remplace par ton URL
-        const API=`https://api.rss2json.com/v1/api.json?rss_url=${RSS_URL}`;
+        // Multi-flux RSS (Virtualisation + Cloud)
+const FEEDS = [
+    'https://www.lemondeinformatique.fr/flux-rss/thematique/virtualisation/virtualisation.xml',
+    'https://www.lemondeinformatique.fr/flux-rss/thematique/cloud/cloud.xml',
+    'https://www.silicon.fr/feed',
+    'https://www.zdnet.fr/feeds/rss/actualites/cloud-computing/',
+    'https://www.lemagit.fr/rss/Cloud',
+    'https://www.lemagit.fr/rss/Virtualisation',
+    'https://virtualisation.developpez.com/index/rss',
+    'https://itsocial.fr/category/enjeux-it/cloud-infrastructure/feed/'
+];
 
-        fetch(API)
+const proxify = url => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
+
+Promise.all(FEEDS.map(f => fetch(proxify(f)).then(r => r.json()).catch(()=>null)))
+    .then(results => {
+        const box = document.getElementById('rss-feed');
+        box.parentElement.setAttribute('aria-busy','false');
+
+        let allItems = [];
+        results.forEach(r => {
+            if(r && r.items) allItems.push(...r.items);
+        });
+
+        if (!allItems.length) { box.innerHTML = '<p class="muted">Aucun article trouvé.</p>'; return; }
+
+        allItems.sort((a,b)=> new Date(b.pubDate) - new Date(a.pubDate));
+
+        box.innerHTML = allItems.map(item => {
+            const d = new Date(item.pubDate);
+            const date = isNaN(d) ? '' : d.toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'});
+            const title = item.title?.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') || 'Sans titre';
+            const source = item.author ? ` — <span>${item.author}</span>` : '';
+            return `
+                <div class="rss-item">
+                    <h4><a href="${item.link}" target="_blank" rel="noopener noreferrer">${title}</a></h4>
+                    <div class="rss-meta">${date}${source}</div>
+                </div>`;
+        }).join('');
+    });(API)
             .then(r=>r.json())
             .then(data=>{
                 const box=document.getElementById('rss-feed');

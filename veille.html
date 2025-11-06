@@ -217,9 +217,9 @@ allItems.sort((a,b)=> new Date(b.pubDate) - new Date(a.pubDate));
 
         box.innerHTML = allItems.map(item => {
             const d = new Date(item.pubDate);
-            const date = isNaN(d) ? '' : d.toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'});
+            const date = isNaN(d) ? '' : d.toLocaleDateString('fr-FR', {year:'numeric', month:'long', day:'numeric'});
             const title = item.title?.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') || 'Sans titre';
-            const source = item.author ? ` — <span>${item.author}</span>` : '';
+            const source = item.author ? ` — <span>par ${item.author}</span>` : '';
             return `
                 <div class="rss-item">
                     <h4><a href="${item.link}" target="_blank" rel="noopener noreferrer">${title}</a></h4>

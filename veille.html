@@ -1,97 +1,97 @@
-<!-- Version compacte de la page Veille -->
+<!-- Version compacte mais cohérente avec la page Projets -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SZ — Veille | Soufiane ZOUGAGH</title>
+<meta name="description" content="Veille technologique Cloud / DevOps / Sécurité : synthèses, sources, notes." />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<header class="header">
-  <div class="container nav-wrap">
-    <div class="brand"><div class="brand-logo"></div><h1>SZ</h1></div>
-    <button id="theme-toggle" class="theme-toggle"></button>
-    <nav id="nav" class="nav">
-      <a href="index.html">Accueil</a><a href="bts.html">BTS SIO</a><a href="entreprise.html">Entreprise</a><a href="epreuves.html">Épreuves</a><a href="projets.html">Projets</a><a class="active" href="veille.html">Veille</a><a href="competences.html">Compétences</a><a href="certifications.html">Certifications</a><a href="contact.html">Contact</a>
-    </nav>
-  </div>
+<header>
+    <div class="container nav-wrap">
+        <div class="brand">
+            <div class="brand-logo"></div>
+            <h1>SZ</h1>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center">
+            <button class="burger"><span></span><span></span><span></span></button>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Thème"></button>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Accueil</a>
+            <a href="bts.html">BTS SIO</a>
+            <a href="entreprise.html">Entreprise</a>
+            <a href="epreuves.html">Épreuves</a>
+            <a href="projets.html">Projets</a>
+            <a class="active" href="veille.html">Veille</a>
+            <a href="competences.html">Compétences</a>
+            <a href="certifications.html">Certifications</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
 </header>
 
-<section class="section">
-  <div class="container">
-    <h2 class="page-title">Veille technologique — Cloud • DevOps • Sécurité</h2>
-    <p class="muted center">🗓️ Dernière mise à jour : <b>24/09/2025</b></p>
+<section>
+    <div class="container">
+        <h2 class="page-title">Veille technologique</h2>
 
-    <div class="grid-2 compact-block">
-      <div class="card">
-        <h4>Objectifs & périmètre</h4>
-        <ul>
-          <li>Suivi Cloud (AWS, Azure), IaC (Terraform), Kubernetes</li>
-          <li>DevOps / CI-CD (GitHub Actions, Argo CD), Observabilité</li>
-          <li>CloudSec / DevSecOps (IAM, OPA, Kyverno, SCA)</li>
-        </ul>
-      </div>
+        <div class="window">
+            <div class="window-bar">
+                <span>veille.md</span>
+                <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+            </div>
+            <div class="content">
+                <p>Veille dédiée au <b>Cloud</b>, <b>DevOps</b> et à la <b>sécurité</b> : suivi des mises à jour des plateformes, bonnes pratiques d'infrastructure, CI/CD, Kubernetes, FinOps et durcissement sécurité.</p>
+                <p class="muted">Mise à jour : <b>24/09/2025</b></p>
+            </div>
+        </div>
 
-      <div class="card">
-        <h4>Workflow</h4>
-        <ul>
-          <li>RSS + newsletters triées</li>
-          <li>Notes : résumé + takeaways + TODO</li>
-          <li>Labs GitHub + synthèse mensuelle</li>
-        </ul>
-      </div>
+        <h3 class="subsection-title">📌 Axes principaux</h3>
+        <div class="grid">
+            <div class="card"><h4>Cloud</h4><p>AWS, Azure, services managés, meilleures pratiques d'architecture.</p></div>
+            <div class="card"><h4>DevOps</h4><p>CI/CD, GitHub Actions, Argo CD, observabilité (Prometheus, Grafana).</p></div>
+            <div class="card"><h4>Sécurité</h4><p>IAM, Zero Trust, OPA/Gatekeeper, Kyverno, signatures d’images.</p></div>
+        </div>
+
+        <h3 class="subsection-title">📝 Synthèse du mois</h3>
+        <div class="grid">
+            <div class="card">
+                <h4>Résumé Septembre 2025</h4>
+                <p>✔ Mise en place d’un pipeline sécurisé (Cosign + SBOM).<br>✔ Politiques d’admission K8s par défaut.<br>✔ Optimisation coûts via autoscaling et alertes anomalies.</p>
+            </div>
+        </div>
+
+        <h3 class="subsection-title">📚 Sources utilisées</h3>
+        <div class="grid">
+            <div class="card"><h4>Cloud</h4><p>AWS What's New · Azure Updates · Google Cloud Blog</p></div>
+            <div class="card"><h4>DevOps & SRE</h4><p>Kubernetes Blog · Argo Project · HashiCorp Terraform</p></div>
+            <div class="card"><h4>Sécurité</h4><p>OWASP · Sigstore · MITRE ATT&CK</p></div>
+        </div>
+
+        <h3 class="subsection-title">🧪 Expérimentations</h3>
+        <div class="grid">
+            <div class="card"><h4>Labs en cours</h4><p>— SLSA + SBOM<br>— Argo Rollouts + HPA<br>— OPA Rego pour Terraform</p></div>
+        </div>
+
+        <h3 class="subsection-title">📁 Documents & ressources</h3>
+        <div class="grid">
+            <div class="card"><h4>Guides</h4><p>Checklist K8s · Méthodo veille · Policies Terraform</p></div>
+            <div class="card"><h4>Repos</h4><p><a href="https://github.com/zsoufiane">GitHub</a> · Portfolio · LinkedIn</p></div>
+            <div class="card"><h4>Contact</h4><p><a class="btn" href="contact.html">Me contacter</a></p></div>
+        </div>
     </div>
-
-    <div class="grid-3 compact-block">
-      <div class="card">
-        <h4>🔐 Sécurité Kubernetes</h4>
-        <p>Durcissement OPA/Kyverno • Images signées • Non-root • Ressources bornées</p>
-      </div>
-      <div class="card">
-        <h4>☁️ FinOps</h4>
-        <p>EKS + Karpenter • Spot • Right-sizing (Goldilocks)</p>
-      </div>
-      <div class="card">
-        <h4>🧱 IaC Sécurisée</h4>
-        <p>Terraform + tfsec/Checkov • PR gating • Drift detection</p>
-      </div>
-    </div>
-
-    <div class="grid-3 compact-block">
-      <div class="card"><h4>Cloud</h4><ul><li>AWS What’s New</li><li>Azure Updates</li><li>Google Cloud</li></ul></div>
-      <div class="card"><h4>DevOps / SRE</h4><ul><li>Kubernetes Blog</li><li>Argo</li><li>Terraform</li></ul></div>
-      <div class="card"><h4>Sécurité</h4><ul><li>OWASP</li><li>Sigstore</li><li>MITRE ATT&CK</li></ul></div>
-    </div>
-
-    <div class="grid-2 compact-block">
-      <div class="card">
-        <h4>Notes</h4>
-        <ul>
-          <li>cosign verify en pré-déploiement</li>
-          <li>RBAC minimal par workload</li>
-          <li>Tracing vers Tempo / OpenTelemetry</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h4>Synthèse</h4>
-        <ul>
-          <li>Pipeline sécurisé : signature + attestations</li>
-          <li>Admission : ressources + non-root</li>
-          <li>FinOps : autoscaling + alertes</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="grid-3 compact-block">
-      <div class="card"><h4>Guides</h4><ul><li>Veille PDF</li><li>Checklist K8s</li><li>Policies Terraform</li></ul></div>
-      <div class="card"><h4>Repos</h4><ul><li>GitHub labs</li><li>LinkedIn</li><li>Portfolio</li></ul></div>
-      <div class="card"><h4>Contact</h4><a href="contact.html">📬 Me contacter</a></div>
-    </div>
-  </div>
 </section>
 
-<footer class="footer"><div class="container">© 2025 — Soufiane ZOUGAGH</div></footer>
+<footer>
+    <div class="container footer-wrap">
+        <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
+        <div class="footer-social">
+            <a href="https://www.linkedin.com/in/soufianezghpro/" aria-label="LinkedIn"></a>
+            <a href="https://github.com/zsoufiane" aria-label="GitHub"></a>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

@@ -82,7 +82,9 @@
         html[data-theme="dark"] .card{background:linear-gradient(180deg, rgba(17,24,39,.6), rgba(17,24,39,.45)), var(--panel);border-color:var(--card-border)}
         .page-title{text-align:center;font-size:clamp(26px,4vw,36px);font-weight:900;margin:0 0 12px}
         .lead{color:var(--muted);text-align:center;margin:0 0 24px}
-        .rss-item{padding:14px 0;border-bottom:1px solid var(--card-border)}
+        .rss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-top:20px}
+.rss-item{border:1px solid var(--card-border);border-radius:var(--radius);padding:18px;background:var(--panel);box-shadow:var(--shadow)}
+html[data-theme="dark"] .rss-item{background:var(--panel-2);}
         .rss-item:last-child{border-bottom:none}
         .rss-item h4{margin:0 0 6px 0;font-size:16px}
         .rss-meta{font:600 12px var(--mono);color:#64748b}
@@ -131,9 +133,9 @@
     <section id="veille">
         <div class="container">
             <h2 class="page-title">Veille technologique — Virtualisation</h2>
-            <p class="lead">Flux Google Alerts importé automatiquement (actualité / veille sur la virtualisation)</p>
+            
             <div class="card" aria-live="polite" aria-busy="true">
-                <div id="rss-feed">
+                <div id="rss-feed" class="rss-grid">
                     <p class="muted">Chargement du flux…</p>
                 </div>
             </div>
@@ -173,14 +175,21 @@
 
         // Multi-flux RSS (Virtualisation + Cloud)
 const FEEDS = [
-    'https://www.lemondeinformatique.fr/flux-rss/thematique/virtualisation/virtualisation.xml',
-    'https://www.lemondeinformatique.fr/flux-rss/thematique/cloud/cloud.xml',
-    'https://www.silicon.fr/feed',
-    'https://www.zdnet.fr/feeds/rss/actualites/cloud-computing/',
-    'https://www.lemagit.fr/rss/Cloud',
-    'https://www.lemagit.fr/rss/Virtualisation',
-    'https://virtualisation.developpez.com/index/rss',
-    'https://itsocial.fr/category/enjeux-it/cloud-infrastructure/feed/'
+    // ✅ AWS
+    'https://aws.amazon.com/about-aws/whats-new/recent/feed/',
+    'https://aws.amazon.com/blogs/aws/feed/',
+
+    // ✅ Azure
+    'https://azurecomcdn.azureedge.net/en-us/updates/feed/',
+
+    // ✅ Google Cloud
+    'https://cloud.google.com/blog/topics/announcements/feed',
+
+    // ✅ Veille Cloud généraliste
+    'https://www.theregister.com/headlines.atom?section=cloud',
+    'https://techcrunch.com/tag/cloud-computing/feed/',
+    'https://feed.infoq.com/cloud.xml',
+    'https://devops.com/category/cloudops/feed/'
 ];
 
 const proxify = url => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;

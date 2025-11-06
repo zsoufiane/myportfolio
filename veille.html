@@ -204,9 +204,16 @@ Promise.all(FEEDS.map(f => fetch(proxify(f)).then(r => r.json()).catch(()=>null)
             if(r && r.items) allItems.push(...r.items);
         });
 
-        if (!allItems.length) { box.innerHTML = '<p class="muted">Aucun article trouvé.</p>'; return; }
+        if (!allItems.length) { box.innerHTML = '<p class="muted">Aucun article lié au cloud trouvé.</p>'; return; }
 
-        allItems.sort((a,b)=> new Date(b.pubDate) - new Date(a.pubDate));
+        // Filtrer uniquement les articles liés au cloud
+allItems = allItems.filter(item => {
+    const t = (item.title || '').toLowerCase();
+    const d = (item.description || '').toLowerCase();
+    return t.includes('cloud') || d.includes('cloud');
+});
+
+allItems.sort((a,b)=> new Date(b.pubDate) - new Date(a.pubDate));
 
         box.innerHTML = allItems.map(item => {
             const d = new Date(item.pubDate);
@@ -238,7 +245,7 @@ Promise.all(FEEDS.map(f => fetch(proxify(f)).then(r => r.json()).catch(()=>null)
                 }).join('');
             })
             .catch(err=>{
-                document.getElementById('rss-feed').innerHTML = '<p class="muted">Impossible de charger le flux.</p>';
+                document.getElementById('rss-feed').innerHTML = '<p class="muted">Impossible de charger le flux RSS.</p>';
                 console.error(err);
             });
     </script>

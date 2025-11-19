@@ -141,29 +141,58 @@ html[data-theme="dark"] .rss-item{background:var(--panel-2);}
             </div>
         </div>
     </section>
-    </body>
+
     <script>
+        // Thème (avec persistance & détection système)
+        (function themeInit(){
+            const root=document.documentElement;
+            const btn=document.getElementById('theme-toggle');
+            const mql=window.matchMedia('(prefers-color-scheme: dark)');
+            const saved=localStorage.getItem('theme');
+            const system=mql.matches?'dark':'light';
+            let current=saved||system;
+            function apply(theme){
+                current=theme;root.setAttribute('data-theme',theme);
+                if(btn){
+                    const isDark=theme==='dark';
+                    btn.setAttribute('aria-pressed',String(isDark));
+                    btn.setAttribute('aria-label', isDark? 'Activer le mode clair':'Activer le mode nuit');
+                }
+            }
+            apply(current);
+            btn && btn.addEventListener('click',()=>{const next=current==='dark'?'light':'dark';apply(next);localStorage.setItem('theme',next);});
+            if(mql.addEventListener){mql.addEventListener('change',e=>{if(!localStorage.getItem('theme')) apply(e.matches?'dark':'light');});}
+            else if(mql.addListener){mql.addListener(e=>{if(!localStorage.getItem('theme')) apply(e.matches?'dark':'light');});}
+        })();
 
-   // --- Flux RSS francophones Cloud ---
+        // Burger
+        const burger=document.querySelector('.burger');
+        const nav=document.getElementById('nav');
+        if(burger&&nav){
+            burger.addEventListener('click',()=>{const open=nav.classList.toggle('open');burger.setAttribute('aria-expanded', String(open));});
+            nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+        }
+
+        // Multi-flux RSS (Virtualisation + Cloud)
 const FEEDS = [
-    // Cloud généraliste FR
-    'https://www.lebigdata.fr/feed',
-    'https://www.zdnet.fr/feeds/rss/actualites/cloud/rss.xml',
-    'https://www.journaldunet.com/web-tech/cloud/rss/',
-    'https://www.silicon.fr/categorie/cloud/feed',
+    // ✅ AWS
+    'https://aws.amazon.com/about-aws/whats-new/recent/feed/',
+    'https://aws.amazon.com/blogs/aws/feed/',
 
-    // AWS FR
-    'https://aws.amazon.com/fr/blogs/france/feed/',
+    // ✅ Azure
+    'https://azurecomcdn.azureedge.net/en-us/updates/feed/',
 
-    // Azure FR
-    'https://azure.microsoft.com/fr-fr/blog/feed/',
+    // ✅ Google Cloud
+    'https://cloud.google.com/blog/topics/announcements/feed',
 
-    // Google Cloud (via Google News FR)
-    'https://bridge.suumitsu.eu/?action=display&bridge=GoogleNews&g=cloud+computing&language=fr&format=Atom'
+    // ✅ Veille Cloud généraliste
+    'https://www.theregister.com/headlines.atom?section=cloud',
+    'https://techcrunch.com/tag/cloud-computing/feed/',
+    'https://feed.infoq.com/cloud.xml',
+    'https://devops.com/category/cloudops/feed/'
 ];
 
-const proxify = url => 
-    `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
+const proxify = url => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
 
 Promise.all(FEEDS.map(f => fetch(proxify(f)).then(r => r.json()).catch(()=>null)))
     .then(results => {
@@ -172,48 +201,54 @@ Promise.all(FEEDS.map(f => fetch(proxify(f)).then(r => r.json()).catch(()=>null)
 
         let allItems = [];
         results.forEach(r => {
-            if (r && r.items) allItems.push(...r.items);
+            if(r && r.items) allItems.push(...r.items);
         });
 
-        if (!allItems.length) {
-            box.innerHTML = '<p class="muted">Aucun article cloud trouvé.</p>';
-            return;
-        }
+        if (!allItems.length) { box.innerHTML = '<p class="muted">Aucun article lié au cloud trouvé.</p>'; return; }
 
-        // --- Filtrage cloud en français ---
-        allItems = allItems.filter(item => {
-            const text = (item.title + " " + item.description).toLowerCase();
-            return (
-                text.includes('cloud') ||
-                text.includes('aws')  ||
-                text.includes('azure') ||
-                text.includes('gcp')  ||
-                text.includes('devops')
-            );
-        });
+        // Filtrer uniquement les articles liés au cloud
+allItems = allItems.filter(item => {
+    const t = (item.title || '').toLowerCase();
+    const d = (item.description || '').toLowerCase();
+    return t.includes('cloud') || d.includes('cloud');
+});
 
-        // Tri par date
-        allItems.sort((a,b)=> new Date(b.pubDate) - new Date(a.pubDate));
+allItems.sort((a,b)=> new Date(b.pubDate) - new Date(a.pubDate));
 
-        // Rendu HTML
         box.innerHTML = allItems.map(item => {
-            const date = new Date(item.pubDate)
-                .toLocaleDateString('fr-FR', {year:'numeric', month:'long', day:'numeric'});
-
-            const title = item.title
-                .replace(/&/g,'&amp;')
-                .replace(/</g,'&lt;')
-                .replace(/>/g,'&gt;');
-
+            const d = new Date(item.pubDate);
+            const date = isNaN(d) ? '' : d.toLocaleDateString('fr-FR', {year:'numeric', month:'long', day:'numeric'});
+            const title = item.title?.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') || 'Sans titre';
+            const source = item.author ? ` — <span>par ${item.author}</span>` : '';
             return `
                 <div class="rss-item">
-                    <h4><a href="${item.link}" target="_blank" rel="noopener">${title}</a></h4>
-                    <div class="rss-meta">${date}</div>
-                </div>
-            `;
+                    <h4><a href="${item.link}" target="_blank" rel="noopener noreferrer">${title}</a></h4>
+                    <div class="rss-meta">${date}${source}</div>
+                </div>`;
         }).join('');
-    });
-</script>
+    });(API)
+            .then(r=>r.json())
+            .then(data=>{
+                const box=document.getElementById('rss-feed');
+                box.parentElement.setAttribute('aria-busy','false');
+                if(!data.items||!data.items.length){ box.innerHTML='<p class="muted">Aucun élément dans le flux.</p>'; return; }
+                box.innerHTML = data.items.map(item=>{
+                    const d=new Date(item.pubDate);
+                    const date=isNaN(d)?'':d.toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'});
+                    const title=item.title?.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')||'Sans titre';
+                    const source=item.author?` — <span>${item.author}</span>`:'';
+                    return `
+                        <div class="rss-item">
+                            <h4><a href="${item.link}" target="_blank" rel="noopener noreferrer">${title}</a></h4>
+                            <div class="rss-meta">${date}${source}</div>
+                        </div>`;
+                }).join('');
+            })
+            .catch(err=>{
+                document.getElementById('rss-feed').innerHTML = '<p class="muted">Impossible de charger le flux RSS.</p>';
+                console.error(err);
+            });
+    </script>
     <footer>
         <div class="container footer-wrap">
             <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>

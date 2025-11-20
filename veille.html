@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SZ — Veille Cloud Computing (France)</title>
-    <meta name="description" content="Veille technologique cloud computing — France" />
+    <title>SZ — Veille Cloud (France)</title>
+    <meta name="description" content="Veille technologique dédiée au cloud computing en France." />
 
+    <!-- ====== CSS global repris du portfolio ====== -->
     <style>
         :root {
             --bg: #f6f7fb;
@@ -19,8 +21,8 @@
             --accent-2: #a7f3d0;
             --card-border: #e5e7eb;
             --radius: 18px;
-            --shadow: 0 10px 30px rgba(0,0,0,.08);
-            --shadow-strong: 0 20px 40px rgba(0,0,0,.12);
+            --shadow: 0 10px 30px rgba(0, 0, 0, .08);
+            --shadow-strong: 0 20px 40px rgba(0, 0, 0, .12);
             --sans: Inter, ui-sans-serif, system-ui;
             --mono: ui-monospace, SFMono-Regular, Menlo, Monaco;
         }
@@ -37,53 +39,59 @@
             --accent: #2563eb;
             --accent-2: #22c55e;
             --card-border: #1f2937;
-            --shadow: 0 10px 30px rgba(0,0,0,.4);
-            --shadow-strong: 0 20px 40px rgba(0,0,0,.55);
+            --shadow: 0 10px 30px rgba(0, 0, 0, .4);
+            --shadow-strong: 0 20px 40px rgba(0, 0, 0, .55);
         }
 
-        * { box-sizing: border-box; transition: background-color .2s, color .2s, border-color .2s; }
-
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
+        * {
+            box-sizing: border-box;
+            transition: background-color .2s, color .2s, border-color .2s;
         }
 
         body {
-            display: flex;
-            flex-direction: column;
+            margin: 0;
             font: 16px/1.65 var(--sans);
             color: var(--text);
             background:
-                radial-gradient(1200px 600px at 10% -10%, rgba(147,197,253,.25), transparent 60%),
-                radial-gradient(1000px 500px at 110% 10%, rgba(167,243,208,.22), transparent 60%),
+                radial-gradient(1200px 600px at 10% -10%, rgba(147, 197, 253, .25), transparent 60%),
+                radial-gradient(1000px 500px at 110% 10%, rgba(167, 243, 208, .22), transparent 60%),
                 var(--bg);
         }
 
         html[data-theme="dark"] body {
             background:
-                radial-gradient(1200px 600px at 10% -10%, rgba(96,165,250,.12), transparent 60%),
-                radial-gradient(1000px 500px at 110% 10%, rgba(34,197,94,.10), transparent 60%),
+                radial-gradient(1200px 600px at 10% -10%, rgba(96, 165, 250, .12), transparent 60%),
+                radial-gradient(1000px 500px at 110% 10%, rgba(34, 197, 94, .10), transparent 60%),
                 var(--bg);
         }
 
-        a { color: var(--primary); text-decoration: none }
-        a:hover { color: var(--primary-600) }
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
 
-        .container { max-width: 1150px; margin: 0 auto; padding: 0 22px }
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
 
-        section { padding: 70px 0; flex: 1; }
+        section {
+            padding: 70px 0;
+        }
 
+        /* ===== HEADER du portfolio ===== */
         header {
             position: sticky;
             top: 0;
-            background: rgba(255,255,255,.7);
+            z-index: 50;
+            background: rgba(255, 255, 255, .7);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--card-border);
-            z-index: 50;
         }
+
         html[data-theme="dark"] header {
-            background: rgba(17,24,39,.6);
+            background: rgba(17, 24, 39, .6);
         }
 
         .nav-wrap {
@@ -98,6 +106,7 @@
             align-items: center;
             gap: 10px;
         }
+
         .brand-logo {
             width: 34px;
             height: 34px;
@@ -105,27 +114,30 @@
             background: radial-gradient(100% 100% at 30% 20%, var(--accent), var(--accent-2));
             box-shadow: var(--shadow);
         }
-        .brand h1 { margin: 0; color: var(--text); }
 
-        nav { display: flex; gap: 10px; }
+        nav {
+            display: flex;
+            gap: 10px;
+        }
+
         nav a {
             padding: 9px 12px;
             border-radius: 999px;
             border: 1px solid var(--card-border);
-            background: #fff;
             font-weight: 600;
-            transition: .12s;
+            background: #fff;
+            color: #0f172a;
+            font-size: 14px;
         }
-        html[data-theme="dark"] nav a { background: #111827; }
 
-        nav a:hover {
-            transform: translateY(-1px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow);
-        }
         nav a.active {
             border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(59,130,246,.2) inset;
+            box-shadow: 0 0 0 2px rgba(59,130,246,.25) inset;
+        }
+
+        html[data-theme="dark"] nav a {
+            background: #111827;
+            color: var(--text);
         }
 
         .theme-toggle {
@@ -137,26 +149,24 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: var(--shadow);
-            cursor: pointer;
-        }
-        html[data-theme="dark"] .theme-toggle { background: #111827; }
-
-        .page-title {
-            font-size: clamp(26px, 4vw, 36px);
-            text-align: center;
-            font-weight: 900;
-            margin-bottom: 20px;
         }
 
+        /* ------- CARD principale ------- */
         .card {
-            border-radius: var(--radius);
+            background: linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,.45)), var(--panel);
             border: 1px solid var(--card-border);
-            background: var(--panel);
+            border-radius: var(--radius);
             padding: 26px;
             box-shadow: var(--shadow);
+            backdrop-filter: blur(8px);
         }
-        html[data-theme="dark"] .card { background: var(--panel-2); }
+
+        .page-title {
+            text-align: center;
+            font-size: clamp(26px, 4vw, 36px);
+            font-weight: 900;
+            margin: 0 0 12px;
+        }
 
         .rss-grid {
             display: grid;
@@ -167,40 +177,37 @@
         .rss-item {
             padding: 18px;
             border-radius: var(--radius);
+            background: var(--panel-2);
             border: 1px solid var(--card-border);
-            background: var(--panel);
             box-shadow: var(--shadow);
-        }
-        html[data-theme="dark"] .rss-item { background: var(--panel-2); }
-
-        footer {
-            margin-top: auto;
-            background: rgba(255,255,255,.7);
-            backdrop-filter: blur(10px);
-            padding: 18px 0;
-            border-top: 1px solid var(--card-border);
-            color: var(--muted);
-            text-align: center;
         }
     </style>
 </head>
 
 <body>
+
+    <!-- ===== HEADER ===== -->
     <header>
         <div class="container nav-wrap">
+
             <div class="brand">
                 <div class="brand-logo"></div>
                 <h1>SZ</h1>
             </div>
 
             <div style="display:flex; gap:10px;">
+                <!-- Bouton thème -->
                 <button id="theme-toggle" class="theme-toggle" aria-label="Activer le mode nuit" aria-pressed="false">
-                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="currentColor" d="M6.76 4.84l..."/></svg>
-                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="display:none"><path fill="currentColor" d="M21 12.79A9 9..."/></svg>
+                    <svg class="icon-sun" width="18" height="18" aria-hidden="true">
+                        <circle cx="12" cy="12" r="5" fill="currentColor" />
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" aria-hidden="true" style="display:none">
+                        <path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                    </svg>
                 </button>
             </div>
 
-            <nav>
+            <nav id="nav">
                 <a href="index.html">Accueil</a>
                 <a href="bts.html">BTS SIO</a>
                 <a href="entreprise.html">Entreprise</a>
@@ -211,23 +218,74 @@
                 <a href="certifications.html">Certifications</a>
                 <a href="contact.html">Contact</a>
             </nav>
+
         </div>
     </header>
 
+    <!-- ===== SECTION VEILLE ===== -->
     <section>
         <div class="container">
             <h2 class="page-title">Veille technologique — Cloud Computing (France)</h2>
 
             <div class="card">
                 <div id="rss-feed" class="rss-grid">
-                    <p>Chargement des actualités cloud…</p>
+                    <p>Chargement des articles cloud français…</p>
                 </div>
             </div>
         </div>
     </section>
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container footer-wrap">
+            <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
 
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/soufianezghpro/" target="_blank" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#2563eb" viewBox="0 0 24 24">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 
+                        2.761 2.239 5 5 5h14c2.762 0 5-2.239 
+                        5-5v-14c0-2.761-2.238-5-5-5zm-11 
+                        19h-3v-10h3v10zm-1.5-11.268c-.966 
+                        0-1.75-.79-1.75-1.764s.784-1.764 
+                        1.75-1.764c.967 0 1.75.79 
+                        1.75 1.764s-.783 1.764-1.75 
+                        1.764zm13.5 11.268h-3v-5.604c0-3.368-4-3.113-4 
+                        0v5.604h-3v-10h3v1.545c1.396-2.586 
+                        7-2.777 7 2.476v5.979z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.github.com/zsoufiane" target="_blank" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                        <path
+                            d="M12 .297c-6.63 0-12 5.373-12 
+                        12 0 5.303 3.438 9.8 8.205 
+                        11.385.6.113.82-.258.82-.577 
+                        0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.084-.729.084-.729 
+                        1.205.084 1.84 1.236 1.84 1.236 
+                        1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.334-5.466-5.931 
+                        0-1.311.469-2.381 1.236-3.221-.123-.303-.535-1.523.117-3.176 
+                        0 0 1.008-.322 3.301 1.23a11.48 
+                        11.48 0 013.003-.404c1.018.005 
+                        2.042.138 3.003.404 2.291-1.552 
+                        3.297-1.23 3.297-1.23.653 1.653.242 
+                        2.873.119 3.176.77.84 1.235 
+                        1.91 1.235 3.221 0 4.609-2.803 
+                        5.628-5.475 5.921.43.371.823 
+                        1.102.823 2.222 0 1.606-.015 
+                        2.898-.015 3.293 0 .322.216.694.825.576 
+                        4.765-1.587 8.2-6.083 
+                        8.2-11.385 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT (Thème + Menu + RSS FR Cloud) ===== -->
     <script>
-        /* === Thème (identique portfolio) === */
+        /* --- Thème jour/nuit (identique portfolio) --- */
         (function themeInit() {
             const root = document.documentElement;
             const btn = document.getElementById('theme-toggle');
@@ -241,12 +299,11 @@
                 root.setAttribute('data-theme', theme);
 
                 const isDark = theme === 'dark';
-                btn.setAttribute('aria-pressed', isDark);
+                btn.setAttribute('aria-pressed', String(isDark));
                 btn.setAttribute('aria-label', isDark ? "Activer le mode clair" : "Activer le mode nuit");
 
                 const sun = btn.querySelector('.icon-sun');
                 const moon = btn.querySelector('.icon-moon');
-
                 sun.style.display = isDark ? 'none' : 'inline';
                 moon.style.display = isDark ? 'inline' : 'none';
             }
@@ -266,8 +323,22 @@
             });
         })();
 
+        /* --- Burger menu --- */
+        const burger = document.querySelector('.burger');
+        const nav = document.getElementById('nav');
 
-        /* === Flux RSS FRANCE (Cloud Computing) === */
+        if (burger && nav) {
+            burger.addEventListener('click', () => {
+                const open = nav.classList.toggle('open');
+                burger.setAttribute('aria-expanded', String(open));
+            });
+
+            nav.querySelectorAll('a').forEach(a =>
+                a.addEventListener('click', () => nav.classList.remove('open'))
+            );
+        }
+
+        /* --- Flux RSS Cloud France (depuis Septembre 2024) --- */
         const FEEDS = [
             "https://www.lemondeinformatique.fr/rss/thematique/cloud-7.xml",
             "https://www.silicon.fr/feed",
@@ -281,41 +352,59 @@
         const proxify = url =>
             `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
 
-        Promise.all(FEEDS.map(f => fetch(proxify(f)).then(r => r.json()).catch(() => null)))
-            .then(results => {
-                const box = document.getElementById("rss-feed");
+        Promise.all(
+            FEEDS.map(f => fetch(proxify(f)).then(r => r.json()).catch(() => null))
+        ).then(results => {
+            const box = document.getElementById("rss-feed");
 
-                let items = [];
-                results.forEach(r => {
-                    if (r && r.items) items.push(...r.items);
-                });
-
-                /* Filtrage FR Cloud */
-                const keywords = [
-                    "cloud", "saas", "paas", "iaas", "infrastructure",
-                    "virtualisation", "serveur", "cybersécurité", "devops",
-                    "kubernetes", "aws", "azure", "gcp", "ovh"
-                ];
-
-                items = items.filter(item => {
-                    const text = (item.title + " " + item.description).toLowerCase();
-                    return keywords.some(k => text.includes(k));
-                });
-
-                /* Tri par date descendante */
-                items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-
-                box.innerHTML = items.slice(0, 30).map(item => `
-                    <div class="rss-item">
-                        <h4><a href="${item.link}" target="_blank">${item.title}</a></h4>
-                        <div class="rss-meta">${new Date(item.pubDate).toLocaleDateString("fr-FR")}</div>
-                    </div>
-                `).join("");
+            let items = [];
+            results.forEach(r => {
+                if (r && r.items) items.push(...r.items);
             });
+
+            /* Mots-clés cloud */
+            const keywords = [
+                "cloud", "saas", "paas", "iaas", "infrastructure",
+                "virtualisation", "serveur", "cybersécurité",
+                "devops", "kubernetes", "aws", "azure", "gcp", "ovh"
+            ];
+
+            /* Filtre Cloud */
+            items = items.filter(item => {
+                const text = (item.title + " " + item.description).toLowerCase();
+                return keywords.some(k => text.includes(k));
+            });
+
+            /* Filtre date >= Septembre 2024 */
+            const MIN_DATE = new Date("2024-09-01");
+            items = items.filter(item => {
+                const d = new Date(item.pubDate);
+                return !isNaN(d) && d >= MIN_DATE;
+            });
+
+            /* Tri récents → anciens */
+            items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+            /* Affichage */
+            if (!items.length) {
+                box.innerHTML = '<p class="muted">Aucun article cloud récent.</p>';
+                return;
+            }
+
+            box.innerHTML = items.slice(0, 30).map(item => `
+                <div class="rss-item">
+                    <h4>
+                        <a href="${item.link}" target="_blank" rel="noopener noreferrer">
+                            ${item.title}
+                        </a>
+                    </h4>
+                    <div class="rss-meta">
+                        ${new Date(item.pubDate).toLocaleDateString("fr-FR")}
+                    </div>
+                </div>
+            `).join("");
+        });
     </script>
 
-    <footer>
-        <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
-    </footer>
 </body>
 </html>

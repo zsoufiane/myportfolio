@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SZ — Veille Cloud Computing</title>
-    <meta name="description" content="Veille technologique — cloud computing" />
+    <title>SZ — Veille Cloud Computing (France)</title>
+    <meta name="description" content="Veille technologique cloud computing — France" />
+
     <style>
         :root {
             --bg: #f6f7fb;
@@ -21,7 +22,7 @@
             --shadow: 0 10px 30px rgba(0,0,0,.08);
             --shadow-strong: 0 20px 40px rgba(0,0,0,.12);
             --sans: Inter, ui-sans-serif, system-ui;
-            --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas;
+            --mono: ui-monospace, SFMono-Regular, Menlo, Monaco;
         }
 
         html[data-theme="dark"] {
@@ -58,6 +59,7 @@
                 radial-gradient(1000px 500px at 110% 10%, rgba(167,243,208,.22), transparent 60%),
                 var(--bg);
         }
+
         html[data-theme="dark"] body {
             background:
                 radial-gradient(1200px 600px at 10% -10%, rgba(96,165,250,.12), transparent 60%),
@@ -72,16 +74,17 @@
 
         section { padding: 70px 0; flex: 1; }
 
-        /* Header */
         header {
             position: sticky;
             top: 0;
-            z-index: 50;
             background: rgba(255,255,255,.7);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--card-border);
+            z-index: 50;
         }
-        html[data-theme="dark"] header { background: rgba(17,24,39,.6); }
+        html[data-theme="dark"] header {
+            background: rgba(17,24,39,.6);
+        }
 
         .nav-wrap {
             display: flex;
@@ -90,7 +93,11 @@
             padding: 14px 0;
         }
 
-        .brand { display: flex; align-items: center; gap: 10px; }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         .brand-logo {
             width: 34px;
             height: 34px;
@@ -98,77 +105,58 @@
             background: radial-gradient(100% 100% at 30% 20%, var(--accent), var(--accent-2));
             box-shadow: var(--shadow);
         }
-        .brand h1 { margin: 0; font-size: 18px; color: #0f172a; }
-        html[data-theme="dark"] .brand h1 { color: var(--text); }
+        .brand h1 { margin: 0; color: var(--text); }
 
-        nav {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
+        nav { display: flex; gap: 10px; }
         nav a {
             padding: 9px 12px;
             border-radius: 999px;
             border: 1px solid var(--card-border);
             background: #fff;
-            color: #0f172a;
             font-weight: 600;
-            font-size: 14px;
             transition: .12s;
         }
+        html[data-theme="dark"] nav a { background: #111827; }
+
         nav a:hover {
             transform: translateY(-1px);
             border-color: var(--primary);
             box-shadow: var(--shadow);
-            background: #f8fafc;
         }
         nav a.active {
-            box-shadow: 0 0 0 2px rgba(59,130,246,.2) inset;
             border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(59,130,246,.2) inset;
         }
-
-        html[data-theme="dark"] nav a {
-            background: #111827;
-            color: var(--text);
-        }
-
-        .burger { display: none; }
 
         .theme-toggle {
             width: 40px;
             height: 40px;
             border-radius: 999px;
-            border: 1px solid var(--card-border);
             background: #fff;
-            color: #0f172a;
+            border: 1px solid var(--card-border);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             box-shadow: var(--shadow);
             cursor: pointer;
         }
-        html[data-theme="dark"] .theme-toggle {
-            background: #111827;
-            color: var(--text);
-        }
-
-        /* Cards */
-        .card {
-            background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,.45)), var(--panel);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius);
-            padding: 26px;
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(8px);
-        }
+        html[data-theme="dark"] .theme-toggle { background: #111827; }
 
         .page-title {
-            text-align: center;
             font-size: clamp(26px, 4vw, 36px);
+            text-align: center;
             font-weight: 900;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
         }
+
+        .card {
+            border-radius: var(--radius);
+            border: 1px solid var(--card-border);
+            background: var(--panel);
+            padding: 26px;
+            box-shadow: var(--shadow);
+        }
+        html[data-theme="dark"] .card { background: var(--panel-2); }
 
         .rss-grid {
             display: grid;
@@ -177,21 +165,22 @@
         }
 
         .rss-item {
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius);
             padding: 18px;
+            border-radius: var(--radius);
+            border: 1px solid var(--card-border);
             background: var(--panel);
             box-shadow: var(--shadow);
         }
         html[data-theme="dark"] .rss-item { background: var(--panel-2); }
 
-        /* Footer */
         footer {
+            margin-top: auto;
             background: rgba(255,255,255,.7);
             backdrop-filter: blur(10px);
-            border-top: 1px solid var(--card-border);
             padding: 18px 0;
+            border-top: 1px solid var(--card-border);
             color: var(--muted);
+            text-align: center;
         }
     </style>
 </head>
@@ -204,20 +193,15 @@
                 <h1>SZ</h1>
             </div>
 
-            <div style="display:flex; gap:10px; align-items:center">
+            <div style="display:flex; gap:10px;">
                 <button id="theme-toggle" class="theme-toggle" aria-label="Activer le mode nuit" aria-pressed="false">
-                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.48 0l1.79-1.8 1.41 1.41-1.8 1.79-1.4-1.4zM12 4V1h-0v3h0zm0 19v-3h0v3h0zM4 12H1v0h3v0zm19 0h-3v0h3v0zM6.76 19.16l-1.42 1.42-1.79-1.8 1.41-1.41 1.8 1.79zm10.48 0l1.4 1.4 1.8-1.79-1.41-1.41-1.79 1.8zM12 8a4 4 0 100 8 4 4 0 000-8z"/>
-                    </svg>
-                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" style="display:none">
-                        <path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-                    </svg>
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="currentColor" d="M6.76 4.84l..."/></svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="display:none"><path fill="currentColor" d="M21 12.79A9 9..."/></svg>
                 </button>
             </div>
 
-            <nav id="nav">
-                <a href="./index.html">Accueil</a>
+            <nav>
+                <a href="index.html">Accueil</a>
                 <a href="bts.html">BTS SIO</a>
                 <a href="entreprise.html">Entreprise</a>
                 <a href="epreuves.html">Épreuves</a>
@@ -230,20 +214,20 @@
         </div>
     </header>
 
-    <section id="veille">
+    <section>
         <div class="container">
-            <h2 class="page-title">Veille technologique — Cloud computing</h2>
+            <h2 class="page-title">Veille technologique — Cloud Computing (France)</h2>
 
             <div class="card">
                 <div id="rss-feed" class="rss-grid">
-                    <p>Chargement du flux…</p>
+                    <p>Chargement des actualités cloud…</p>
                 </div>
             </div>
         </div>
     </section>
 
     <script>
-        /* === THÈME (identique portfolio) === */
+        /* === Thème (identique portfolio) === */
         (function themeInit() {
             const root = document.documentElement;
             const btn = document.getElementById('theme-toggle');
@@ -257,11 +241,12 @@
                 root.setAttribute('data-theme', theme);
 
                 const isDark = theme === 'dark';
-                btn.setAttribute('aria-pressed', String(isDark));
-                btn.setAttribute('aria-label', isDark ? 'Activer le mode clair' : 'Activer le mode nuit');
+                btn.setAttribute('aria-pressed', isDark);
+                btn.setAttribute('aria-label', isDark ? "Activer le mode clair" : "Activer le mode nuit");
 
                 const sun = btn.querySelector('.icon-sun');
                 const moon = btn.querySelector('.icon-moon');
+
                 sun.style.display = isDark ? 'none' : 'inline';
                 moon.style.display = isDark ? 'inline' : 'none';
             }
@@ -281,50 +266,56 @@
             });
         })();
 
-        /* === RSS FEED === */
+
+        /* === Flux RSS FRANCE (Cloud Computing) === */
         const FEEDS = [
-            "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
-            "https://aws.amazon.com/blogs/aws/feed/",
-            "https://azurecomcdn.azureedge.net/en-us/updates/feed/",
-            "https://cloud.google.com/blog/topics/announcements/feed",
-            "https://www.theregister.com/headlines.atom?section=cloud",
-            "https://techcrunch.com/tag/cloud-computing/feed/",
-            "https://feed.infoq.com/cloud.xml",
-            "https://devops.com/category/cloudops/feed/"
+            "https://www.lemondeinformatique.fr/rss/thematique/cloud-7.xml",
+            "https://www.silicon.fr/feed",
+            "https://www.journaldunet.com/rss/cloud-computing/",
+            "https://www.zdnet.fr/actualites/cloud/rss",
+            "https://www.usine-digitale.fr/rss",
+            "https://www.lemagit.fr/rss",
+            "https://www.ovh.com/fr/news/feed.xml"
         ];
 
         const proxify = url =>
             `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
 
         Promise.all(FEEDS.map(f => fetch(proxify(f)).then(r => r.json()).catch(() => null)))
-        .then(results => {
-            const box = document.getElementById("rss-feed");
+            .then(results => {
+                const box = document.getElementById("rss-feed");
 
-            let allItems = [];
-            results.forEach(r => {
-                if (r && r.items) allItems.push(...r.items);
+                let items = [];
+                results.forEach(r => {
+                    if (r && r.items) items.push(...r.items);
+                });
+
+                /* Filtrage FR Cloud */
+                const keywords = [
+                    "cloud", "saas", "paas", "iaas", "infrastructure",
+                    "virtualisation", "serveur", "cybersécurité", "devops",
+                    "kubernetes", "aws", "azure", "gcp", "ovh"
+                ];
+
+                items = items.filter(item => {
+                    const text = (item.title + " " + item.description).toLowerCase();
+                    return keywords.some(k => text.includes(k));
+                });
+
+                /* Tri par date descendante */
+                items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+                box.innerHTML = items.slice(0, 30).map(item => `
+                    <div class="rss-item">
+                        <h4><a href="${item.link}" target="_blank">${item.title}</a></h4>
+                        <div class="rss-meta">${new Date(item.pubDate).toLocaleDateString("fr-FR")}</div>
+                    </div>
+                `).join("");
             });
-
-            allItems = allItems.filter(item =>
-                item.title?.toLowerCase().includes("cloud") ||
-                item.description?.toLowerCase().includes("cloud")
-            );
-
-            allItems.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-
-            box.innerHTML = allItems.slice(0, 30).map(item => `
-                <div class="rss-item">
-                    <h4><a href="${item.link}" target="_blank">${item.title}</a></h4>
-                    <div class="rss-meta">${new Date(item.pubDate).toLocaleDateString("fr-FR")}</div>
-                </div>
-            `).join("");
-        });
     </script>
 
     <footer>
-        <div class="container footer-wrap">
-            <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
-        </div>
+        <p>© 2025 — <b>Soufiane ZOUGAGH</b>. Tous droits réservés.</p>
     </footer>
 </body>
 </html>
